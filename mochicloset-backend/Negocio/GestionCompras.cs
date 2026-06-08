@@ -1,46 +1,61 @@
-﻿using mochi_closet.Datos;
+﻿using mochi_closet.Data;
+using mochi_closet.Datos;
 
 namespace mochi_closet.Negocio;
 
 public class GestionCompras
 {
-    private static List<Compra> _dbCompras = new();
-    private static GestionPublicaciones _gestionPublicaciones = new();
- 
+    private readonly MochiClosetDbContext _context;
+
+    public GestionCompras(MochiClosetDbContext context)
+    {
+        _context = context;
+    }
+
     public List<Compra> ListaCompras()
     {
-        return _dbCompras;
+        return _context.Compras.ToList();
     }
- 
+
     public Compra? ObtenerCompra(int id)
     {
-        return _dbCompras.FirstOrDefault(c => c.Id == id);
+        return _context.Compras
+            .FirstOrDefault(c => c.Id == id);
     }
- 
+
     public string RegistrarCompra(Compra compra)
     {
         if (string.IsNullOrWhiteSpace(compra.MetodoPago))
             return "El método de pago es obligatorio";
- 
+
         if (string.IsNullOrWhiteSpace(compra.DireccionEntrega))
             return "La dirección de entrega es obligatoria";
- 
-        var publicacion = _gestionPublicaciones.ObtenerPublicacion(compra.PublicacionId);
- 
+
+        var publicacion = _context.Publicaciones
+            .FirstOrDefault(p => p.Id == compra.PublicacionId);
+
         if (publicacion == null)
             return "La publicación no existe";
- 
+
         if (publicacion.Estado != "Disponible")
             return "Esta publicación ya fue vendida";
- 
-        compra.Id = _dbCompras.Count == 0 ? 1 : _dbCompras.Max(c => c.Id) + 1;
+
+        var usuario = _context.Usuarios
+            .FirstOrDefault(u => u.Id == compra.UsuarioId);
+
+        if (usuario == null)
+            return "La usuaria no existe";
+
         compra.FechaCompra = DateTime.Now;
         compra.Estado = "Completada";
         compra.MontoTotal = (decimal)publicacion.Precio;
-        _dbCompras.Add(compra);
- 
+
+        _context.Compras.Add(compra);
+
         publicacion.Estado = "Vendido";
- 
+
+        _context.SaveChanges();
+
         return "ok";
     }
 }

@@ -4,3 +4,19 @@ GET {{mochi_closet_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+POST /GestionUsuarios/registrar-usuario
+
+###
+POST http://localhost:5160/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Paola",
+  "username": "paorose",
+  "email": "paola@gmail.com",
+  "telefono": "77777777",
+  "password": "12345678"
+}
+
+###
+GET http://localhost:5160/GestionUsuarios/lista-usuarios

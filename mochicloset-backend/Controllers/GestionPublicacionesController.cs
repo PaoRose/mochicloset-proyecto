@@ -8,11 +8,12 @@ namespace mochi_closet.Controllers;
 [Route("[controller]")]
 public class GestionPublicacionesController : ControllerBase
 {
-    private GestionPublicaciones _gestionPublicaciones;
+    private readonly GestionPublicaciones _gestionPublicaciones;
 
-    public GestionPublicacionesController()
+    public GestionPublicacionesController(
+        GestionPublicaciones gestionPublicaciones)
     {
-        _gestionPublicaciones = new GestionPublicaciones();
+        _gestionPublicaciones = gestionPublicaciones;
     }
 
     [HttpGet("lista-publicaciones")]
@@ -29,7 +30,7 @@ public class GestionPublicacionesController : ControllerBase
         if (publicacion == null)
             return NotFound();
 
-        return publicacion;
+        return Ok(publicacion);
     }
 
     [HttpPost]
@@ -40,12 +41,15 @@ public class GestionPublicacionesController : ControllerBase
         if (resultado != "ok")
             return BadRequest(resultado);
 
-        return Ok(publicacion);
+        return Ok("Publicación creada correctamente");
     }
 
     [HttpPut("{id}")]
     public IActionResult ActualizarPublicacion(int id, Publicacion publicacionEditada)
     {
+        if (id != publicacionEditada.Id)
+            return BadRequest();
+
         var publicacion = _gestionPublicaciones.ObtenerPublicacion(id);
 
         if (publicacion == null)
@@ -53,7 +57,7 @@ public class GestionPublicacionesController : ControllerBase
 
         _gestionPublicaciones.ActualizarPublicacion(publicacionEditada);
 
-        return Ok(publicacion);
+        return Ok("Publicación actualizada correctamente");
     }
 
     [HttpDelete("{id}")]

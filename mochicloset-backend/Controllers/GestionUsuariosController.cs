@@ -8,11 +8,12 @@ namespace mochi_closet.Controllers;
 [Route("[controller]")]
 public class GestionUsuariosController : ControllerBase
 {
-    private GestionUsuarios _gestionUsuarios;
+    private readonly GestionUsuarios _gestionUsuarios;
 
-    public GestionUsuariosController()
+    public GestionUsuariosController(
+        GestionUsuarios gestionUsuarios)
     {
-        _gestionUsuarios = new GestionUsuarios();
+        _gestionUsuarios = gestionUsuarios;
     }
 
     [HttpGet("lista-usuarios")]
@@ -29,7 +30,7 @@ public class GestionUsuariosController : ControllerBase
         if (usuario == null)
             return NotFound();
 
-        return usuario;
+        return Ok(usuario);
     }
 
     [HttpPost("registrar-usuario")]
@@ -46,18 +47,24 @@ public class GestionUsuariosController : ControllerBase
     [HttpPost("iniciar-sesion")]
     public ActionResult<Usuario> IniciarSesion(Usuario credenciales)
     {
-        var usuario = _gestionUsuarios.IniciarSesion(credenciales.Email, credenciales.Password);
+        var usuario = _gestionUsuarios
+            .IniciarSesion(
+                credenciales.Email,
+                credenciales.Password);
 
         if (usuario == null)
-            return Unauthorized("Credenciales incorrectas o cuenta suspendida");
+            return Unauthorized(
+                "Credenciales incorrectas o cuenta suspendida");
 
         return Ok(usuario);
     }
 
     [HttpPut("actualizar-perfil")]
-    public IActionResult ActualizarPerfil(Usuario usuarioEditado)
+    public IActionResult ActualizarPerfil(
+        Usuario usuarioEditado)
     {
-        var resultado = _gestionUsuarios.ActualizarUsuario(usuarioEditado);
+        var resultado =
+            _gestionUsuarios.ActualizarUsuario(usuarioEditado);
 
         if (resultado != "ok")
             return BadRequest(resultado);
