@@ -1,93 +1,122 @@
-﻿using mochi_closet.Datos;
+﻿using mochi_closet.Data;
+using mochi_closet.Datos;
 
 namespace mochi_closet.Negocio;
 
 public class GestionUsuarios
 {
-        private static List<Usuario> _dbUsuarios = new();
- 
+    private readonly MochiClosetDbContext _context;
+
+    public GestionUsuarios(MochiClosetDbContext context)
+    {
+        _context = context;
+    }
+
     public List<Usuario> ListaUsuarios()
     {
-        return _dbUsuarios;
+        return _context.Usuarios.ToList();
     }
- 
+
     public Usuario? ObtenerUsuario(int id)
     {
-        return _dbUsuarios.FirstOrDefault(u => u.Id == id);
+        return _context.Usuarios
+            .FirstOrDefault(u => u.Id == id);
     }
- 
+
     public string RegistrarUsuario(Usuario usuario)
     {
         if (string.IsNullOrWhiteSpace(usuario.Nombre))
             return "El nombre es obligatorio";
- 
+
         if (string.IsNullOrWhiteSpace(usuario.Username))
             return "El username es obligatorio";
- 
+
         if (string.IsNullOrWhiteSpace(usuario.Email))
             return "El email es obligatorio";
- 
+
         if (string.IsNullOrWhiteSpace(usuario.Password))
             return "La contraseña es obligatoria";
- 
+
         if (usuario.Password.Length < 8)
             return "La contraseña debe tener al menos 8 caracteres";
- 
-        if (_dbUsuarios.Any(u => u.Username == usuario.Username))
+
+        if (_context.Usuarios.Any(u => u.Username == usuario.Username))
             return "El username ya está en uso";
- 
-        if (_dbUsuarios.Any(u => u.Email == usuario.Email))
+
+        if (_context.Usuarios.Any(u => u.Email == usuario.Email))
             return "El email ya está registrado";
- 
-        usuario.Id = _dbUsuarios.Count == 0 ? 1 : _dbUsuarios.Max(u => u.Id) + 1;
+
         usuario.Rol = "Usuaria";
         usuario.Estado = "Activo";
-        _dbUsuarios.Add(usuario);
- 
+
+        _context.Usuarios.Add(usuario);
+
+        _context.SaveChanges();
+
         return "ok";
     }
- 
+
     public Usuario? IniciarSesion(string? email, string? password)
     {
-        var usuario = _dbUsuarios.FirstOrDefault(u => u.Email == email && u.Password == password);
- 
+        var usuario = _context.Usuarios
+            .FirstOrDefault(u =>
+                u.Email == email &&
+                u.Password == password);
+
         if (usuario == null)
             return null;
- 
+
         if (usuario.Estado == "Suspendido")
             return null;
- 
+
         return usuario;
     }
- 
+
     public string ActualizarUsuario(Usuario usuarioEditado)
     {
-        var u = _dbUsuarios.FirstOrDefault(u => u.Id == usuarioEditado.Id);
- 
-        if (u == null)
+        var usuario = _context.Usuarios
+            .FirstOrDefault(u => u.Id == usuarioEditado.Id);
+
+        if (usuario == null)
             return "Usuaria no encontrada";
- 
-        if (_dbUsuarios.Any(x => x.Username == usuarioEditado.Username && x.Id != usuarioEditado.Id))
+
+        if (_context.Usuarios.Any(u =>
+                u.Username == usuarioEditado.Username &&
+                u.Id != usuarioEditado.Id))
             return "El username ya está en uso";
- 
-        u.Nombre = usuarioEditado.Nombre;
-        u.Username = usuarioEditado.Username;
-        u.Telefono = usuarioEditado.Telefono;
- 
+
+        usuario.Nombre = usuarioEditado.Nombre;
+        usuario.Username = usuarioEditado.Username;
+        usuario.Telefono = usuarioEditado.Telefono;
+
+        _context.SaveChanges();
+
         return "ok";
     }
- 
+
     public void SuspenderUsuario(int id)
     {
-        var u = _dbUsuarios.FirstOrDefault(u => u.Id == id);
-        if (u != null)
-            u.Estado = "Suspendido";
+        var usuario = _context.Usuarios
+            .FirstOrDefault(u => u.Id == id);
+
+        if (usuario != null)
+        {
+            usuario.Estado = "Suspendido";
+
+            _context.SaveChanges();
+        }
     }
- 
+
     public void ActivarUsuario(int id)
     {
-        var u = _dbUsuarios.FirstOrDefault(u => u.Id == id);
-        if (u != null)
-            u.Estado = "Activo";
+        var usuario = _context.Usuarios
+            .FirstOrDefault(u => u.Id == id);
+
+        if (usuario != null)
+        {
+            usuario.Estado = "Activo";
+
+            _context.SaveChanges();
+        }
     }
 }

@@ -8,11 +8,12 @@ namespace mochi_closet.Controllers;
 [Route("[controller]")]
 public class GestionComprasController : ControllerBase
 {
-    private GestionCompras _gestionCompras;
+    private readonly GestionCompras _gestionCompras;
 
-    public GestionComprasController()
+    public GestionComprasController(
+        GestionCompras gestionCompras)
     {
-        _gestionCompras = new GestionCompras();
+        _gestionCompras = gestionCompras;
     }
 
     [HttpGet("lista-compras")]
@@ -29,13 +30,15 @@ public class GestionComprasController : ControllerBase
         if (compra == null)
             return NotFound();
 
-        return compra;
+        return Ok(compra);
     }
 
     [HttpPost]
-    public ActionResult<string> RegistrarCompra(Compra compra)
+    public ActionResult<string> RegistrarCompra(
+        Compra compra)
     {
-        var resultado = _gestionCompras.RegistrarCompra(compra);
+        var resultado =
+            _gestionCompras.RegistrarCompra(compra);
 
         if (resultado != "ok")
             return BadRequest(resultado);

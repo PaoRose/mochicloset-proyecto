@@ -1,48 +1,57 @@
-﻿using mochi_closet.Datos;
+﻿using mochi_closet.Data;
+using mochi_closet.Datos;
 
 namespace mochi_closet.Negocio;
 
 public class GestionCategorias
 {
-    private static List<Categoria> _dbCategorias = new()
+    private readonly MochiClosetDbContext _context;
+
+    public GestionCategorias(MochiClosetDbContext context)
     {
-        new() { Id = 1, Nombre = "Tops", Descripcion = "Blusas, camisetas y tops" },
-        new() { Id = 2, Nombre = "Pantalones", Descripcion = "Jeans, leggings y pantalones" },
-        new() { Id = 3, Nombre = "Vestidos", Descripcion = "Vestidos y faldas" },
-        new() { Id = 4, Nombre = "Abrigos", Descripcion = "Chaquetas y abrigos" },
-        new() { Id = 5, Nombre = "Accesorios", Descripcion = "Bolsos, cinturones y accesorios" }
-    };
- 
+        _context = context;
+    }
+
     public List<Categoria> ListaCategorias()
     {
-        return _dbCategorias;
+        return _context.Categorias.ToList();
     }
- 
+
     public Categoria? ObtenerCategoria(int id)
     {
-        return _dbCategorias.FirstOrDefault(c => c.Id == id);
+        return _context.Categorias
+            .FirstOrDefault(c => c.Id == id);
     }
- 
+
     public void CrearCategoria(Categoria categoria)
     {
-        categoria.Id = _dbCategorias.Count == 0 ? 1 : _dbCategorias.Max(c => c.Id) + 1;
-        _dbCategorias.Add(categoria);
+        _context.Categorias.Add(categoria);
+        _context.SaveChanges();
     }
- 
+
     public void ActualizarCategoria(Categoria categoriaEditada)
     {
-        var c = _dbCategorias.FirstOrDefault(c => c.Id == categoriaEditada.Id);
-        if (c != null)
+        var categoria = _context.Categorias
+            .FirstOrDefault(c => c.Id == categoriaEditada.Id);
+
+        if (categoria != null)
         {
-            c.Nombre = categoriaEditada.Nombre;
-            c.Descripcion = categoriaEditada.Descripcion;
+            categoria.Nombre = categoriaEditada.Nombre;
+            categoria.Descripcion = categoriaEditada.Descripcion;
+
+            _context.SaveChanges();
         }
     }
- 
+
     public void EliminarCategoria(int id)
     {
-        var c = _dbCategorias.FirstOrDefault(c => c.Id == id);
-        if (c != null)
-            _dbCategorias.Remove(c);
+        var categoria = _context.Categorias
+            .FirstOrDefault(c => c.Id == id);
+
+        if (categoria != null)
+        {
+            _context.Categorias.Remove(categoria);
+            _context.SaveChanges();
+        }
     }
 }

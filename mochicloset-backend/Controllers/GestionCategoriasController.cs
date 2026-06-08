@@ -8,11 +8,12 @@ namespace mochi_closet.Controllers;
 [Route("[controller]")]
 public class GestionCategoriasController : ControllerBase
 {
-    private GestionCategorias _gestionCategorias;
+    private readonly GestionCategorias _gestionCategorias;
 
-    public GestionCategoriasController()
+    public GestionCategoriasController(
+        GestionCategorias gestionCategorias)
     {
-        _gestionCategorias = new GestionCategorias();
+        _gestionCategorias = gestionCategorias;
     }
 
     [HttpGet("lista-categorias")]
@@ -43,6 +44,9 @@ public class GestionCategoriasController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult ActualizarCategoria(int id, Categoria categoriaEditada)
     {
+        if (id != categoriaEditada.Id)
+            return BadRequest();
+
         var categoria = _gestionCategorias.ObtenerCategoria(id);
 
         if (categoria == null)
@@ -50,7 +54,7 @@ public class GestionCategoriasController : ControllerBase
 
         _gestionCategorias.ActualizarCategoria(categoriaEditada);
 
-        return Ok(categoria);
+        return Ok(categoriaEditada);
     }
 
     [HttpDelete("{id}")]
