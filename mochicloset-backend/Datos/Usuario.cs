@@ -10,4 +10,20 @@ public class Usuario
     public string? Password { get; set; }
     public string? Rol { get; set; }
     public string? Estado { get; set; }
+    
+
+    public virtual string ObtenerRol()
+    {
+        return "Usuario";
+    }
+
+    public virtual bool PuedePublicar()
+    {
+        return false;
+    }
+
+    public virtual bool PuedeAdministrar()
+    {
+        return false;
+    }
 }

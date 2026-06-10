@@ -6,17 +6,28 @@ namespace mochi_closet.Negocio;
 public class GestionPublicaciones
 {
     private readonly MochiClosetDbContext _context;
+    private readonly GestionNotificaciones _gestionNotificaciones;
 
-    public GestionPublicaciones(MochiClosetDbContext context)
+    public GestionPublicaciones(
+        MochiClosetDbContext context,
+        GestionNotificaciones gestionNotificaciones)
     {
         _context = context;
+        _gestionNotificaciones = gestionNotificaciones;
     }
 
     public List<Publicacion> ListaPublicaciones()
     {
         return _context.Publicaciones.ToList();
     }
-
+    
+    public List<Publicacion> ListaPublicacionesPorUsuaria(int usuarioId)
+    {
+        return _context.Publicaciones
+            .Where(p => p.UsuarioId == usuarioId)
+            .ToList();
+    }
+    
     public Publicacion? ObtenerPublicacion(int id)
     {
         return _context.Publicaciones
@@ -86,17 +97,86 @@ public class GestionPublicaciones
             _context.SaveChanges();
         }
     }
-
-    public void EliminarPublicacion(int id)
+    
+    public List<Publicacion> FiltrarPublicaciones(
+        string? busqueda,
+        int? categoriaId,
+        string? talla,
+        string? condicion,
+        decimal? precioMin,
+        decimal? precioMax)
     {
+        var query = _context.Publicaciones
+            .Where(p => p.Estado == "Disponible")
+            .AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(busqueda))
+            query = query.Where(p => p.Titulo!.Contains(busqueda));
+
+        if (categoriaId.HasValue)
+            query = query.Where(p => p.CategoriaId == categoriaId.Value);
+
+        if (!string.IsNullOrWhiteSpace(talla))
+            query = query.Where(p => p.Talla == talla);
+
+        if (!string.IsNullOrWhiteSpace(condicion))
+            query = query.Where(p => p.Condicion == condicion);
+
+        if (precioMin.HasValue)
+            query = query.Where(p => p.Precio >= precioMin.Value);
+
+        if (precioMax.HasValue)
+            query = query.Where(p => p.Precio <= precioMax.Value);
+
+        return query.ToList();
+    }
+    
+    //ADMIN
+    public string EliminarPublicacion(int adminId, int id, string razon)
+    {
+        var admin = _context.Usuarios
+            .FirstOrDefault(u => u.Id == adminId);
+
+        if (admin == null || admin.Rol != "Admin")
+            return "No tienes permisos para realizar esta accion";
+
         var publicacion = _context.Publicaciones
             .FirstOrDefault(p => p.Id == id);
 
-        if (publicacion != null)
-        {
-            _context.Publicaciones.Remove(publicacion);
+        if (publicacion == null)
+            return "Publicacion no encontrada";
 
-            _context.SaveChanges();
-        }
+        _gestionNotificaciones.CrearNotificacion(
+            publicacion.UsuarioId,
+            "PrendaEliminada",
+            "Tu publicacion fue eliminada por el administrador. Razon: " + razon);
+
+        _context.Publicaciones.Remove(publicacion);
+        _context.SaveChanges();
+
+        return "ok";
+    }
+    //USUARIA
+    public string EliminarPublicacionPropia(int usuarioId, int id)
+    {
+        var usuario = _context.Usuarios
+            .FirstOrDefault(u => u.Id == usuarioId);
+
+        if (usuario == null || usuario.Rol != "Usuaria")
+            return "No tienes permisos para realizar esta accion";
+
+        var publicacion = _context.Publicaciones
+            .FirstOrDefault(p => p.Id == id);
+
+        if (publicacion == null)
+            return "Publicacion no encontrada";
+
+        if (publicacion.UsuarioId != usuarioId)
+            return "No puedes eliminar una publicacion que no es tuya";
+
+        _context.Publicaciones.Remove(publicacion);
+        _context.SaveChanges();
+
+        return "ok";
     }
 }

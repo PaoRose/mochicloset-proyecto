@@ -22,6 +22,18 @@ public class GestionComprasController : ControllerBase
         return _gestionCompras.ListaCompras();
     }
 
+    [HttpGet("mis-compras/{usuarioId}")]
+    public IEnumerable<Compra> ListaComprasPorUsuaria(int usuarioId)
+    {
+        return _gestionCompras.ListaComprasPorUsuaria(usuarioId);
+    }
+    
+    [HttpGet("mis-ventas/{usuarioId}")]
+    public IEnumerable<Compra> ListaVentasPorUsuaria(int usuarioId)
+    {
+        return _gestionCompras.ListaVentasPorUsuaria(usuarioId);
+    }
+
     [HttpGet("{id}")]
     public ActionResult<Compra> ObtenerCompra(int id)
     {
@@ -34,11 +46,9 @@ public class GestionComprasController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<string> RegistrarCompra(
-        Compra compra)
+    public ActionResult<string> RegistrarCompra(Compra compra)
     {
-        var resultado =
-            _gestionCompras.RegistrarCompra(compra);
+        var resultado = _gestionCompras.RegistrarCompra(compra);
 
         if (resultado != "ok")
             return BadRequest(resultado);

@@ -73,27 +73,23 @@ public class GestionUsuariosController : ControllerBase
     }
 
     [HttpPut("suspender-usuario/{id}")]
-    public IActionResult SuspenderUsuario(int id)
+    public IActionResult SuspenderUsuario(int id, [FromQuery] int adminId)
     {
-        var usuario = _gestionUsuarios.ObtenerUsuario(id);
+        var resultado = _gestionUsuarios.SuspenderUsuario(adminId, id);
 
-        if (usuario == null)
-            return NotFound();
-
-        _gestionUsuarios.SuspenderUsuario(id);
+        if (resultado != "ok")
+            return BadRequest(resultado);
 
         return Ok("Usuaria suspendida correctamente");
     }
 
     [HttpPut("activar-usuario/{id}")]
-    public IActionResult ActivarUsuario(int id)
+    public IActionResult ActivarUsuario(int id, [FromQuery] int adminId)
     {
-        var usuario = _gestionUsuarios.ObtenerUsuario(id);
+        var resultado = _gestionUsuarios.ActivarUsuario(adminId, id);
 
-        if (usuario == null)
-            return NotFound();
-
-        _gestionUsuarios.ActivarUsuario(id);
+        if (resultado != "ok")
+            return BadRequest(resultado);
 
         return Ok("Usuaria activada correctamente");
     }

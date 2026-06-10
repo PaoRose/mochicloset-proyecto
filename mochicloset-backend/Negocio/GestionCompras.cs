@@ -17,6 +17,24 @@ public class GestionCompras
         return _context.Compras.ToList();
     }
 
+    public List<Compra> ListaComprasPorUsuaria(int usuarioId)
+    {
+        return _context.Compras
+            .Where(c => c.UsuarioId == usuarioId)
+            .ToList();
+    }
+    
+    public List<Compra> ListaVentasPorUsuaria(int usuarioId)
+    {
+        var publicacionesDeUsuaria = _context.Publicaciones
+            .Where(p => p.UsuarioId == usuarioId)
+            .Select(p => p.Id)
+            .ToList();
+
+        return _context.Compras
+            .Where(c => publicacionesDeUsuaria.Contains(c.PublicacionId))
+            .ToList();
+    }
     public Compra? ObtenerCompra(int id)
     {
         return _context.Compras
@@ -25,12 +43,6 @@ public class GestionCompras
 
     public string RegistrarCompra(Compra compra)
     {
-        if (string.IsNullOrWhiteSpace(compra.MetodoPago))
-            return "El método de pago es obligatorio";
-
-        if (string.IsNullOrWhiteSpace(compra.DireccionEntrega))
-            return "La dirección de entrega es obligatoria";
-
         var publicacion = _context.Publicaciones
             .FirstOrDefault(p => p.Id == compra.PublicacionId);
 
@@ -48,7 +60,7 @@ public class GestionCompras
 
         compra.FechaCompra = DateTime.Now;
         compra.Estado = "Completada";
-        compra.MontoTotal = (decimal)publicacion.Precio;
+        compra.MontoTotal = publicacion.Precio;
 
         _context.Compras.Add(compra);
 

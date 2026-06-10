@@ -94,29 +94,43 @@ public class GestionUsuarios
         return "ok";
     }
 
-    public void SuspenderUsuario(int id)
+    public string SuspenderUsuario(int adminId, int id)
     {
+        var admin = _context.Usuarios
+            .FirstOrDefault(u => u.Id == adminId);
+
+        if (admin == null || admin.Rol != "Admin")
+            return "No tienes permisos para realizar esta accion";
+
         var usuario = _context.Usuarios
             .FirstOrDefault(u => u.Id == id);
 
-        if (usuario != null)
-        {
-            usuario.Estado = "Suspendido";
+        if (usuario == null)
+            return "Usuaria no encontrada";
 
-            _context.SaveChanges();
-        }
+        usuario.Estado = "Suspendido";
+        _context.SaveChanges();
+
+        return "ok";
     }
 
-    public void ActivarUsuario(int id)
+    public string ActivarUsuario(int adminId, int id)
     {
+        var admin = _context.Usuarios
+            .FirstOrDefault(u => u.Id == adminId);
+
+        if (admin == null || admin.Rol != "Admin")
+            return "No tienes permisos para realizar esta accion";
+
         var usuario = _context.Usuarios
             .FirstOrDefault(u => u.Id == id);
 
-        if (usuario != null)
-        {
-            usuario.Estado = "Activo";
+        if (usuario == null)
+            return "Usuaria no encontrada";
 
-            _context.SaveChanges();
-        }
+        usuario.Estado = "Activo";
+        _context.SaveChanges();
+
+        return "ok";
     }
 }

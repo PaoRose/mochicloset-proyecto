@@ -21,6 +21,25 @@ public class GestionPublicacionesController : ControllerBase
     {
         return _gestionPublicaciones.ListaPublicaciones();
     }
+    
+    [HttpGet("filtrar")]
+    public IEnumerable<Publicacion> FiltrarPublicaciones(
+        [FromQuery] string? busqueda,
+        [FromQuery] int? categoriaId,
+        [FromQuery] string? talla,
+        [FromQuery] string? condicion,
+        [FromQuery] decimal? precioMin,
+        [FromQuery] decimal? precioMax)
+    {
+        return _gestionPublicaciones.FiltrarPublicaciones(
+            busqueda, categoriaId, talla, condicion, precioMin, precioMax);
+    }
+    
+    [HttpGet("mis-publicaciones/{usuarioId}")]
+    public IEnumerable<Publicacion> ListaPublicacionesPorUsuaria(int usuarioId)
+    {
+        return _gestionPublicaciones.ListaPublicacionesPorUsuaria(usuarioId);
+    }
 
     [HttpGet("{id}")]
     public ActionResult<Publicacion> ObtenerPublicacion(int id)
@@ -59,16 +78,30 @@ public class GestionPublicacionesController : ControllerBase
 
         return Ok("Publicación actualizada correctamente");
     }
-
+    
+    //ADMIN
     [HttpDelete("{id}")]
-    public IActionResult EliminarPublicacion(int id)
+    public IActionResult EliminarPublicacion(int id, [FromQuery] int adminId, [FromQuery] string? razon)
     {
-        var publicacion = _gestionPublicaciones.ObtenerPublicacion(id);
+        if (string.IsNullOrWhiteSpace(razon))
+            return BadRequest("La razon de eliminacion es obligatoria");
 
-        if (publicacion == null)
-            return NotFound();
+        var resultado = _gestionPublicaciones.EliminarPublicacion(adminId, id, razon);
 
-        _gestionPublicaciones.EliminarPublicacion(id);
+        if (resultado != "ok")
+            return BadRequest(resultado);
+
+        return NoContent();
+    }
+    
+    //USUARIA
+    [HttpDelete("eliminar-propia/{id}")]
+    public IActionResult EliminarPublicacionPropia(int id, [FromQuery] int usuarioId)
+    {
+        var resultado = _gestionPublicaciones.EliminarPublicacionPropia(usuarioId, id);
+
+        if (resultado != "ok")
+            return BadRequest(resultado);
 
         return NoContent();
     }
