@@ -1,13 +1,53 @@
 :root {
-  --primary: #d9a5b3;
-  --secondary: #f5e6ea;
-  --background: #fffafb;
-  --text: #333333;
+  /* =====================
+     COLORES DE MARCA
+     (identidad visual de la app)
+  ====================== */
+
+  --mc-matcha-green: #B7C9A8;   /* Color principal (botones, acciones principales) */
+  --mc-strawberry-pink: #F5B7C3; /* Color secundario (detalles suaves) */
+  --mc-accent-pink: #E88CA0;     /* Hover, resaltados, elementos activos */
+
+  --mc-cream: #FFF7F2;           /* Fondos secundarios (secciones, inputs) */
+  --mc-warm-white: #FFFCFA;      /* Fondo principal de la aplicación */
+
+  /* =====================
+     COLORES DE TEXTO
+  ====================== */
+
+  --mc-text-dark: #5C524D;       /* Texto principal (títulos y contenido) */
+  --mc-text-muted: #8C8279;      /* Texto secundario (placeholders, descripciones) */
+
+  /* =====================
+     COLORES DE ESTADO
+     (errores, acciones importantes)
+  ====================== */
+
+  --mc-danger: #d4183d;          /* Errores, eliminar, alertas */
+  --mc-white: #FFFFFF;           /* Texto o fondos en contraste */
+
+  /* =====================
+     COLORES PARA GRÁFICAS
+     (estadísticas o dashboards)
+  ====================== */
+
+  --mc-chart-1: #B7C9A8;
+  --mc-chart-2: #F5B7C3;
+  --mc-chart-3: #E88CA0;
+  --mc-chart-4: #C9DDB8;
+  --mc-chart-5: #F8CDD4;
 }
 
-body {
+
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--background);
-  color: var(--text);
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Outfit', sans-serif; /* fuente principal de toda la app */
+}
+
+/* Fondo general */
+body {
+  background-color: var(--mc-warm-white);
+  color: var(--mc-text-dark);
 }

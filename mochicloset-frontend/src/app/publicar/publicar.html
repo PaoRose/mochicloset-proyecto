@@ -1,0 +1,113 @@
+<div class="publicar-container">
+
+  <!-- Volver -->
+  <a class="publicar-volver" routerLink="/perfil">← Volver al dashboard</a>
+
+  <!-- Header -->
+  <h1 class="publicar-title">Publicar prenda</h1>
+  <p class="publicar-subtitle">Completa los detalles de tu artículo</p>
+
+  <!-- Grid -->
+  <div class="publicar-grid">
+
+    <!-- Columna izquierda -->
+    <div class="publicar-columna-izq">
+
+      <!-- Fotos -->
+      <div class="publicar-card">
+        <h3 class="card-title">Fotos</h3>
+        <p class="card-subtitle">Agrega hasta 5 fotos de tu prenda. La primera será la principal.</p>
+        <div class="fotos-grid">
+          <div class="foto-agregar">
+            <span class="foto-icon">📷</span>
+            <p>Agregar foto</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detalles -->
+      <div class="publicar-card">
+        <h3 class="card-title">Detalles</h3>
+
+        <div class="detalle-group">
+          <label for="titulo">Título</label>
+          <input id="titulo" type="text" placeholder="Ej: Vestido floral vintage talla M" />
+        </div>
+
+        <div class="detalle-row">
+          <div class="detalle-group">
+            <label for="categoria">Categoría</label>
+            <select id="categoria">
+              <option value="" disabled selected>Selecciona</option>
+              <option>Vestidos</option>
+              <option>Blusas</option>
+              <option>Pantalones</option>
+              <option>Faldas</option>
+            </select>
+          </div>
+          <div class="detalle-group">
+            <label for="talla">Talla</label>
+            <select id="talla">
+              <option value="" disabled selected>Selecciona</option>
+              <option>XS</option>
+              <option>S</option>
+              <option>M</option>
+              <option>L</option>
+              <option>XL</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="detalle-group">
+          <label for="condicion">Condición</label>
+          <select id="condicion">
+            <option value="" disabled selected>Selecciona</option>
+            <option>Nuevo</option>
+            <option>Como nuevo</option>
+            <option>Buen estado</option>
+            <option>Usado</option>
+          </select>
+        </div>
+
+        <div class="detalle-group">
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" placeholder="Describe tu prenda: marca, material, colores, detalles especiales..."></textarea>
+          <span class="detalle-hint">Sé lo más detallada posible</span>
+        </div>
+
+      </div>
+
+      <!-- Precio -->
+      <div class="publicar-card">
+        <h3 class="card-title">Precio</h3>
+
+        <div class="detalle-group">
+          <label for="precio">Precio (Bs.)</label>
+          <input id="precio" type="number" placeholder="120" />
+          <span class="detalle-hint">Precio sugerido basado en condición</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="publicar-columna-der">
+
+      <!-- Vista previa -->
+      <div class="publicar-card">
+        <h3 class="card-title">Vista previa</h3>
+        <div class="vista-previa">
+          <span class="vista-icon">⬆</span>
+        </div>
+        <p class="vista-texto">Tu prenda aparecerá así</p>
+        <p class="vista-subtexto">Asegúrate de usar fotos claras y con buena iluminación</p>
+      </div>
+
+      <!-- Botón publicar -->
+      <button class="btn-publicar" routerLink="/perfil">Publicar prenda</button>
+
+    </div>
+
+  </div>
+
+</div>

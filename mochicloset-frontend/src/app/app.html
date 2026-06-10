@@ -1,1 +1,5 @@
-<router-outlet />
+<app-nav-menu *ngIf="router.url !== '/login' && router.url !== '/registro' && router.url !== '/chat'"></app-nav-menu>
+
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>

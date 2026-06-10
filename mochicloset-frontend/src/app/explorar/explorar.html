@@ -1,0 +1,158 @@
+<div class="explorar-container">
+
+  <!-- Buscador y filtros -->
+  <div class="explorar-toolbar">
+    <div class="explorar-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Buscar ropa, accesorios..." />
+    </div>
+    <div class="explorar-toolbar-right">
+      <select class="explorar-orden">
+        <option>Más recientes</option>
+        <option>Menor precio</option>
+        <option>Mayor precio</option>
+      </select>
+      <button class="explorar-filtros-btn" (click)="abrirFiltros()">⚙ Filtros</button>
+    </div>
+  </div>
+
+  <!-- Categorías -->
+  <div class="explorar-categorias">
+    <button class="categoria-btn active">Todas</button>
+    <button class="categoria-btn">Vestidos</button>
+    <button class="categoria-btn">Blusas</button>
+    <button class="categoria-btn">Pantalones</button>
+    <button class="categoria-btn">Faldas</button>
+    <button class="categoria-btn">Accesorios</button>
+  </div>
+
+  <!-- Grid de prendas -->
+  <div class="explorar-grid">
+
+    <div class="prenda-card" routerLink="/prenda/1">
+      <div class="prenda-img-wrapper">
+        <img src="assets/articulo1.jpg" alt="Vestido Floral Vintage">
+        <button class="prenda-fav">🤍</button>
+      </div>
+      <div class="prenda-info">
+        <p class="prenda-nombre">Vestido Floral Vintage</p>
+        <p class="prenda-vendedor">María López</p>
+        <div class="prenda-footer">
+          <span class="prenda-precio">Bs. 120</span>
+          <span class="prenda-tag">M</span>
+          <span class="prenda-tag">Excelente</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prenda-card">
+      <div class="prenda-img-wrapper">
+        <img src="assets/fav1.jpg" alt="Blusa de Lino Blanca">
+        <button class="prenda-fav">🤍</button>
+      </div>
+      <div class="prenda-info">
+        <p class="prenda-nombre">Blusa de Lino Blanca</p>
+        <p class="prenda-vendedor">Ana García</p>
+        <div class="prenda-footer">
+          <span class="prenda-precio">Bs. 85</span>
+          <span class="prenda-tag">S</span>
+          <span class="prenda-tag">Nueva</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prenda-card">
+      <div class="prenda-img-wrapper">
+        <img src="assets/articulo2.jpg" alt="Falda Midi Rosa">
+        <button class="prenda-fav">🤍</button>
+      </div>
+      <div class="prenda-info">
+        <p class="prenda-nombre">Falda Midi Rosa</p>
+        <p class="prenda-vendedor">Sofía Martínez</p>
+        <div class="prenda-footer">
+          <span class="prenda-precio">Bs. 95</span>
+          <span class="prenda-tag">M</span>
+          <span class="prenda-tag">Muy buena</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="prenda-card">
+      <div class="prenda-img-wrapper">
+        <img src="assets/articulo3.jpg" alt="Cardigan Suave Beige">
+        <button class="prenda-fav">🤍</button>
+      </div>
+      <div class="prenda-info">
+        <p class="prenda-nombre">Cardigan Suave Beige</p>
+        <p class="prenda-vendedor">Laura Pérez</p>
+        <div class="prenda-footer">
+          <span class="prenda-precio">Bs. 110</span>
+          <span class="prenda-tag">L</span>
+          <span class="prenda-tag">Excelente</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Drawer filtros — FUERA del contenedor -->
+<div class="filtros-overlay" *ngIf="filtrosAbiertos" (click)="cerrarFiltros()">
+  <div class="filtros-drawer" (click)="$event.stopPropagation()">
+
+    <div class="filtros-header">
+      <div>
+        <h3 class="filtros-title">Filtros</h3>
+        <p class="filtros-subtitle">Refina tu búsqueda</p>
+      </div>
+      <button class="filtros-close" (click)="cerrarFiltros()">✕</button>
+    </div>
+
+    <div class="filtros-group">
+      <label>Categoría</label>
+      <select>
+        <option>Todas las categorías</option>
+        <option>Vestidos</option>
+        <option>Blusas</option>
+        <option>Pantalones</option>
+        <option>Faldas</option>
+        <option>Accesorios</option>
+      </select>
+    </div>
+
+    <div class="filtros-group">
+      <label>Talla</label>
+      <select>
+        <option>Todas las tallas</option>
+        <option>XS</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+      </select>
+    </div>
+
+    <div class="filtros-group">
+      <label>Condición</label>
+      <select>
+        <option>Todas las condiciones</option>
+        <option>Nuevo</option>
+        <option>Como nuevo</option>
+        <option>Buen estado</option>
+        <option>Usado</option>
+      </select>
+    </div>
+
+    <div class="filtros-group">
+      <div class="filtros-precio-header">
+        <label>Rango de precio</label>
+        <span class="filtros-precio-valor">Bs. 0 - Bs. 500</span>
+      </div>
+      <input type="range" min="0" max="500" value="500" class="filtros-range" />
+    </div>
+
+    <button class="filtros-limpiar">Limpiar filtros</button>
+
+  </div>
+</div>

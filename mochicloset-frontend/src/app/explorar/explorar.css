@@ -1,0 +1,353 @@
+/* =====================
+   CONTENEDOR
+===================== */
+
+.explorar-container {
+  max-width: 1200px;
+  margin: 24px auto;
+  padding: 0 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =====================
+   TOOLBAR
+===================== */
+
+.explorar-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.explorar-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--mc-white);
+  border: 1px solid #E0D5CF;
+  border-radius: 999px;
+  padding: 12px 20px;
+}
+
+.search-icon {
+  font-size: 16px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.explorar-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: var(--mc-text-dark);
+}
+
+.explorar-search input::placeholder {
+  color: #C4B8B0;
+}
+
+.explorar-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.explorar-orden {
+  background-color: var(--mc-white);
+  border: 1px solid #E0D5CF;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--mc-text-dark);
+  outline: none;
+  cursor: pointer;
+}
+
+.explorar-filtros-btn {
+  background-color: var(--mc-white);
+  border: 1px solid #E0D5CF;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.explorar-filtros-btn:hover {
+  border-color: var(--mc-matcha-green);
+  color: var(--mc-matcha-green);
+}
+
+/* =====================
+   CATEGORÍAS
+===================== */
+
+.explorar-categorias {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.categoria-btn {
+  background: transparent;
+  border: 1px solid #E0D5CF;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.categoria-btn.active {
+  background-color: var(--mc-matcha-green);
+  color: white;
+  border-color: var(--mc-matcha-green);
+}
+
+.categoria-btn:hover:not(.active) {
+  border-color: var(--mc-matcha-green);
+  color: var(--mc-matcha-green);
+}
+
+/* =====================
+   GRID
+===================== */
+
+.explorar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* =====================
+   CARD
+===================== */
+
+.prenda-card {
+  background-color: var(--mc-white);
+  border: 1px solid #E0D5CF;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.prenda-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+}
+
+.prenda-img-wrapper {
+  position: relative;
+}
+
+.prenda-img-wrapper img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.prenda-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.prenda-fav:hover {
+  transform: scale(1.1);
+}
+
+/* =====================
+   INFO
+===================== */
+
+.prenda-info {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.prenda-nombre {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.prenda-vendedor {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}
+
+.prenda-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.prenda-precio {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mc-matcha-green);
+  flex: 1;
+}
+
+.prenda-tag {
+  background-color: var(--mc-cream);
+  border: 1px solid #E0D5CF;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mc-text-muted);
+}
+
+/* =====================
+   DRAWER FILTROS
+===================== */
+
+.filtros-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filtros-drawer {
+  background: var(--mc-warm-white);
+  width: 100%;
+  max-width: 440px;
+  height: 100%;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.filtros-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.filtros-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.filtros-subtitle {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+  margin: 4px 0 0;
+}
+
+.filtros-close {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--mc-text-muted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.filtros-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filtros-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+}
+
+.filtros-group select {
+  background-color: var(--mc-white);
+  border: 1px solid #E0D5CF;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--mc-text-dark);
+  outline: none;
+  cursor: pointer;
+  appearance: auto;
+}
+
+.filtros-group select:focus {
+  border-color: var(--mc-matcha-green);
+}
+
+.filtros-precio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filtros-precio-valor {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+}
+
+.filtros-range {
+  width: 100%;
+  accent-color: var(--mc-matcha-green);
+  cursor: pointer;
+}
+
+.filtros-limpiar {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #E0D5CF;
+  border-radius: 14px;
+  background: var(--mc-white);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: auto;
+}
+
+.filtros-limpiar:hover {
+  border-color: var(--mc-matcha-green);
+  color: var(--mc-matcha-green);
+}

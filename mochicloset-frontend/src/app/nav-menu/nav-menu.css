@@ -1,0 +1,76 @@
+/* =====================
+   NAV MENU
+===================== */
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+  background-color: var(--mc-white);
+  border-bottom: 1px solid #F0E8E3;
+}
+
+/* =====================
+   LOGO
+===================== */
+
+.nav-menu-logo img {
+  height: 80px;
+  width: auto;
+}
+
+/* =====================
+   LINKS
+===================== */
+
+.nav-menu-links {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu-links a {
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+  transition: color 0.2s;
+}
+
+.nav-menu-links a:hover {
+  color: var(--mc-accent-pink);
+}
+
+.nav-menu-links a.active {
+  color: var(--mc-matcha-green);
+  font-weight: 600;
+}
+
+/* =====================
+   ICONOS
+===================== */
+
+.nav-menu-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px;
+  border-radius: 50%;
+  color: var(--mc-text-dark);
+  transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+  background-color: var(--mc-cream);
+}

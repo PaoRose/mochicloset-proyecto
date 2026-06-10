@@ -1,0 +1,229 @@
+/* =====================
+   CONTENEDOR
+===================== */
+
+.editar-container {
+  max-width: 700px;
+  margin: 32px auto;
+  padding: 0 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* =====================
+   VOLVER
+===================== */
+
+.editar-volver {
+  font-size: 14px;
+  color: var(--mc-text-muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+  width: fit-content;
+}
+
+.editar-volver:hover {
+  color: var(--mc-text-dark);
+}
+
+/* =====================
+   HEADER
+===================== */
+
+.editar-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.editar-subtitle {
+  font-size: 14px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}
+
+/* =====================
+   CARD
+===================== */
+
+.editar-card {
+  background-color: var(--mc-white);
+  border: 1px solid #E0D5CF;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+/* =====================
+   FOTO
+===================== */
+
+.editar-foto-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.editar-foto {
+  width: 110px;
+  height: 110px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.editar-foto-btn {
+  background: transparent;
+  border: 1px solid #E0D5CF;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.editar-foto-btn:hover {
+  border-color: var(--mc-matcha-green);
+  color: var(--mc-matcha-green);
+}
+
+.editar-foto-hint {
+  font-size: 12px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}
+
+/* =====================
+   DIVIDER
+===================== */
+
+.editar-divider {
+  border: none;
+  border-top: 1px solid #F0E8E3;
+  margin: 0;
+}
+
+/* =====================
+   FORMULARIO
+===================== */
+
+.editar-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.editar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.editar-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+}
+
+.editar-input-field {
+  display: flex;
+  align-items: center;
+  background-color: var(--mc-cream);
+  border: 1px solid #E0D5CF;
+  border-radius: 14px;
+  padding: 12px 16px;
+  gap: 10px;
+  transition: border-color 0.2s;
+}
+
+.editar-input-field:focus-within {
+  border-color: var(--mc-matcha-green);
+}
+
+.editar-disabled {
+  background-color: #F5F0ED;
+  opacity: 0.7;
+}
+
+.editar-icon {
+  font-size: 16px;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.editar-input-field input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: var(--mc-text-dark);
+}
+
+.editar-input-field input:disabled {
+  cursor: not-allowed;
+  color: var(--mc-text-muted);
+}
+
+.editar-hint {
+  font-size: 12px;
+  color: var(--mc-text-muted);
+}
+
+/* =====================
+   BOTONES
+===================== */
+
+.editar-acciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-guardar {
+  height: 48px;
+  border: none;
+  border-radius: 14px;
+  background-color: var(--mc-matcha-green);
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-guardar:hover {
+  background-color: var(--mc-accent-pink);
+}
+
+.btn-cancelar {
+  height: 48px;
+  border: 1px solid #E0D5CF;
+  border-radius: 14px;
+  background: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancelar:hover {
+  border-color: var(--mc-text-dark);
+}

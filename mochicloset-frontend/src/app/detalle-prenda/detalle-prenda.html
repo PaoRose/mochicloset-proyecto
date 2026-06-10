@@ -1,0 +1,120 @@
+<div class="detalle-container">
+
+  <!-- Volver -->
+  <a class="detalle-volver" routerLink="/explorar">← Volver al marketplace</a>
+
+  <!-- Imagen principal -->
+  <div class="detalle-img-principal">
+    <img src="assets/articulo1.jpg" alt="Vestido Floral Vintage">
+  </div>
+
+  <!-- Miniaturas -->
+  <div class="detalle-miniaturas">
+    <img src="assets/articulo1.jpg" alt="foto 1" class="miniatura activa">
+    <img src="assets/articulo2.jpg" alt="foto 2" class="miniatura">
+    <img src="assets/articulo3.jpg" alt="foto 3" class="miniatura">
+  </div>
+
+  <!-- Info -->
+  <div class="detalle-info">
+
+    <div class="detalle-nombre-row">
+      <div>
+        <h1 class="detalle-nombre">Vestido Floral Vintage</h1>
+        <p class="detalle-precio">Bs. 120</p>
+      </div>
+      <button class="detalle-fav">🤍</button>
+    </div>
+
+    <!-- Tags -->
+    <div class="detalle-tags">
+      <span class="detalle-tag">Vestidos</span>
+      <span class="detalle-tag">Talla M</span>
+      <span class="detalle-tag">Excelente</span>
+    </div>
+
+    <!-- Vendedora -->
+    <div class="detalle-vendedora">
+      <img src="assets/foto-perfil.jpg" alt="María López" class="vendedora-foto">
+      <div class="vendedora-info">
+        <p class="vendedora-nombre">María López</p>
+        <p class="vendedora-stats">⭐ 4.9 · 23 ventas</p>
+      </div>
+    </div>
+
+    <!-- Botón comprar -->
+    <button class="detalle-comprar-btn" (click)="abrirModalSeguridad()">Comprar ahora</button>
+
+    <!-- Detalles del producto -->
+    <div class="detalle-card">
+      <h3 class="detalle-card-title">Detalles del producto</h3>
+      <div class="detalle-fila">
+        <span class="detalle-label">Marca</span>
+        <span class="detalle-valor">Zara</span>
+      </div>
+      <div class="detalle-fila">
+        <span class="detalle-label">Talla</span>
+        <span class="detalle-valor">M</span>
+      </div>
+      <div class="detalle-fila">
+        <span class="detalle-label">Color</span>
+        <span class="detalle-valor">Rosa/Verde/Crema</span>
+      </div>
+      <div class="detalle-fila">
+        <span class="detalle-label">Condición</span>
+        <span class="detalle-valor">Excelente</span>
+      </div>
+      <div class="detalle-fila">
+        <span class="detalle-label">Categoría</span>
+        <span class="detalle-valor">Vestidos</span>
+      </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="detalle-card">
+      <h3 class="detalle-card-title">Descripción</h3>
+      <p class="detalle-descripcion">Hermoso vestido floral vintage en excelente estado. Perfecto para primavera/verano. Tiene un corte midi muy favorecedor y tela suave y cómoda. Solo lo usé 2 veces para eventos especiales. Sin manchas, roturas ni decoloración. Las flores son en tonos rosados y verdes sobre fondo crema.</p>
+    </div>
+
+    <!-- Ubicación y fecha -->
+    <div class="detalle-meta">
+      <span>📍 Santa Cruz, Bolivia</span>
+      <span>📅 Hace 3 días</span>
+    </div>
+
+    <!-- Modal seguridad — al final del archivo -->
+    <div class="modal-overlay" *ngIf="modalSeguridad" (click)="cerrarModalSeguridad()">
+      <div class="modal-seguridad" (click)="$event.stopPropagation()">
+
+        <div class="modal-seg-header">
+          <div class="modal-seg-titulo-row">
+            <span class="modal-seg-icono">⚠️</span>
+            <h3 class="modal-seg-titulo">Antes de continuar</h3>
+          </div>
+          <button class="modal-seg-close" (click)="cerrarModalSeguridad()">✕</button>
+        </div>
+
+        <div class="modal-seg-alerta">
+          <p class="modal-seg-alerta-titulo">Recomendaciones de seguridad</p>
+          <ul class="modal-seg-lista">
+            <li>Coordina el pago y la entrega directamente con la vendedora por el chat.</li>
+            <li>Nunca realices pagos anticipados sin haber visto la prenda.</li>
+            <li>Prefiere encuentros en lugares públicos y concurridos.</li>
+            <li>Desconfía de precios demasiado bajos o condiciones sospechosas.</li>
+            <li>Ante cualquier irregularidad, repórtalo al administrador.</li>
+          </ul>
+        </div>
+
+        <p class="modal-seg-disclaimer">Mochi Closet no se responsabiliza por transacciones realizadas fuera de la plataforma.</p>
+
+        <div class="modal-seg-acciones">
+          <button class="modal-seg-cancelar" (click)="cerrarModalSeguridad()">Cancelar</button>
+          <button class="modal-seg-chat" (click)="irAlChat()">💬 Ir al chat</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
