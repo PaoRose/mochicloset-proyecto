@@ -21,8 +21,9 @@
         <h1 class="detalle-nombre">{{ publicacion?.titulo }}</h1>
         <p class="detalle-precio">Bs. {{ publicacion?.precio }}</p>
       </div>
-      <button class="detalle-fav">🤍</button>
-    </div>
+      <button class="detalle-fav" (click)="toggleFavorito()">
+        {{ esFavorito ? '❤️' : '🤍' }}
+      </button>    </div>
 
     <!-- Tags -->
     <div class="detalle-tags">
