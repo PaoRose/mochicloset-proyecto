@@ -34,16 +34,15 @@
 
     <!-- Vendedora -->
     <div class="detalle-vendedora">
-      <img src="assets/foto-perfil.jpg" alt="María López" class="vendedora-foto">
+      <img src="assets/foto-perfil.jpg" alt="vendedora" class="vendedora-foto">
       <div class="vendedora-info">
-        <p class="vendedora-nombre">María López</p>
-        <p class="vendedora-stats">⭐ 4.9 · 23 ventas</p>
+        <p class="vendedora-nombre">{{ vendedora?.nombre }}</p>
+        <p class="vendedora-stats">&#64;{{ vendedora?.username }}</p>
       </div>
     </div>
 
     <!-- Botón comprar -->
-    <button class="detalle-comprar-btn" (click)="abrirModalSeguridad()">Comprar ahora</button>
-
+    <button class="detalle-comprar-btn" *ngIf="publicacion?.usuarioId !== usuarioLogueadoId" (click)="abrirModalSeguridad()">Comprar ahora</button>
     <!-- Detalles del producto -->
     <div class="detalle-card">
       <h3 class="detalle-card-title">Detalles del producto</h3>
@@ -68,7 +67,7 @@
     <!-- Ubicación y fecha -->
     <div class="detalle-meta">
       <span>📍 Santa Cruz, Bolivia</span>
-      <span>📅 Hace 3 días</span>
+      <span>📅 {{ publicacion?.fechaPublicacion | date:'d MMM yyyy' }}</span>
     </div>
 
     <!-- Modal seguridad — al final del archivo -->
