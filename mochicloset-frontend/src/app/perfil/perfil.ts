@@ -1,29 +1,148 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ApiClient } from '../core/http/api-client';
+
+interface Publicacion {
+  id: number;
+  titulo: string;
+  descripcion: string;
+  precio: number;
+  talla: string;
+  condicion: string;
+  estado: string;
+  fechaPublicacion: string;
+  imagenUrl: string;
+  usuarioId: number;
+  categoriaId: number;
+}
+
+interface Favorito {
+  id: number;
+  usuarioId: number;
+  publicacionId: number;
+  publicacion: {
+    id: number;
+    titulo: string;
+    precio: number;
+    imagenUrl: string;
+  };
+}
+
+interface Compra {
+  id: number;
+  usuarioId: number;
+  publicacionId: number;
+  montoTotal: number;
+  fechaCompra: string;
+  estado: string;
+  publicacion: {
+    id: number;
+    titulo: string;
+  };
+}
 
 @Component({
   selector: 'app-perfil',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './perfil.html',
   styleUrl: './perfil.css'
 })
 export class Perfil {
+  private api = inject(ApiClient);
+  private url = 'http://localhost:5160/GestionPublicaciones';
+  private urlFavoritos = 'http://localhost:5160/GestionFavoritos';
+  private urlCompras = 'http://localhost:5160/GestionCompras';
+
   tabActiva = 'publicaciones';
   modalAbierto = false;
   articuloEditando: any = null;
+  usuario: any = null;
+  publicaciones: Publicacion[] = [];
+  favoritos: Favorito[] = [];
+  compras: Compra[] = [];
+  ventas: Compra[] = [];
+
+  ngOnInit() {
+    this.usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    this.cargarPublicaciones();
+    this.cargarFavoritos();
+    this.cargarCompras();
+    this.cargarVentas();
+  }
+
+  private cargarPublicaciones() {
+    this.api.get<Publicacion[]>(this.url + '/mis-publicaciones/' + this.usuario.id).subscribe({
+      next: data => this.publicaciones = data,
+      error: error => console.error('Error al cargar publicaciones', error)
+    });
+  }
+
+  private cargarFavoritos() {
+    this.api.get<Favorito[]>(this.urlFavoritos + '/' + this.usuario.id).subscribe({
+      next: data => this.favoritos = data,
+      error: error => console.error('Error al cargar favoritos', error)
+    });
+  }
+
+  private cargarCompras() {
+    this.api.get<Compra[]>(this.urlCompras + '/mis-compras/' + this.usuario.id).subscribe({
+      next: data => this.compras = data,
+      error: error => console.error('Error al cargar compras', error)
+    });
+  }
+
+  private cargarVentas() {
+    this.api.get<Compra[]>(this.urlCompras + '/mis-ventas/' + this.usuario.id).subscribe({
+      next: data => this.ventas = data,
+      error: error => console.error('Error al cargar ventas', error)
+    });
+  }
 
   cambiarTab(tab: string) {
     this.tabActiva = tab;
   }
 
-  abrirModal(articulo: any) {
-    this.articuloEditando = articulo;
+  abrirModal(p: Publicacion) {
+    this.articuloEditando = {...p};
     this.modalAbierto = true;
   }
 
   cerrarModal() {
     this.modalAbierto = false;
     this.articuloEditando = null;
+  }
+
+  eliminarFavorito(publicacionId: number, event: Event) {
+    event.stopPropagation();
+    this.api.delete(this.urlFavoritos + '/' + this.usuario.id + '/' + publicacionId).subscribe({
+      next: () => this.cargarFavoritos(),
+      error: () => this.cargarFavoritos()
+    });
+  }
+
+  eliminarPublicacion(id: number) {
+    this.api.delete(this.url + '/eliminar-propia/' + id + '?usuarioId=' + this.usuario.id).subscribe({
+      next: () => this.cargarPublicaciones(),
+      error: () => this.cargarPublicaciones()
+    });
+  }
+
+  guardarCambios() {
+    this.api.put<any>(this.url + '/' + this.articuloEditando.id, this.articuloEditando).subscribe({
+      next: () => {
+        this.cerrarModal();
+        this.cargarPublicaciones();
+      },
+      error: (error) => {
+        if (error.status === 200) {
+          this.cerrarModal();
+          this.cargarPublicaciones();
+        } else {
+          console.error('Error al guardar cambios', error);
+        }
+      }
+    });
   }
 }

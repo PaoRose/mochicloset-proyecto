@@ -1,4 +1,5 @@
-﻿using mochi_closet.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using mochi_closet.Data;
 using mochi_closet.Datos;
 
 namespace mochi_closet.Negocio;
@@ -16,6 +17,7 @@ public class GestionFavoritos
     {
         return _context.Favoritos
             .Where(f => f.UsuarioId == usuarioId)
+            .Include(f => f.Publicacion)
             .ToList();
     }
 

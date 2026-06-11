@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using mochi_closet.Data;
 using mochi_closet.Datos;
 using mochi_closet.Negocio;
 
@@ -9,11 +10,14 @@ namespace mochi_closet.Controllers;
 public class GestionMensajesController : ControllerBase
 {
     private readonly GestionMensajes _gestionMensajes;
+    private readonly MochiClosetDbContext _context;
 
     public GestionMensajesController(
-        GestionMensajes gestionMensajes)
+        GestionMensajes gestionMensajes,
+        MochiClosetDbContext context)
     {
         _gestionMensajes = gestionMensajes;
+        _context = context;
     }
 
     [HttpGet("conversaciones/{usuarioId}")]
@@ -23,14 +27,27 @@ public class GestionMensajesController : ControllerBase
     }
 
     [HttpPost("conversaciones")]
-    public ActionResult<string> IniciarConversacion(Conversacion conversacion)
+    public ActionResult<Conversacion> IniciarConversacion(Conversacion conversacion)
     {
+        var existente = _context.Conversaciones.FirstOrDefault(c =>
+            c.CompradoraId == conversacion.CompradoraId &&
+            c.VendedoraId == conversacion.VendedoraId &&
+            c.PublicacionId == conversacion.PublicacionId);
+
+        if (existente != null)
+            return Ok(existente);
+
         var resultado = _gestionMensajes.IniciarConversacion(conversacion);
 
         if (resultado != "ok")
             return BadRequest(resultado);
 
-        return Ok("Conversación iniciada correctamente");
+        var nueva = _context.Conversaciones.FirstOrDefault(c =>
+            c.CompradoraId == conversacion.CompradoraId &&
+            c.VendedoraId == conversacion.VendedoraId &&
+            c.PublicacionId == conversacion.PublicacionId);
+
+        return Ok(nueva);
     }
 
     [HttpGet("mensajes/{conversacionId}")]
@@ -40,13 +57,13 @@ public class GestionMensajesController : ControllerBase
     }
 
     [HttpPost("mensajes")]
-    public ActionResult<string> EnviarMensaje(Mensaje mensaje)
+    public ActionResult EnviarMensaje(Mensaje mensaje)
     {
         var resultado = _gestionMensajes.EnviarMensaje(mensaje);
 
         if (resultado != "ok")
-            return BadRequest(resultado);
+            return BadRequest(new { mensaje = resultado });
 
-        return Ok("Mensaje enviado correctamente");
+        return Ok(new { mensaje = "Mensaje enviado correctamente" });
     }
 }

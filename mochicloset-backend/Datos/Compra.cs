@@ -8,4 +8,5 @@ public class Compra
     public int UsuarioId { get; set; }
     public int PublicacionId { get; set; }
     public decimal MontoTotal { get; set; }
+    public Publicacion? Publicacion { get; set; }
 }

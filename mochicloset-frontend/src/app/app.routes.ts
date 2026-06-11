@@ -9,6 +9,7 @@ import { EditarPerfil } from './editar-perfil/editar-perfil';
 import { Explorar } from './explorar/explorar';
 import { DetallePrenda } from './detalle-prenda/detalle-prenda';
 import { Chat } from './chat/chat';
+import {Recibo} from './recibo/recibo';
 
 
 export const routes: Routes = [
@@ -22,5 +23,6 @@ export const routes: Routes = [
   { path: 'editar-perfil', component: EditarPerfil },
   { path: 'explorar', component: Explorar },
   { path: 'prenda/:id', component: DetallePrenda },
-  { path: 'chat', component: Chat }
+  { path: 'chat/:id', component: Chat },
+  { path: 'recibo/:id', component: Recibo }
 ];

@@ -57,6 +57,19 @@ export class DetallePrenda {
 
   irAlChat() {
     this.modalSeguridad = false;
-    this.router.navigate(['/chat']);
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+
+    const conversacion = {
+      compradoraId: usuario.id,
+      vendedoraId: this.publicacion?.usuarioId,
+      publicacionId: this.publicacion?.id
+    };
+
+    this.api.post<any>('http://localhost:5160/GestionMensajes/conversaciones', conversacion).subscribe({
+      next: data => {
+        this.router.navigate(['/chat', data.id]);
+      },
+      error: error => console.error('Error al iniciar conversacion', error)
+    });
   }
 }

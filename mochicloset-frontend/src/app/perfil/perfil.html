@@ -5,16 +5,11 @@
     <img class="perfil-foto" src="assets/foto-perfil.jpg" alt="Foto de perfil">
     <div class="perfil-info">
       <div class="perfil-nombre-row">
-        <h1 class="perfil-nombre">María López</h1>
-        <span class="perfil-badge">⭐ Vendedora verificada</span>
+        <h1 class="perfil-nombre">{{ usuario?.nombre }}</h1>
       </div>
-      <p class="perfil-username">&#64;maria_closet · Miembro desde Enero 2026</p>
+      <p class="perfil-username">&#64;{{ usuario?.username }}</p>
       <div class="perfil-stats">
-        <span>📦 <strong>12</strong> publicaciones</span>
-        <span>⭐ <strong>4.9</strong> calificación</span>
-      </div>
-      <div class="perfil-ventas">
-        <span>📈 <strong>8</strong> ventas</span>
+        <span>📦 <strong>{{ publicaciones.length }}</strong> publicaciones</span>
       </div>
     </div>
     <button class="perfil-edit-btn" routerLink="/editar-perfil">✏️ Editar perfil</button>
@@ -25,15 +20,8 @@
     <div class="metric-card">
       <p class="metric-label">Artículos activos</p>
       <div class="metric-row">
-        <span class="metric-value">8</span>
+        <span class="metric-value">{{ publicaciones.length }}</span>
         <span class="metric-icon">📦</span>
-      </div>
-    </div>
-    <div class="metric-card">
-      <p class="metric-label">Total de ventas</p>
-      <div class="metric-row">
-        <span class="metric-value">Bs. 1,240</span>
-        <span class="metric-icon">📈</span>
       </div>
     </div>
   </div>
@@ -52,49 +40,16 @@
       <button class="publicar-btn" routerLink="/publicar">+ Publicar nuevo</button>
     </div>
     <div class="articulos-grid">
-      <div class="articulo-card">
+      <div class="articulo-card" *ngFor="let p of publicaciones">
         <div class="articulo-img-wrapper">
-          <img src="assets/articulo1.jpg" alt="Vestido Floral Vintage">
-          <span class="articulo-badge">Activo</span>
+          <img [src]="p.imagenUrl" [alt]="p.titulo">
+          <span class="articulo-badge" [class.vendido]="p.estado === 'Vendido'">{{ p.estado }}</span>
         </div>
         <div class="articulo-info">
-          <p class="articulo-nombre">Vestido Floral Vintage</p>
-          <p class="articulo-precio">Bs. 120</p>
-          <p class="articulo-meta">45 vistas 🤍 8</p>
-          <!-- Botones de cada artículo -->
+          <p class="articulo-nombre">{{ p.titulo }}</p>
+          <p class="articulo-precio">Bs. {{ p.precio }}</p>
           <div class="articulo-acciones">
-            <button class="editar-btn" (click)="abrirModal({nombre: 'Vestido Floral Vintage', precio: 120, descripcion: 'Hermoso vestido floral en excelente estado.', foto: 'assets/articulo1.jpg'})">✏️ Editar</button>
-            <button class="eliminar-btn">🗑</button>
-          </div>
-        </div>
-      </div>
-      <div class="articulo-card">
-        <div class="articulo-img-wrapper">
-          <img src="assets/articulo2.jpg" alt="Falda Midi Rosa">
-          <span class="articulo-badge">Activo</span>
-        </div>
-        <div class="articulo-info">
-          <p class="articulo-nombre">Falda Midi Rosa</p>
-          <p class="articulo-precio">Bs. 95</p>
-          <p class="articulo-meta">32 vistas 🤍 5</p>
-          <div class="articulo-acciones">
-            <button class="editar-btn">✏️ Editar</button>
-            <button class="eliminar-btn">🗑</button>
-          </div>
-        </div>
-      </div>
-      <div class="articulo-card">
-        <div class="articulo-img-wrapper">
-          <img src="assets/articulo3.jpg" alt="Cardigan Suave Beige">
-          <span class="articulo-badge vendido">Vendido</span>
-        </div>
-        <div class="articulo-info">
-          <p class="articulo-nombre">Cardigan Suave Beige</p>
-          <p class="articulo-precio">Bs. 110</p>
-          <p class="articulo-meta">28 vistas 🤍 4</p>
-          <div class="articulo-acciones">
-            <button class="editar-btn">✏️ Editar</button>
-            <button class="eliminar-btn">🗑</button>
+            <button class="editar-btn" (click)="abrirModal(p)">✏️ Editar</button>            <button class="eliminar-btn" (click)="eliminarPublicacion(p.id)">🗑</button>
           </div>
         </div>
       </div>
@@ -105,27 +60,15 @@
   <div class="articulos-section" *ngIf="tabActiva === 'favoritos'">
     <h3 class="articulos-title">Mis favoritos</h3>
     <div class="articulos-grid">
-      <div class="articulo-card">
+      <div class="articulo-card" *ngFor="let f of favoritos" [routerLink]="['/prenda', f.publicacionId]">
         <div class="articulo-img-wrapper">
-          <img src="assets/fav1.jpg" alt="Blusa de Lino Blanca">
+          <img [src]="f.publicacion?.imagenUrl" [alt]="f.publicacion?.titulo">
           <span class="fav-icon">❤️</span>
         </div>
         <div class="articulo-info">
-          <p class="articulo-nombre">Blusa de Lino Blanca</p>
-          <p class="articulo-vendedor">Ana García</p>
-          <p class="articulo-precio">Bs. 85</p>
-        </div>
-      </div>
-      <div class="articulo-card">
-        <div class="articulo-img-wrapper">
-          <img src="assets/fav2.jpg" alt="Jeans Mom Fit">
-          <span class="fav-icon">❤️</span>
-        </div>
-        <div class="articulo-info">
-          <p class="articulo-nombre">Jeans Mom Fit</p>
-          <p class="articulo-vendedor">Sofía Martínez</p>
-          <p class="articulo-precio">Bs. 140</p>
-        </div>
+          <p class="articulo-nombre">{{ f.publicacion?.titulo }}</p>
+          <p class="articulo-precio">Bs. {{ f.publicacion?.precio }}</p>
+          <button class="eliminar-btn" (click)="eliminarFavorito(f.publicacionId, $event)">🗑 Quitar favorito</button>        </div>
       </div>
     </div>
   </div>
@@ -140,27 +83,23 @@
         <span>Monto</span>
         <span>Fecha</span>
         <span>Estado</span>
+        <span>Recibo</span>
       </div>
-      <div class="historial-row">
-        <span>Vestido Floral</span>
-        <span class="tipo-badge">Venta</span>
-        <span class="monto">Bs. 120</span>
-        <span class="fecha">15 May 2026</span>
-        <span class="estado-badge">Completada</span>
+      <div class="historial-row" *ngFor="let c of compras">
+        <span>{{ c.publicacion?.titulo }}</span>
+        <span class="tipo-badge">Compra</span>
+        <span class="monto">Bs. {{ c.montoTotal }}</span>
+        <span class="fecha">{{ c.fechaCompra | date:'d MMM yyyy' }}</span>
+        <span class="estado-badge">{{ c.estado }}</span>
+        <span><button class="editar-btn" [routerLink]="['/recibo', c.id]">Ver recibo</button></span>
       </div>
-      <div class="historial-row">
-        <span>Blusa Rayas</span>
+      <div class="historial-row" *ngFor="let v of ventas">
+        <span>{{ v.publicacion?.titulo }}</span>
         <span class="tipo-badge">Venta</span>
-        <span class="monto">Bs. 95</span>
-        <span class="fecha">10 May 2026</span>
-        <span class="estado-badge">Completada</span>
-      </div>
-      <div class="historial-row">
-        <span>Cardigan Beige</span>
-        <span class="tipo-badge">Venta</span>
-        <span class="monto">Bs. 110</span>
-        <span class="fecha">8 May 2026</span>
-        <span class="estado-badge">Completada</span>
+        <span class="monto">Bs. {{ v.montoTotal }}</span>
+        <span class="fecha">{{ v.fechaCompra | date:'d MMM yyyy' }}</span>
+        <span class="estado-badge">{{ v.estado }}</span>
+        <span>-</span>
       </div>
     </div>
   </div>
@@ -168,44 +107,22 @@
   <!-- Modal editar prenda -->
   <div class="modal-overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
     <div class="modal-card" (click)="$event.stopPropagation()">
-
-      <!-- Header -->
       <div class="modal-header">
         <h3 class="modal-title">Editar prenda</h3>
         <button class="modal-close" (click)="cerrarModal()">✕</button>
       </div>
-
-      <!-- Artículo -->
-      <div class="modal-articulo">
-        <img [src]="articuloEditando?.foto" alt="Foto artículo">
-        <div>
-          <p class="modal-editando">Editando</p>
-          <p class="modal-articulo-nombre">{{ articuloEditando?.nombre }}</p>
-        </div>
-      </div>
-
-      <!-- Formulario -->
       <div class="modal-group">
         <label>Título</label>
-        <input type="text" [value]="articuloEditando?.nombre" />
+        <input type="text" [(ngModel)]="articuloEditando.titulo" name="titulo" />
       </div>
-
       <div class="modal-group">
         <label>Precio (Bs.)</label>
-        <input type="number" [value]="articuloEditando?.precio" />
+        <input type="number" [(ngModel)]="articuloEditando.precio" name="precio" />
       </div>
-
-      <div class="modal-group">
-        <label>Descripción</label>
-        <textarea>{{ articuloEditando?.descripcion }}</textarea>
-      </div>
-
-      <!-- Botones -->
       <div class="modal-acciones">
         <button class="modal-cancelar" (click)="cerrarModal()">Cancelar</button>
-        <button class="modal-guardar" (click)="cerrarModal()">Guardar cambios</button>
+        <button class="modal-guardar" (click)="guardarCambios()">Guardar cambios</button>
       </div>
-
     </div>
   </div>
 

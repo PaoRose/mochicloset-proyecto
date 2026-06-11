@@ -1,0 +1,59 @@
+﻿<div class="recibo-container">
+
+  <!-- Volver -->
+  <a class="recibo-volver" routerLink="/perfil">← Volver al perfil</a>
+
+  <!-- Card del recibo -->
+  <div class="recibo-card">
+
+    <!-- Header -->
+    <div class="recibo-header">
+      <img src="logo.png" alt="Mochi Closet" class="recibo-logo">
+      <div class="recibo-header-info">
+        <h1 class="recibo-titulo">Recibo de compra</h1>
+        <p class="recibo-numero">#{{ compra?.id }}</p>
+      </div>
+      <span class="recibo-estado">✅ {{ compra?.estado }}</span>
+    </div>
+
+    <hr class="recibo-divider">
+
+    <!-- Prenda -->
+    <div class="recibo-prenda">
+      <img [src]="compra?.publicacion?.imagenUrl" [alt]="compra?.publicacion?.titulo" class="recibo-img">
+      <div class="recibo-prenda-info">
+        <p class="recibo-prenda-titulo">{{ compra?.publicacion?.titulo }}</p>
+        <p class="recibo-prenda-detalle">Talla: {{ compra?.publicacion?.talla }}</p>
+        <p class="recibo-prenda-detalle">Condición: {{ compra?.publicacion?.condicion }}</p>
+      </div>
+    </div>
+
+    <hr class="recibo-divider">
+
+    <!-- Detalles -->
+    <div class="recibo-detalles">
+      <div class="recibo-fila">
+        <span class="recibo-label">Fecha de compra</span>
+        <span class="recibo-valor">{{ compra?.fechaCompra | date:'d MMM yyyy, h:mm a' }}</span>
+      </div>
+      <div class="recibo-fila">
+        <span class="recibo-label">Estado</span>
+        <span class="recibo-valor">{{ compra?.estado }}</span>
+      </div>
+      <div class="recibo-fila recibo-total">
+        <span class="recibo-label">Total pagado</span>
+        <span class="recibo-valor-total">Bs. {{ compra?.montoTotal }}</span>
+      </div>
+    </div>
+
+    <hr class="recibo-divider">
+
+    <!-- Nota -->
+    <p class="recibo-nota">💬 El pago y la entrega fueron coordinados directamente con la vendedora por chat.</p>
+
+    <!-- Botón imprimir -->
+    <button class="recibo-imprimir-btn" (click)="imprimir()">🖨️ Imprimir / Guardar PDF</button>
+
+  </div>
+
+</div>

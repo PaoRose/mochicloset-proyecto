@@ -1,4 +1,5 @@
-﻿using mochi_closet.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using mochi_closet.Data;
 using mochi_closet.Datos;
 
 namespace mochi_closet.Negocio;
@@ -14,16 +15,19 @@ public class GestionCompras
 
     public List<Compra> ListaCompras()
     {
-        return _context.Compras.ToList();
+        return _context.Compras
+            .Include(c => c.Publicacion)
+            .ToList();
     }
 
     public List<Compra> ListaComprasPorUsuaria(int usuarioId)
     {
         return _context.Compras
             .Where(c => c.UsuarioId == usuarioId)
+            .Include(c => c.Publicacion)
             .ToList();
     }
-    
+
     public List<Compra> ListaVentasPorUsuaria(int usuarioId)
     {
         var publicacionesDeUsuaria = _context.Publicaciones
@@ -33,11 +37,14 @@ public class GestionCompras
 
         return _context.Compras
             .Where(c => publicacionesDeUsuaria.Contains(c.PublicacionId))
+            .Include(c => c.Publicacion)
             .ToList();
     }
+
     public Compra? ObtenerCompra(int id)
     {
         return _context.Compras
+            .Include(c => c.Publicacion)
             .FirstOrDefault(c => c.Id == id);
     }
 
@@ -63,9 +70,7 @@ public class GestionCompras
         compra.MontoTotal = publicacion.Precio;
 
         _context.Compras.Add(compra);
-
         publicacion.Estado = "Vendido";
-
         _context.SaveChanges();
 
         return "ok";

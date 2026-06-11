@@ -6,4 +6,5 @@ public class Favorito
     public int UsuarioId { get; set; }
     public int PublicacionId { get; set; }
     public DateTime FechaAgregado { get; set; }
+    public Publicacion? Publicacion { get; set; }
 }

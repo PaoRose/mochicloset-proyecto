@@ -1,0 +1,207 @@
+﻿/* =====================
+   CONTENEDOR
+===================== */
+
+.recibo-container {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =====================
+   VOLVER
+===================== */
+
+.recibo-volver {
+  font-size: 14px;
+  color: var(--mc-text-muted);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.recibo-volver:hover {
+  color: var(--mc-matcha-green);
+}
+
+/* =====================
+   CARD
+===================== */
+
+.recibo-card {
+  background-color: var(--mc-white);
+  border: 1px solid #E0D5CF;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* =====================
+   HEADER
+===================== */
+
+.recibo-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.recibo-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.recibo-header-info {
+  flex: 1;
+}
+
+.recibo-titulo {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.recibo-numero {
+  font-size: 14px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}
+
+.recibo-estado {
+  background-color: var(--mc-matcha-green);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+/* =====================
+   DIVIDER
+===================== */
+
+.recibo-divider {
+  border: none;
+  border-top: 1px solid #E0D5CF;
+  margin: 0;
+}
+
+/* =====================
+   PRENDA
+===================== */
+
+.recibo-prenda {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.recibo-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.recibo-prenda-titulo {
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0 0 4px;
+}
+
+.recibo-prenda-detalle {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}
+
+/* =====================
+   DETALLES
+===================== */
+
+.recibo-detalles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.recibo-fila {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.recibo-label {
+  color: var(--mc-text-muted);
+}
+
+.recibo-valor {
+  color: var(--mc-text-dark);
+  font-weight: 500;
+}
+
+.recibo-total {
+  font-size: 16px;
+}
+
+.recibo-valor-total {
+  font-family: 'Nunito', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--mc-matcha-green);
+}
+
+/* =====================
+   NOTA
+===================== */
+
+.recibo-nota {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+  text-align: center;
+  margin: 0;
+}
+
+/* =====================
+   BOTÓN IMPRIMIR
+===================== */
+
+.recibo-imprimir-btn {
+  background-color: var(--mc-matcha-green);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s;
+}
+
+.recibo-imprimir-btn:hover {
+  background-color: var(--mc-accent-pink);
+}
+
+/* =====================
+   PRINT
+===================== */
+
+@media print {
+  .recibo-volver,
+  .recibo-imprimir-btn {
+    display: none;
+  }
+}

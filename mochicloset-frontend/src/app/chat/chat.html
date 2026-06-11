@@ -3,55 +3,19 @@
   <!-- Header -->
   <div class="chat-header">
     <a class="chat-volver" routerLink="/explorar">←</a>
-    <img class="chat-avatar" src="assets/foto-perfil.jpg" alt="Sofía Martínez">
+    <img class="chat-avatar" src="assets/foto-perfil.jpg" alt="Vendedora">
     <div class="chat-header-info">
-      <p class="chat-nombre">Sofía Martínez</p>
-      <p class="chat-username">&#64;sofia_style</p>
-    </div>
-  </div>
-
-  <!-- Detalles de compra -->
-  <div class="chat-detalle-compra">
-    <div>
-      <p class="chat-detalle-titulo">Detalles de compra</p>
-      <p class="chat-detalle-subtitle">Coordinando entrega</p>
-    </div>
-    <div class="chat-prenda-preview">
-      <img src="assets/articulo1.jpg" alt="Vestido Floral Vintage">
-      <div>
-        <p class="chat-prenda-nombre">Vestido Floral Vintage</p>
-        <p class="chat-prenda-talla">Talla M</p>
-        <p class="chat-prenda-precio">Bs. 120</p>
-      </div>
+      <p class="chat-nombre">Chat</p>
     </div>
   </div>
 
   <!-- Mensajes -->
   <div class="chat-mensajes">
 
-    <div class="mensaje mensaje-recibido">
-      <p>¡Hola María! Me interesa tu vestido floral 💕</p>
-      <span class="mensaje-hora">10:30 AM</span>
-    </div>
-
-    <div class="mensaje mensaje-enviado">
-      <p>¡Hola Sofía! Está en excelente estado, solo lo usé dos veces</p>
-      <span class="mensaje-hora">10:32 AM</span>
-    </div>
-
-    <div class="mensaje mensaje-recibido">
-      <p>¡Me encanta! ¿Dónde podemos encontrarnos para verlo?</p>
-      <span class="mensaje-hora">10:35 AM</span>
-    </div>
-
-    <div class="mensaje mensaje-enviado">
-      <p>Me queda bien el centro, cerca de la plaza 24 de Septiembre. ¿Te parece bien?</p>
-      <span class="mensaje-hora">10:40 AM</span>
-    </div>
-
-    <div class="mensaje mensaje-recibido">
-      <p>¡Perfecto! ¿Qué tal el sábado por la tarde?</p>
-      <span class="mensaje-hora">10:45 AM</span>
+    <div *ngFor="let m of mensajes"
+         [class]="m.remitenteId === usuarioId ? 'mensaje mensaje-enviado' : 'mensaje mensaje-recibido'">
+      <p>{{ m.texto }}</p>
+      <span class="mensaje-hora">{{ m.fechaEnvio | date:'shortTime' }}</span>
     </div>
 
   </div>
@@ -60,8 +24,8 @@
   <div class="chat-input-wrapper">
     <div class="chat-input">
       <button class="chat-adjuntar">🖼</button>
-      <input type="text" placeholder="Escribe un mensaje..." />
-      <button class="chat-enviar">➤</button>
+      <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="nuevoMensaje" name="mensaje" />
+      <button class="chat-enviar" (click)="enviarMensaje()">➤</button>
     </div>
   </div>
 
