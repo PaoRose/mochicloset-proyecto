@@ -659,3 +659,8 @@ Content-Type: application/json
   "usuarioId": 8,
   "publicacionId": 6
 }
+
+
+### Listar usuarios
+### Listar usuarios
+GET {{base}}/GestionUsuarios/lista-usuarios

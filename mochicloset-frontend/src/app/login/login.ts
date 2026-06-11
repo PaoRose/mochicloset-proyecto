@@ -1,10 +1,43 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { ApiClient } from '../core/http/api-client';
+
+interface UsuarioLogin {
+  email: string;
+  password: string;
+}
+
+interface UsuarioRespuesta {
+  id: number;
+  nombre: string;
+  email: string;
+  rol: string;
+}
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
-export class Login {}
+export class Login {
+  private api = inject(ApiClient);
+  private router = inject(Router);
+  private url = 'http://localhost:5160/GestionUsuarios';
+
+  usuario: UsuarioLogin = {
+    email: '',
+    password: ''
+  };
+
+  iniciarSesion() {
+    this.api.post<UsuarioRespuesta>(this.url + '/iniciar-sesion', this.usuario).subscribe({
+      next: data => {
+        localStorage.setItem('usuario', JSON.stringify(data));
+        this.router.navigate(['/home']);
+      },
+      error: error => console.error('Error al iniciar sesión', error)
+    });
+  }
+}
