@@ -4,13 +4,13 @@
   <div class="explorar-toolbar">
     <div class="explorar-search">
       <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Buscar ropa, accesorios..." />
+      <input type="text" placeholder="Buscar ropa, accesorios..." [(ngModel)]="busqueda" (keyup.enter)="aplicarFiltros()" />
     </div>
     <div class="explorar-toolbar-right">
-      <select class="explorar-orden">
-        <option>Más recientes</option>
-        <option>Menor precio</option>
-        <option>Mayor precio</option>
+      <select class="explorar-orden" [(ngModel)]="orden" (change)="cargarPublicaciones()">
+        <option value="recientes">Más recientes</option>
+        <option value="precio-asc">Menor precio</option>
+        <option value="precio-desc">Mayor precio</option>
       </select>
       <button class="explorar-filtros-btn" (click)="abrirFiltros()">⚙ Filtros</button>
     </div>
@@ -18,23 +18,24 @@
 
   <!-- Categorías -->
   <div class="explorar-categorias">
-    <button class="categoria-btn active">Todas</button>
-    <button class="categoria-btn">Vestidos</button>
-    <button class="categoria-btn">Blusas</button>
-    <button class="categoria-btn">Pantalones</button>
-    <button class="categoria-btn">Faldas</button>
-    <button class="categoria-btn">Accesorios</button>
+    <button class="categoria-btn" [class.active]="categoriaId === null" (click)="filtrarPorCategoria(null)">Todas</button>
+    <button class="categoria-btn" [class.active]="categoriaId === 1" (click)="filtrarPorCategoria(1)">Vestidos</button>
+    <button class="categoria-btn" [class.active]="categoriaId === 2" (click)="filtrarPorCategoria(2)">Blusas</button>
+    <button class="categoria-btn" [class.active]="categoriaId === 3" (click)="filtrarPorCategoria(3)">Pantalones</button>
+    <button class="categoria-btn" [class.active]="categoriaId === 4" (click)="filtrarPorCategoria(4)">Faldas</button>
+    <button class="categoria-btn" [class.active]="categoriaId === 6" (click)="filtrarPorCategoria(6)">Accesorios</button>
   </div>
 
   <!-- Grid de prendas -->
   <div class="explorar-grid">
-
-    <div class="prenda-card" *ngFor="let p of publicaciones" [routerLink]="['/prenda', p.id]">
-      <div class="prenda-img-wrapper">
+    <div class="prenda-card" *ngFor="let p of publicaciones">
+      <div class="prenda-img-wrapper" (click)="verPrenda(p.id)">
         <img [src]="p.imagenUrl" [alt]="p.titulo">
-        <button class="prenda-fav">🤍</button>
+        <button class="prenda-fav" (click)="toggleFavorito(p.id, $event)">
+          {{ favoritosIds.includes(p.id) ? '❤️' : '🤍' }}
+        </button>
       </div>
-      <div class="prenda-info">
+      <div class="prenda-info" (click)="verPrenda(p.id)">
         <p class="prenda-nombre">{{ p.titulo }}</p>
         <div class="prenda-footer">
           <span class="prenda-precio">Bs. {{ p.precio }}</span>
@@ -44,8 +45,6 @@
       </div>
     </div>
   </div>
-</div>
-
 
 <!-- Drawer filtros — FUERA del contenedor -->
 <div class="filtros-overlay" *ngIf="filtrosAbiertos" (click)="cerrarFiltros()">
@@ -61,20 +60,21 @@
 
     <div class="filtros-group">
       <label>Categoría</label>
-      <select>
-        <option>Todas las categorías</option>
-        <option>Vestidos</option>
-        <option>Blusas</option>
-        <option>Pantalones</option>
-        <option>Faldas</option>
-        <option>Accesorios</option>
+      <select [(ngModel)]="categoriaId">
+        <option [value]="null">Todas las categorías</option>
+        <option [value]="1">Vestidos</option>
+        <option [value]="2">Tops y Blusas</option>
+        <option [value]="3">Pantalones</option>
+        <option [value]="4">Faldas</option>
+        <option [value]="5">Abrigos</option>
+        <option [value]="6">Accesorios</option>
       </select>
     </div>
 
     <div class="filtros-group">
       <label>Talla</label>
-      <select>
-        <option>Todas las tallas</option>
+      <select [(ngModel)]="talla">
+        <option value="">Todas las tallas</option>
         <option>XS</option>
         <option>S</option>
         <option>M</option>
@@ -85,11 +85,9 @@
 
     <div class="filtros-group">
       <label>Condición</label>
-      <select>
-        <option>Todas las condiciones</option>
-        <option>Nuevo</option>
+      <select [(ngModel)]="condicion">
+        <option value="">Todas las condiciones</option>
         <option>Como nuevo</option>
-        <option>Buen estado</option>
         <option>Usado</option>
       </select>
     </div>
@@ -97,12 +95,13 @@
     <div class="filtros-group">
       <div class="filtros-precio-header">
         <label>Rango de precio</label>
-        <span class="filtros-precio-valor">Bs. 0 - Bs. 500</span>
+        <span class="filtros-precio-valor">Bs. 0 - Bs. {{ precioMax }}</span>
       </div>
-      <input type="range" min="0" max="500" value="500" class="filtros-range" />
+      <input type="range" min="0" max="500" [(ngModel)]="precioMax" class="filtros-range" />
     </div>
 
-    <button class="filtros-limpiar">Limpiar filtros</button>
+    <button class="filtros-limpiar" (click)="limpiarFiltros()">Limpiar filtros</button>
+    <button class="filtros-aplicar" (click)="aplicarFiltros()">Aplicar filtros</button>
 
   </div>
 </div>

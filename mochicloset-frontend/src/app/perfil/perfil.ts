@@ -9,11 +9,11 @@ interface Publicacion {
   titulo: string;
   descripcion: string;
   precio: number;
+  estado: string;
+  imagenUrl: string;
+  fechaPublicacion: string;
   talla: string;
   condicion: string;
-  estado: string;
-  fechaPublicacion: string;
-  imagenUrl: string;
   usuarioId: number;
   categoriaId: number;
 }

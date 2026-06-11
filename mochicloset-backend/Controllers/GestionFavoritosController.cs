@@ -23,21 +23,20 @@ public class GestionFavoritosController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<string> AgregarFavorito(Favorito favorito)
+    public ActionResult AgregarFavorito(Favorito favorito)
     {
         var resultado = _gestionFavoritos.AgregarFavorito(favorito);
 
         if (resultado != "ok")
-            return BadRequest(resultado);
+            return BadRequest(new { mensaje = resultado });
 
-        return Ok("Agregado a favoritos correctamente");
+        return Ok(new { mensaje = "Agregado a favoritos correctamente" });
     }
 
     [HttpDelete("{usuarioId}/{publicacionId}")]
     public IActionResult EliminarFavorito(int usuarioId, int publicacionId)
     {
         _gestionFavoritos.EliminarFavorito(usuarioId, publicacionId);
-
-        return Ok("Eliminado de favoritos correctamente");
+        return Ok(new { mensaje = "Eliminado de favoritos correctamente" });
     }
 }

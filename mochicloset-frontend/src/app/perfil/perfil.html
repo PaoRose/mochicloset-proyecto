@@ -119,6 +119,10 @@
         <label>Precio (Bs.)</label>
         <input type="number" [(ngModel)]="articuloEditando.precio" name="precio" />
       </div>
+      <div class="modal-group">
+        <label>Descripción</label>
+        <textarea [(ngModel)]="articuloEditando.descripcion" name="descripcion"></textarea>
+      </div>
       <div class="modal-acciones">
         <button class="modal-cancelar" (click)="cerrarModal()">Cancelar</button>
         <button class="modal-guardar" (click)="guardarCambios()">Guardar cambios</button>
