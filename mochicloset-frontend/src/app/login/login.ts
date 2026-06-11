@@ -37,7 +37,7 @@ export class Login {
         localStorage.setItem('usuario', JSON.stringify(data));
         this.router.navigate(['/home']);
       },
-      error: error => console.error('Error al iniciar sesión', error)
+      error: () => alert('Correo o contraseña incorrectos.')
     });
   }
 }

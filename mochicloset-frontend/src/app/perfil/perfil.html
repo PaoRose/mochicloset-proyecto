@@ -94,7 +94,7 @@
         <span><button class="editar-btn" [routerLink]="['/recibo', c.id]">Ver recibo</button></span>
       </div>
       <div class="historial-row" *ngFor="let v of ventas">
-        <span>{{ v.publicacion?.titulo }}</span>
+        <span>{{ v.publicacion.titulo }}</span>
         <span class="tipo-badge">Venta</span>
         <span class="monto">Bs. {{ v.montoTotal }}</span>
         <span class="fecha">{{ v.fechaCompra | date:'d MMM yyyy' }}</span>
