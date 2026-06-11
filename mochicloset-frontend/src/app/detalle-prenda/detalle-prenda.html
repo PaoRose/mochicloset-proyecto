@@ -5,14 +5,12 @@
 
   <!-- Imagen principal -->
   <div class="detalle-img-principal">
-    <img src="assets/articulo1.jpg" alt="Vestido Floral Vintage">
+    <img [src]="publicacion?.imagenUrl" [alt]="publicacion?.titulo">
   </div>
 
   <!-- Miniaturas -->
   <div class="detalle-miniaturas">
-    <img src="assets/articulo1.jpg" alt="foto 1" class="miniatura activa">
-    <img src="assets/articulo2.jpg" alt="foto 2" class="miniatura">
-    <img src="assets/articulo3.jpg" alt="foto 3" class="miniatura">
+    <img [src]="publicacion?.imagenUrl" [alt]="publicacion?.titulo" class="miniatura activa">
   </div>
 
   <!-- Info -->
@@ -20,17 +18,16 @@
 
     <div class="detalle-nombre-row">
       <div>
-        <h1 class="detalle-nombre">Vestido Floral Vintage</h1>
-        <p class="detalle-precio">Bs. 120</p>
+        <h1 class="detalle-nombre">{{ publicacion?.titulo }}</h1>
+        <p class="detalle-precio">Bs. {{ publicacion?.precio }}</p>
       </div>
       <button class="detalle-fav">🤍</button>
     </div>
 
     <!-- Tags -->
     <div class="detalle-tags">
-      <span class="detalle-tag">Vestidos</span>
-      <span class="detalle-tag">Talla M</span>
-      <span class="detalle-tag">Excelente</span>
+      <span class="detalle-tag">Talla {{ publicacion?.talla }}</span>
+      <span class="detalle-tag">{{ publicacion?.condicion }}</span>
     </div>
 
     <!-- Vendedora -->
@@ -49,31 +46,21 @@
     <div class="detalle-card">
       <h3 class="detalle-card-title">Detalles del producto</h3>
       <div class="detalle-fila">
-        <span class="detalle-label">Marca</span>
-        <span class="detalle-valor">Zara</span>
-      </div>
-      <div class="detalle-fila">
         <span class="detalle-label">Talla</span>
-        <span class="detalle-valor">M</span>
-      </div>
-      <div class="detalle-fila">
-        <span class="detalle-label">Color</span>
-        <span class="detalle-valor">Rosa/Verde/Crema</span>
+        <span class="detalle-valor">{{ publicacion?.talla }}</span>
       </div>
       <div class="detalle-fila">
         <span class="detalle-label">Condición</span>
-        <span class="detalle-valor">Excelente</span>
+        <span class="detalle-valor">{{ publicacion?.condicion }}</span>
       </div>
       <div class="detalle-fila">
         <span class="detalle-label">Categoría</span>
-        <span class="detalle-valor">Vestidos</span>
-      </div>
+        <span class="detalle-valor">{{ categorias[publicacion?.categoriaId!] }}</span>      </div>
     </div>
 
     <!-- Descripción -->
     <div class="detalle-card">
-      <h3 class="detalle-card-title">Descripción</h3>
-      <p class="detalle-descripcion">Hermoso vestido floral vintage en excelente estado. Perfecto para primavera/verano. Tiene un corte midi muy favorecedor y tela suave y cómoda. Solo lo usé 2 veces para eventos especiales. Sin manchas, roturas ni decoloración. Las flores son en tonos rosados y verdes sobre fondo crema.</p>
+      <p class="detalle-descripcion">{{ publicacion?.descripcion }}</p>
     </div>
 
     <!-- Ubicación y fecha -->
