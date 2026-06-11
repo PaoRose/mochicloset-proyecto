@@ -4,16 +4,25 @@ using mochi_closet.Negocio;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddScoped<GestionCategorias>();
 builder.Services.AddScoped<GestionUsuarios>();
 builder.Services.AddScoped<GestionCompras>();
 builder.Services.AddScoped<GestionPublicaciones>();
+builder.Services.AddScoped<GestionFavoritos>();
+builder.Services.AddScoped<GestionMensajes>();
+builder.Services.AddScoped<GestionNotificaciones>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirAngular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddDbContext<MochiClosetDbContext>(
     options =>
@@ -22,14 +31,12 @@ builder.Services.AddDbContext<MochiClosetDbContext>(
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
+app.UseCors("PermitirAngular");
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
