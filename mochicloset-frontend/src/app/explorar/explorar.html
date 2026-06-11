@@ -31,7 +31,7 @@
     <div class="prenda-card" *ngFor="let p of publicaciones">
       <div class="prenda-img-wrapper" (click)="verPrenda(p.id)">
         <img [src]="p.imagenUrl" [alt]="p.titulo">
-        <button class="prenda-fav" (click)="agregarFavorito(p.id, $event)">
+        <button class="prenda-fav" (click)="toggleFavorito(p.id, $event)">
           {{ favoritosIds.includes(p.id) ? '❤️' : '🤍' }}
         </button>
       </div>

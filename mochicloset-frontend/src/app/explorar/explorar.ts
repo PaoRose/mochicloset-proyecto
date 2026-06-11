@@ -72,21 +72,23 @@ export class Explorar {
     });
   }
 
-  agregarFavorito(publicacionId: number, event: Event) {
+  toggleFavorito(publicacionId: number, event: Event) {
     event.stopPropagation();
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     if (!usuario.id) return;
 
-    const favorito = { usuarioId: usuario.id, publicacionId: publicacionId };
-
-    this.api.post('http://localhost:5160/GestionFavoritos', favorito).subscribe({
-      next: () => this.favoritosIds.push(publicacionId),
-      error: (error) => {
-        if (error.status === 200) {
-          this.favoritosIds.push(publicacionId);
-        }
-      }
-    });
+    if (this.favoritosIds.includes(publicacionId)) {
+      this.api.delete('http://localhost:5160/GestionFavoritos/' + usuario.id + '/' + publicacionId).subscribe({
+        next: () => this.favoritosIds = this.favoritosIds.filter(id => id !== publicacionId),
+        error: () => this.favoritosIds = this.favoritosIds.filter(id => id !== publicacionId)
+      });
+    } else {
+      const favorito = { usuarioId: usuario.id, publicacionId: publicacionId };
+      this.api.post('http://localhost:5160/GestionFavoritos', favorito).subscribe({
+        next: () => this.favoritosIds.push(publicacionId),
+        error: (error) => { if (error.status === 200) this.favoritosIds.push(publicacionId); }
+      });
+    }
   }
 
   verPrenda(id: number) {
