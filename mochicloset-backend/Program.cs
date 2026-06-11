@@ -16,7 +16,7 @@ builder.Services.AddScoped<GestionNotificaciones>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("PermitirAngular", policy =>
+    options.AddPolicy("AllowAngular", policy =>
     {
         policy.WithOrigins("http://localhost:4200")
             .AllowAnyHeader()
@@ -36,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors("PermitirAngular");
+app.UseCors("AllowAngular");
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

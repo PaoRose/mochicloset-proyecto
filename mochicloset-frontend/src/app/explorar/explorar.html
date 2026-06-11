@@ -29,73 +29,23 @@
   <!-- Grid de prendas -->
   <div class="explorar-grid">
 
-    <div class="prenda-card" routerLink="/prenda/1">
+    <div class="prenda-card" *ngFor="let p of publicaciones" [routerLink]="['/prenda', p.id]">
       <div class="prenda-img-wrapper">
-        <img src="assets/articulo1.jpg" alt="Vestido Floral Vintage">
+        <img [src]="p.imagenUrl" [alt]="p.titulo">
         <button class="prenda-fav">🤍</button>
       </div>
       <div class="prenda-info">
-        <p class="prenda-nombre">Vestido Floral Vintage</p>
-        <p class="prenda-vendedor">María López</p>
+        <p class="prenda-nombre">{{ p.titulo }}</p>
         <div class="prenda-footer">
-          <span class="prenda-precio">Bs. 120</span>
-          <span class="prenda-tag">M</span>
-          <span class="prenda-tag">Excelente</span>
+          <span class="prenda-precio">Bs. {{ p.precio }}</span>
+          <span class="prenda-tag">{{ p.talla }}</span>
+          <span class="prenda-tag">{{ p.condicion }}</span>
         </div>
       </div>
     </div>
-
-    <div class="prenda-card">
-      <div class="prenda-img-wrapper">
-        <img src="assets/fav1.jpg" alt="Blusa de Lino Blanca">
-        <button class="prenda-fav">🤍</button>
-      </div>
-      <div class="prenda-info">
-        <p class="prenda-nombre">Blusa de Lino Blanca</p>
-        <p class="prenda-vendedor">Ana García</p>
-        <div class="prenda-footer">
-          <span class="prenda-precio">Bs. 85</span>
-          <span class="prenda-tag">S</span>
-          <span class="prenda-tag">Nueva</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="prenda-card">
-      <div class="prenda-img-wrapper">
-        <img src="assets/articulo2.jpg" alt="Falda Midi Rosa">
-        <button class="prenda-fav">🤍</button>
-      </div>
-      <div class="prenda-info">
-        <p class="prenda-nombre">Falda Midi Rosa</p>
-        <p class="prenda-vendedor">Sofía Martínez</p>
-        <div class="prenda-footer">
-          <span class="prenda-precio">Bs. 95</span>
-          <span class="prenda-tag">M</span>
-          <span class="prenda-tag">Muy buena</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="prenda-card">
-      <div class="prenda-img-wrapper">
-        <img src="assets/articulo3.jpg" alt="Cardigan Suave Beige">
-        <button class="prenda-fav">🤍</button>
-      </div>
-      <div class="prenda-info">
-        <p class="prenda-nombre">Cardigan Suave Beige</p>
-        <p class="prenda-vendedor">Laura Pérez</p>
-        <div class="prenda-footer">
-          <span class="prenda-precio">Bs. 110</span>
-          <span class="prenda-tag">L</span>
-          <span class="prenda-tag">Excelente</span>
-        </div>
-      </div>
-    </div>
-
   </div>
-
 </div>
+
 
 <!-- Drawer filtros — FUERA del contenedor -->
 <div class="filtros-overlay" *ngIf="filtrosAbiertos" (click)="cerrarFiltros()">
