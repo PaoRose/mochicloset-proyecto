@@ -1,22 +1,661 @@
-@mochi_closet_HostAddress = http://localhost:5160
+@base = http://localhost:5160
 
-GET {{mochi_closet_HostAddress}}/weatherforecast/
-Accept: application/json
+### ===== CATEGORIAS =====
 
-###
-POST /GestionUsuarios/registrar-usuario
-
-###
-POST http://localhost:5160/GestionUsuarios/registrar-usuario
+### Categoria 1
+POST {{base}}/GestionCategorias
 Content-Type: application/json
 
 {
-  "nombre": "Paola",
+  "nombre": "Vestidos",
+  "descripcion": "Vestidos de todo tipo y ocasion"
+}
+
+###
+
+### Categoria 2
+POST {{base}}/GestionCategorias
+Content-Type: application/json
+
+{
+  "nombre": "Tops y Blusas",
+  "descripcion": "Tops, blusas y camisas"
+}
+
+###
+
+### Categoria 3
+POST {{base}}/GestionCategorias
+Content-Type: application/json
+
+{
+  "nombre": "Pantalones",
+  "descripcion": "Pantalones y jeans"
+}
+
+###
+
+### Categoria 4
+POST {{base}}/GestionCategorias
+Content-Type: application/json
+
+{
+  "nombre": "Faldas",
+  "descripcion": "Faldas de todo estilo"
+}
+
+###
+
+### Categoria 5
+POST {{base}}/GestionCategorias
+Content-Type: application/json
+
+{
+  "nombre": "Abrigos",
+  "descripcion": "Abrigos y chaquetas"
+}
+
+###
+
+### Categoria 6
+POST {{base}}/GestionCategorias
+Content-Type: application/json
+
+{
+  "nombre": "Accesorios",
+  "descripcion": "Bolsos, cinturones y mas"
+}
+
+###
+
+### ===== USUARIAS =====
+
+### Usuaria 1
+POST {{base}}/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Paola Quinteros",
   "username": "paorose",
   "email": "paola@gmail.com",
-  "telefono": "77777777",
+  "telefono": "77712345",
   "password": "12345678"
 }
 
 ###
-GET http://localhost:5160/GestionUsuarios/lista-usuarios
+
+### Usuaria 2
+POST {{base}}/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Alicia Belaunde",
+  "username": "aliciab",
+  "email": "alicia@gmail.com",
+  "telefono": "76654321",
+  "password": "12345678"
+}
+
+###
+
+### Usuaria 3
+POST {{base}}/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Sofia Mendez",
+  "username": "sofiamendez",
+  "email": "sofia@gmail.com",
+  "telefono": "75598765",
+  "password": "12345678"
+}
+
+###
+
+### Usuaria 4
+POST {{base}}/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Valentina Cruz",
+  "username": "valecruz",
+  "email": "valentina@gmail.com",
+  "telefono": "71234567",
+  "password": "12345678"
+}
+
+###
+
+### Usuaria 5
+POST {{base}}/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Camila Rojas",
+  "username": "camilarojas",
+  "email": "camila@gmail.com",
+  "telefono": "78887766",
+  "password": "12345678"
+}
+
+###
+
+### Usuaria 6
+POST {{base}}/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Gabriela Torres",
+  "username": "gabitorres",
+  "email": "gabriela@gmail.com",
+  "telefono": "79991234",
+  "password": "12345678"
+}
+
+###
+
+### Usuaria 7
+POST {{base}}/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Daniela Vaca",
+  "username": "danyvaca",
+  "email": "daniela@gmail.com",
+  "telefono": "72223344",
+  "password": "12345678"
+}
+
+###
+
+### Usuaria 8
+POST {{base}}/GestionUsuarios/registrar-usuario
+Content-Type: application/json
+
+{
+  "nombre": "Fernanda Suarez",
+  "username": "fersuarez",
+  "email": "fernanda@gmail.com",
+  "telefono": "73334455",
+  "password": "12345678"
+}
+
+###
+
+### ===== PUBLICACIONES =====
+
+### Publicacion 1
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Vestido floral rosa",
+  "descripcion": "Vestido floral en muy buen estado, usado pocas veces",
+  "precio": 80.00,
+  "talla": "S",
+  "condicion": "Como nuevo",
+  "usuarioId": 2,
+  "categoriaId": 1,
+  "imagenUrl": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1"
+}
+
+###
+
+### Publicacion 2
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Vestido negro elegante",
+  "descripcion": "Vestido negro para ocasiones especiales, talla M",
+  "precio": 120.00,
+  "talla": "M",
+  "condicion": "Usado",
+  "usuarioId": 3,
+  "categoriaId": 1,
+  "imagenUrl": "https://images.unsplash.com/photo-1595777457583-95e059d581b8"
+}
+
+###
+
+### Publicacion 3
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Vestido blanco verano",
+  "descripcion": "Vestido blanco ideal para verano",
+  "precio": 95.00,
+  "talla": "S",
+  "condicion": "Como nuevo",
+  "usuarioId": 4,
+  "categoriaId": 1,
+  "imagenUrl": "https://images.unsplash.com/photo-1566174053879-31528523f8ae"
+}
+
+###
+
+### Publicacion 4
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Top blanco basico",
+  "descripcion": "Top blanco clasico, talla S",
+  "precio": 35.00,
+  "talla": "S",
+  "condicion": "Como nuevo",
+  "usuarioId": 5,
+  "categoriaId": 2,
+  "imagenUrl": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b"
+}
+
+###
+
+### Publicacion 5
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Blusa estampada colorida",
+  "descripcion": "Blusa con estampado tropical, muy linda",
+  "precio": 55.00,
+  "talla": "M",
+  "condicion": "Usado",
+  "usuarioId": 6,
+  "categoriaId": 2,
+  "imagenUrl": "https://images.unsplash.com/photo-1564257631407-4deb1f99d992"
+}
+
+###
+
+### Publicacion 6
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Blusa rosa pastel",
+  "descripcion": "Blusa rosa muy delicada y femenina",
+  "precio": 45.00,
+  "talla": "S",
+  "condicion": "Como nuevo",
+  "usuarioId": 7,
+  "categoriaId": 2,
+  "imagenUrl": "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7"
+}
+
+###
+
+### Publicacion 7
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Jean azul clasico",
+  "descripcion": "Jean azul en buen estado, talla 28",
+  "precio": 90.00,
+  "talla": "28",
+  "condicion": "Usado",
+  "usuarioId": 8,
+  "categoriaId": 3,
+  "imagenUrl": "https://images.unsplash.com/photo-1542272604-787c3835535d"
+}
+
+###
+
+### Publicacion 8
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Pantalon negro formal",
+  "descripcion": "Pantalon negro formal casi sin uso",
+  "precio": 110.00,
+  "talla": "30",
+  "condicion": "Como nuevo",
+  "usuarioId": 2,
+  "categoriaId": 3,
+  "imagenUrl": "https://images.unsplash.com/photo-1594938298603-c8148c4b4c3b"
+}
+
+###
+
+### Publicacion 9
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Falda midi beige",
+  "descripcion": "Falda midi color beige muy elegante",
+  "precio": 70.00,
+  "talla": "S",
+  "condicion": "Como nuevo",
+  "usuarioId": 3,
+  "categoriaId": 4,
+  "imagenUrl": "https://images.unsplash.com/photo-1583496661160-fb5218ees23"
+}
+
+###
+
+### Publicacion 10
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Falda floral corta",
+  "descripcion": "Falda corta con flores ideal para verano",
+  "precio": 45.00,
+  "talla": "M",
+  "condicion": "Usado",
+  "usuarioId": 4,
+  "categoriaId": 4,
+  "imagenUrl": "https://images.unsplash.com/photo-1592301933927-35b597393c0a"
+}
+
+###
+
+### Publicacion 11
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Abrigo gris largo",
+  "descripcion": "Abrigo gris largo para el frio",
+  "precio": 150.00,
+  "talla": "M",
+  "condicion": "Como nuevo",
+  "usuarioId": 5,
+  "categoriaId": 5,
+  "imagenUrl": "https://images.unsplash.com/photo-1544022613-e87ca75a784a"
+}
+
+###
+
+### Publicacion 12
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Chaqueta de cuero negra",
+  "descripcion": "Chaqueta de cuero sintetico muy cool",
+  "precio": 200.00,
+  "talla": "S",
+  "condicion": "Usado",
+  "usuarioId": 6,
+  "categoriaId": 5,
+  "imagenUrl": "https://images.unsplash.com/photo-1551028719-00167b16eac5"
+}
+
+###
+
+### Publicacion 13
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Bolso cafe cuero",
+  "descripcion": "Bolso de cuero cafe en perfecto estado",
+  "precio": 180.00,
+  "talla": "Unica",
+  "condicion": "Como nuevo",
+  "usuarioId": 7,
+  "categoriaId": 6,
+  "imagenUrl": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa"
+}
+
+###
+
+### Publicacion 14
+POST {{base}}/GestionPublicaciones
+Content-Type: application/json
+
+{
+  "titulo": "Cinturon negro elegante",
+  "descripcion": "Cinturon negro de cuero sintetico",
+  "precio": 40.00,
+  "talla": "Unica",
+  "condicion": "Usado",
+  "usuarioId": 8,
+  "categoriaId": 6,
+  "imagenUrl": "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80"
+}
+
+###
+
+### ===== FAVORITOS =====
+
+### Favorito 1
+POST {{base}}/GestionFavoritos
+Content-Type: application/json
+
+{
+  "usuarioId": 2,
+  "publicacionId": 3
+}
+
+###
+
+### Favorito 2
+POST {{base}}/GestionFavoritos
+Content-Type: application/json
+
+{
+  "usuarioId": 2,
+  "publicacionId": 7
+}
+
+###
+
+### Favorito 3
+POST {{base}}/GestionFavoritos
+Content-Type: application/json
+
+{
+  "usuarioId": 3,
+  "publicacionId": 1
+}
+
+###
+
+### Favorito 4
+POST {{base}}/GestionFavoritos
+Content-Type: application/json
+
+{
+  "usuarioId": 4,
+  "publicacionId": 11
+}
+
+###
+
+### Favorito 5
+POST {{base}}/GestionFavoritos
+Content-Type: application/json
+
+{
+  "usuarioId": 5,
+  "publicacionId": 13
+}
+
+###
+
+### ===== CONVERSACIONES =====
+
+### Conversacion 1
+POST {{base}}/GestionMensajes/conversaciones
+Content-Type: application/json
+
+{
+  "compradoraId": 2,
+  "vendedoraId": 3,
+  "publicacionId": 2
+}
+
+###
+
+### Conversacion 2
+POST {{base}}/GestionMensajes/conversaciones
+Content-Type: application/json
+
+{
+  "compradoraId": 4,
+  "vendedoraId": 8,
+  "publicacionId": 7
+}
+
+###
+
+### Conversacion 3
+POST {{base}}/GestionMensajes/conversaciones
+Content-Type: application/json
+
+{
+  "compradoraId": 5,
+  "vendedoraId": 7,
+  "publicacionId": 13
+}
+
+###
+
+### ===== MENSAJES =====
+
+### Mensaje 1
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 1,
+  "remitenteId": 2,
+  "texto": "Hola! Sigue disponible el vestido negro?"
+}
+
+###
+
+### Mensaje 2
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 1,
+  "remitenteId": 3,
+  "texto": "Si! Sigue disponible, lo tengo en perfecto estado"
+}
+
+###
+
+### Mensaje 3
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 1,
+  "remitenteId": 2,
+  "texto": "Genial! Podemos coordinar para verlo este fin de semana?"
+}
+
+###
+
+### Mensaje 4
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 1,
+  "remitenteId": 3,
+  "texto": "Claro! El sabado en el patio de comidas del Ventura?"
+}
+
+###
+
+### Mensaje 5
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 2,
+  "remitenteId": 4,
+  "texto": "Hola! Me interesa el jean, que talla es exactamente?"
+}
+
+###
+
+### Mensaje 6
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 2,
+  "remitenteId": 8,
+  "texto": "Es talla 28, te queda bien si usas 28 o 29"
+}
+
+###
+
+### Mensaje 7
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 2,
+  "remitenteId": 4,
+  "texto": "Perfecto! Cuanto es lo menos que aceptas?"
+}
+
+###
+
+### Mensaje 8
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 3,
+  "remitenteId": 5,
+  "texto": "Hola! El bolso sigue disponible?"
+}
+
+###
+
+### Mensaje 9
+POST {{base}}/GestionMensajes/mensajes
+Content-Type: application/json
+
+{
+  "conversacionId": 3,
+  "remitenteId": 7,
+  "texto": "Si! Esta en excelente estado, casi sin uso"
+}
+
+###
+
+### ===== COMPRAS =====
+
+### Compra 1
+POST {{base}}/GestionCompras
+Content-Type: application/json
+
+{
+  "usuarioId": 3,
+  "publicacionId": 1
+}
+
+###
+
+### Compra 2
+POST {{base}}/GestionCompras
+Content-Type: application/json
+
+{
+  "usuarioId": 6,
+  "publicacionId": 4
+}
+
+###
+
+### Compra 3
+POST {{base}}/GestionCompras
+Content-Type: application/json
+
+{
+  "usuarioId": 8,
+  "publicacionId": 6
+}
