@@ -10,19 +10,18 @@ import { Explorar } from './explorar/explorar';
 import { DetallePrenda } from './detalle-prenda/detalle-prenda';
 import { Chat } from './chat/chat';
 import {Recibo} from './recibo/recibo';
-
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: Login },
-  { path: 'home', component: Home },
   { path: 'registro', component: Registro },
-  { path: 'perfil', component: Perfil },
-  { path: 'notificaciones', component: Notificaciones },
-  { path: 'publicar', component: Publicar },
-  { path: 'editar-perfil', component: EditarPerfil },
-  { path: 'explorar', component: Explorar },
-  { path: 'prenda/:id', component: DetallePrenda },
-  { path: 'chat/:id', component: Chat },
-  { path: 'recibo/:id', component: Recibo }
+  { path: 'home', component: Home },
+  { path: 'explorar', component: Explorar, canActivate: [authGuard] },
+  { path: 'perfil', component: Perfil, canActivate: [authGuard] },
+  { path: 'editar-perfil', component: EditarPerfil, canActivate: [authGuard] },
+  { path: 'publicar', component: Publicar, canActivate: [authGuard] },
+  { path: 'notificaciones', component: Notificaciones, canActivate: [authGuard] },
+  { path: 'prenda/:id', component: DetallePrenda, canActivate: [authGuard] },
+  { path: 'chat', component: Chat, canActivate: [authGuard] }
 ];

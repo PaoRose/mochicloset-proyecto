@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiClient } from '../core/http/api-client';
-import { RouterLink, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 interface Publicacion {
   id: number;
@@ -17,7 +17,7 @@ interface Publicacion {
 
 @Component({
   selector: 'app-explorar',
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './explorar.html',
   styleUrl: './explorar.css'
 })
