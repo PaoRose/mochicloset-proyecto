@@ -1,27 +1,22 @@
 <div class="publicar-container">
 
-  <!-- Volver -->
   <a class="publicar-volver" routerLink="/perfil">← Volver al dashboard</a>
 
-  <!-- Header -->
   <h1 class="publicar-title">Publicar prenda</h1>
   <p class="publicar-subtitle">Completa los detalles de tu artículo</p>
 
-  <!-- Grid -->
   <div class="publicar-grid">
 
-    <!-- Columna izquierda -->
     <div class="publicar-columna-izq">
 
       <!-- Fotos -->
       <div class="publicar-card">
         <h3 class="card-title">Fotos</h3>
-        <p class="card-subtitle">Agrega hasta 5 fotos de tu prenda. La primera será la principal.</p>
-        <div class="fotos-grid">
-          <div class="foto-agregar">
-            <span class="foto-icon">📷</span>
-            <p>Agregar foto</p>
-          </div>
+        <p class="card-subtitle">Agrega la URL de la imagen de tu prenda.</p>
+        <div class="detalle-group">
+          <label>URL de imagen</label>
+          <input type="text" placeholder="https://..."
+                 [(ngModel)]="publicacion.imagenUrl" name="imagenUrl" />
         </div>
       </div>
 
@@ -31,24 +26,22 @@
 
         <div class="detalle-group">
           <label for="titulo">Título</label>
-          <input id="titulo" type="text" placeholder="Ej: Vestido floral vintage talla M" />
+          <input id="titulo" type="text" placeholder="Ej: Vestido floral vintage talla M"
+                 [(ngModel)]="publicacion.titulo" name="titulo" />
         </div>
 
         <div class="detalle-row">
           <div class="detalle-group">
             <label for="categoria">Categoría</label>
-            <select id="categoria">
-              <option value="" disabled selected>Selecciona</option>
-              <option>Vestidos</option>
-              <option>Blusas</option>
-              <option>Pantalones</option>
-              <option>Faldas</option>
+            <select id="categoria" [(ngModel)]="publicacion.categoriaId" name="categoriaId">
+              <option value="0" disabled>Selecciona</option>
+              <option *ngFor="let c of categorias" [value]="c.id">{{ c.nombre }}</option>
             </select>
           </div>
           <div class="detalle-group">
             <label for="talla">Talla</label>
-            <select id="talla">
-              <option value="" disabled selected>Selecciona</option>
+            <select id="talla" [(ngModel)]="publicacion.talla" name="talla">
+              <option value="" disabled>Selecciona</option>
               <option>XS</option>
               <option>S</option>
               <option>M</option>
@@ -60,8 +53,8 @@
 
         <div class="detalle-group">
           <label for="condicion">Condición</label>
-          <select id="condicion">
-            <option value="" disabled selected>Selecciona</option>
+          <select id="condicion" [(ngModel)]="publicacion.condicion" name="condicion">
+            <option value="" disabled>Selecciona</option>
             <option>Nuevo</option>
             <option>Como nuevo</option>
             <option>Buen estado</option>
@@ -71,7 +64,8 @@
 
         <div class="detalle-group">
           <label for="descripcion">Descripción</label>
-          <textarea id="descripcion" placeholder="Describe tu prenda: marca, material, colores, detalles especiales..."></textarea>
+          <textarea id="descripcion" placeholder="Describe tu prenda: marca, material, colores, detalles especiales..."
+                    [(ngModel)]="publicacion.descripcion" name="descripcion"></textarea>
           <span class="detalle-hint">Sé lo más detallada posible</span>
         </div>
 
@@ -80,11 +74,10 @@
       <!-- Precio -->
       <div class="publicar-card">
         <h3 class="card-title">Precio</h3>
-
         <div class="detalle-group">
           <label for="precio">Precio (Bs.)</label>
-          <input id="precio" type="number" placeholder="120" />
-          <span class="detalle-hint">Precio sugerido basado en condición</span>
+          <input id="precio" type="number" placeholder="120"
+                 [(ngModel)]="publicacion.precio" name="precio" />
         </div>
       </div>
 
@@ -93,18 +86,17 @@
     <!-- Columna derecha -->
     <div class="publicar-columna-der">
 
-      <!-- Vista previa -->
       <div class="publicar-card">
         <h3 class="card-title">Vista previa</h3>
         <div class="vista-previa">
-          <span class="vista-icon">⬆</span>
+          <img *ngIf="publicacion.imagenUrl" [src]="publicacion.imagenUrl" alt="Vista previa">
+          <span *ngIf="!publicacion.imagenUrl" class="vista-icon">⬆</span>
         </div>
         <p class="vista-texto">Tu prenda aparecerá así</p>
         <p class="vista-subtexto">Asegúrate de usar fotos claras y con buena iluminación</p>
       </div>
 
-      <!-- Botón publicar -->
-      <button class="btn-publicar" routerLink="/perfil">Publicar prenda</button>
+      <button class="btn-publicar" (click)="publicar()">Publicar prenda</button>
 
     </div>
 
