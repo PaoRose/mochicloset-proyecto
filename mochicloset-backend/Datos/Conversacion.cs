@@ -7,4 +7,5 @@ public class Conversacion
     public int VendedoraId { get; set; }
     public int PublicacionId { get; set; }
     public DateTime FechaCreacion { get; set; }
+    public Publicacion? Publicacion { get; set; }
 }

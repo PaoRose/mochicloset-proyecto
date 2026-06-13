@@ -1,4 +1,5 @@
-﻿using mochi_closet.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using mochi_closet.Data;
 using mochi_closet.Datos;
 
 namespace mochi_closet.Negocio;
@@ -19,8 +20,9 @@ public class GestionMensajes
     public List<Conversacion> ListaConversacionesPorUsuaria(int usuarioId)
     {
         return _context.Conversaciones
-            .Where(c => c.CompradoraId == usuarioId || c.VendedoraId == usuarioId)
-            .ToList();
+        .Where(c => c.CompradoraId == usuarioId || c.VendedoraId == usuarioId)
+        .Include(c => c.Publicacion)
+        .ToList();
     }
 
     public string IniciarConversacion(Conversacion conversacion)

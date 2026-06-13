@@ -10,7 +10,7 @@ public class Usuario
     public string? Password { get; set; }
     public string? Rol { get; set; }
     public string? Estado { get; set; }
-    
+    public string? FotoPerfil { get; set; }
 
     public virtual string ObtenerRol()
     {

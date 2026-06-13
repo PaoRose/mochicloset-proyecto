@@ -42,6 +42,16 @@ interface Compra {
     titulo: string;
   };
 }
+interface Conversacion {
+  id: number;
+  compradoraId: number;
+  vendedoraId: number;
+  publicacionId: number;
+  publicacion: {
+    id: number;
+    titulo: string;
+  };
+}
 
 @Component({
   selector: 'app-perfil',
@@ -54,6 +64,7 @@ export class Perfil {
   private url = 'http://localhost:5160/GestionPublicaciones';
   private urlFavoritos = 'http://localhost:5160/GestionFavoritos';
   private urlCompras = 'http://localhost:5160/GestionCompras';
+  private urlMensajes = 'http://localhost:5160/GestionMensajes';
 
   tabActiva = 'publicaciones';
   modalAbierto = false;
@@ -63,13 +74,14 @@ export class Perfil {
   favoritos: Favorito[] = [];
   compras: Compra[] = [];
   ventas: Compra[] = [];
-
+  conversaciones: Conversacion[] = [];
   ngOnInit() {
     this.usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     this.cargarPublicaciones();
     this.cargarFavoritos();
     this.cargarCompras();
     this.cargarVentas();
+    this.cargarConversaciones();
   }
 
   private cargarPublicaciones() {
@@ -145,4 +157,14 @@ export class Perfil {
       }
     });
   }
+  get totalVentas(): number {
+    return this.ventas.reduce((sum, v) => sum + v.montoTotal, 0);
+  }
+  private cargarConversaciones() {
+    this.api.get<Conversacion[]>(this.urlMensajes + '/conversaciones/' + this.usuario.id).subscribe({
+      next: data => this.conversaciones = data,
+      error: error => console.error('Error al cargar conversaciones', error)
+    });
+  }
+
 }

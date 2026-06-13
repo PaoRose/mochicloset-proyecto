@@ -88,6 +88,7 @@ public class GestionUsuarios
         usuario.Nombre = usuarioEditado.Nombre;
         usuario.Username = usuarioEditado.Username;
         usuario.Telefono = usuarioEditado.Telefono;
+        usuario.FotoPerfil = usuarioEditado.FotoPerfil;
 
         _context.SaveChanges();
 

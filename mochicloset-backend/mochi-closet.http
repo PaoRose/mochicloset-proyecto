@@ -664,3 +664,16 @@ Content-Type: application/json
 ### Listar usuarios
 ### Listar usuarios
 GET {{base}}/GestionUsuarios/lista-usuarios
+
+
+### Actualizar perfil
+PUT {{base}}/GestionUsuarios/actualizar-perfil
+Content-Type: application/json
+
+{
+  "id": 2,
+  "nombre": "Paola Test",
+  "username": "paorose",
+  "email": "paola@gmail.com",
+  "telefono": "77712345"
+}

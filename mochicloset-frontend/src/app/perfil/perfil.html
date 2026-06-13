@@ -2,7 +2,7 @@
 
   <!-- Card principal -->
   <div class="perfil-card">
-    <img class="perfil-foto" src="assets/foto-perfil.jpg" alt="Foto de perfil">
+    <img class="perfil-foto" [src]="usuario?.fotoPerfil || 'assets/foto-perfil.jpg'" alt="Foto de perfil">
     <div class="perfil-info">
       <div class="perfil-nombre-row">
         <h1 class="perfil-nombre">{{ usuario?.nombre }}</h1>
@@ -24,6 +24,13 @@
         <span class="metric-icon">📦</span>
       </div>
     </div>
+    <div class="metric-card">
+      <p class="metric-label">Total de ventas</p>
+      <div class="metric-row">
+        <span class="metric-value">Bs. {{ ventas.reduce((sum, v) => sum + v.montoTotal, 0) }}</span>
+        <span class="metric-icon">📈</span>
+      </div>
+    </div>
   </div>
 
   <!-- Tabs -->
@@ -31,6 +38,7 @@
     <button class="tab-btn" [class.active]="tabActiva === 'publicaciones'" (click)="cambiarTab('publicaciones')">Mis publicaciones</button>
     <button class="tab-btn" [class.active]="tabActiva === 'favoritos'" (click)="cambiarTab('favoritos')">Favoritos</button>
     <button class="tab-btn" [class.active]="tabActiva === 'historial'" (click)="cambiarTab('historial')">Historial</button>
+    <button class="tab-btn" [class.active]="tabActiva === 'chats'" (click)="cambiarTab('chats')">Mis chats</button>
   </div>
 
   <!-- Tab: Mis publicaciones -->
@@ -63,7 +71,6 @@
       <div class="articulo-card" *ngFor="let f of favoritos" [routerLink]="['/prenda', f.publicacionId]">
         <div class="articulo-img-wrapper">
           <img [src]="f.publicacion?.imagenUrl" [alt]="f.publicacion?.titulo">
-          <span class="fav-icon">❤️</span>
         </div>
         <div class="articulo-info">
           <p class="articulo-nombre">{{ f.publicacion?.titulo }}</p>
@@ -104,11 +111,26 @@
     </div>
   </div>
 
+  <!-- Tab: Chats -->
+  <div class="articulos-section" *ngIf="tabActiva === 'chats'">
+    <h3 class="articulos-title">Mis conversaciones</h3>
+    <div class="historial-tabla">
+      <div class="historial-header">
+        <span>Prenda</span>
+        <span>Acción</span>
+      </div>
+      <div class="historial-row" *ngFor="let c of conversaciones">
+        <span>{{ c.publicacion?.titulo }}</span>
+        <span><button class="editar-btn" [routerLink]="['/chat', c.id]">Abrir chat</button></span>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal editar prenda -->
   <div class="modal-overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
     <div class="modal-card" (click)="$event.stopPropagation()">
       <div class="modal-header">
-        <h3 class="modal-title">Editar prenda</h3>
+        <span><h3 class="modal-title">Editar prenda</h3></span>
         <button class="modal-close" (click)="cerrarModal()">✕</button>
       </div>
       <div class="modal-group">

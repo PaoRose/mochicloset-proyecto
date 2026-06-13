@@ -12,9 +12,14 @@
 
     <!-- Foto -->
     <div class="editar-foto-section">
-      <img class="editar-foto" src="assets/foto-perfil.jpg" alt="Foto de perfil">
-      <button class="editar-foto-btn">📷 Cambiar foto</button>
-      <p class="editar-foto-hint">Recomendamos una imagen cuadrada de al menos 400x400 px</p>
+      <img class="editar-foto" [src]="usuario?.fotoPerfil || 'assets/foto-perfil.jpg'" alt="Foto de perfil">
+      <div class="editar-group">
+        <label>URL de foto de perfil</label>
+        <div class="editar-input-field">
+          <span class="editar-icon">🖼</span>
+          <input type="text" placeholder="https://..." [(ngModel)]="usuario.fotoPerfil" name="fotoPerfil" />
+        </div>
+      </div>
     </div>
 
     <hr class="editar-divider">
@@ -26,16 +31,15 @@
         <label for="username">Nombre de usuario</label>
         <div class="editar-input-field">
           <span class="editar-icon">&#64;</span>
-          <input id="username" type="text" value="maria_closet" />
+          <input id="username" type="text" [(ngModel)]="usuario.username" name="username" />
         </div>
-        <span class="editar-hint">Tu usuario aparecerá como &#64;maria_closet</span>
       </div>
 
       <div class="editar-group">
         <label for="nombre">Nombre completo</label>
         <div class="editar-input-field">
           <span class="editar-icon">👤</span>
-          <input id="nombre" type="text" value="María López" />
+          <input id="nombre" type="text" [(ngModel)]="usuario.nombre" name="nombre" />
         </div>
       </div>
 
@@ -43,7 +47,7 @@
         <label for="email">Email</label>
         <div class="editar-input-field editar-disabled">
           <span class="editar-icon">✉</span>
-          <input id="email" type="email" value="maria.lopez@email.com" disabled />
+          <input id="email" type="email" [value]="usuario?.email" disabled />
         </div>
         <span class="editar-hint">El email no se puede modificar</span>
       </div>
@@ -52,13 +56,13 @@
         <label for="telefono">Teléfono</label>
         <div class="editar-input-field">
           <span class="editar-icon">📞</span>
-          <input id="telefono" type="tel" value="+591 70123456" />
+          <input id="telefono" type="tel" [(ngModel)]="usuario.telefono" name="telefono" />
         </div>
       </div>
 
       <!-- Botones -->
       <div class="editar-acciones">
-        <button class="btn-guardar" routerLink="/perfil">Guardar cambios</button>
+        <button class="btn-guardar" (click)="guardarCambios()">Guardar cambios</button>
         <button class="btn-cancelar" routerLink="/perfil">Cancelar</button>
       </div>
 

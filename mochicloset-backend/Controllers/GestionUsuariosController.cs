@@ -59,7 +59,7 @@ public class GestionUsuariosController : ControllerBase
         return Ok(usuario);
     }
 
-    [HttpPut("actualizar-perfil")]
+    [HttpPut("editar-perfil")]
     public IActionResult ActualizarPerfil(
         Usuario usuarioEditado)
     {

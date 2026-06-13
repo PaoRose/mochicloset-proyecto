@@ -15,7 +15,12 @@ interface Publicacion {
   categoriaId: number;
   fechaPublicacion: string;
 }
-
+interface Usuario {
+  id: number;
+  nombre: string;
+  username: string;
+  fotoPerfil: string;
+}
 interface Usuario {
   id: number;
   nombre: string;
