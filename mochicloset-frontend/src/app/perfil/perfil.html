@@ -2,7 +2,10 @@
 
   <!-- Card principal -->
   <div class="perfil-card">
-    <img class="perfil-foto" [src]="usuario?.fotoPerfil || 'assets/foto-perfil.jpg'" alt="Foto de perfil">
+    <img [src]="usuario?.fotoPerfil || 'https://img.magnific.com/vector-premium/icono-perfil-avatar-predeterminado-imagen-usuario-redes-sociales-icono-avatar-gris-silueta-perfil-blanco-ilustracion-vectorial_561158-3383.jpg?semt=ais_hybrid&w=740&q=80'"
+         alt="foto perfil"
+         class="perfil-foto"
+         style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
     <div class="perfil-info">
       <div class="perfil-nombre-row">
         <h1 class="perfil-nombre">{{ usuario?.nombre }}</h1>

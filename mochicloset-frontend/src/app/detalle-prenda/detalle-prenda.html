@@ -8,9 +8,9 @@
     <img [src]="publicacion?.imagenUrl" [alt]="publicacion?.titulo">
   </div>
 
-  <!-- Miniaturas -->
+  <!-- Miniaturas — quita esto o pon la imagen de la prenda -->
   <div class="detalle-miniaturas">
-    <img [src]="vendedora?.fotoPerfil || 'assets/foto-perfil.jpg'" alt="vendedora" class="vendedora-foto">
+    <img [src]="publicacion?.imagenUrl" [alt]="publicacion?.titulo" class="miniatura activa">
   </div>
 
   <!-- Info -->
@@ -34,7 +34,7 @@
 
     <!-- Vendedora -->
     <div class="detalle-vendedora">
-      <img src="assets/foto-perfil.jpg" alt="vendedora" class="vendedora-foto">
+      <img [src]="vendedora?.fotoPerfil || 'https://img.magnific.com/vector-premium/icono-perfil-avatar-predeterminado-imagen-usuario-redes-sociales-icono-avatar-gris-silueta-perfil-blanco-ilustracion-vectorial_561158-3383.jpg?semt=ais_hybrid&w=740&q=80'" alt="vendedora" class="vendedora-foto">
       <div class="vendedora-info">
         <p class="vendedora-nombre">{{ vendedora?.nombre }}</p>
         <p class="vendedora-stats">&#64;{{ vendedora?.username }}</p>

@@ -3,7 +3,7 @@
   <!-- Header -->
   <div class="chat-header">
     <a class="chat-volver" routerLink="/perfil">←</a>
-    <img class="chat-avatar" [src]="otraPersona?.fotoPerfil || 'assets/foto-perfil.jpg'" alt="usuario">
+    <img class="chat-avatar" [src]="otraPersona?.fotoPerfil || 'https://img.magnific.com/vector-premium/icono-perfil-avatar-predeterminado-imagen-usuario-redes-sociales-icono-avatar-gris-silueta-perfil-blanco-ilustracion-vectorial_561158-3383.jpg?semt=ais_hybrid&w=740&q=80'" alt="usuario">
     <div class="chat-header-info">
       <p class="chat-nombre">{{ otraPersona?.nombre || 'Chat' }}</p>
       <p class="chat-username">&#64;{{ otraPersona?.username }}</p>
@@ -12,18 +12,28 @@
 
   <!-- Prenda info -->
   <div class="chat-detalle-compra" *ngIf="conversacion">
-    <p class="chat-prenda-nombre">{{ conversacion.publicacion?.titulo }}</p>
-    <p class="chat-prenda-precio">Bs. {{ conversacion.publicacion?.precio }}</p>
-    <button class="editar-btn" (click)="irAPrenda()" *ngIf="esCompradora">🔍 Ver prenda</button>
-    <button class="modal-guardar" (click)="confirmarVenta()" *ngIf="!esCompradora">✅ Confirmar venta</button>
+    <div class="chat-prenda-preview">
+      <img [src]="conversacion.publicacion?.imagenUrl" alt="prenda">
+      <div>
+        <p class="chat-prenda-nombre">{{ conversacion.publicacion?.titulo }}</p>
+        <p class="chat-prenda-precio">Bs. {{ conversacion.publicacion?.precio }}</p>
+      </div>
+    </div>
+    <button class="chat-ver-prenda" (click)="irAPrenda()" *ngIf="esCompradora">🔍 Ver prenda</button>
+    <button class="chat-ver-prenda" (click)="confirmarVenta()" *ngIf="!esCompradora">✅ Confirmar venta</button>
   </div>
 
   <!-- Mensajes -->
   <div class="chat-mensajes">
     <div *ngFor="let m of mensajes"
          [class]="m.remitenteId === usuarioId ? 'mensaje mensaje-enviado' : 'mensaje mensaje-recibido'">
-      <p>{{ m.texto }}</p>
-      <span class="mensaje-hora">{{ m.fechaEnvio | date:'shortTime' }}</span>
+      <ng-container *ngIf="esImagen(m.texto); else textoNormal">
+        <img [src]="m.texto" class="mensaje-imagen">
+      </ng-container>
+      <ng-template #textoNormal>
+        <p>{{ m.texto }}</p>
+      </ng-template>
+      <span class="mensaje-hora">{{ m.fechaEnvio | date:'h:mm a' }}</span>
     </div>
   </div>
 
@@ -31,7 +41,7 @@
   <div class="chat-input-wrapper">
     <div class="chat-input">
       <button class="chat-adjuntar">🖼</button>
-      <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="nuevoMensaje" name="mensaje" />
+      <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="nuevoMensaje" name="mensaje" (keyup.enter)="enviarMensaje()" />
       <button class="chat-enviar" (click)="enviarMensaje()">➤</button>
     </div>
   </div>

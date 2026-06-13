@@ -23,5 +23,5 @@ export const routes: Routes = [
   { path: 'publicar', component: Publicar, canActivate: [authGuard] },
   { path: 'notificaciones', component: Notificaciones, canActivate: [authGuard] },
   { path: 'prenda/:id', component: DetallePrenda, canActivate: [authGuard] },
-  { path: 'chat', component: Chat, canActivate: [authGuard] }
+  { path: 'chat/:id', component: Chat, canActivate: [authGuard] }
 ];

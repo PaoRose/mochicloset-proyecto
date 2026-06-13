@@ -3,6 +3,7 @@ import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiClient } from '../core/http/api-client';
+import { HttpClient } from '@angular/common/http';
 
 interface Mensaje {
   id: number;
@@ -46,6 +47,7 @@ export class Chat implements OnDestroy {
   private urlUsuarios = 'http://localhost:5160/GestionUsuarios';
   private urlCompras = 'http://localhost:5160/GestionCompras';
   private intervalo: any;
+  private http = inject(HttpClient);
 
   mensajes: Mensaje[] = [];
   conversacion: Conversacion | null = null;
@@ -99,19 +101,12 @@ export class Chat implements OnDestroy {
       texto: this.nuevoMensaje
     };
 
-    this.api.post<{mensaje: string}>(this.url + '/mensajes', mensaje).subscribe({
+    this.http.post(this.url + '/mensajes', mensaje, { responseType: 'text' }).subscribe({
       next: () => {
         this.nuevoMensaje = '';
         this.cargarMensajes();
       },
-      error: (error) => {
-        if (error.status === 200) {
-          this.nuevoMensaje = '';
-          this.cargarMensajes();
-        } else {
-          console.error('Error al enviar mensaje', error);
-        }
-      }
+      error: (err) => console.error('Error al enviar mensaje', err)
     });
   }
 
@@ -131,5 +126,10 @@ export class Chat implements OnDestroy {
         else console.error('Error al registrar venta', error);
       }
     });
+  }
+  esImagen(texto: string): boolean {
+    return /\.(jpg|jpeg|png|gif|webp)(\?.*)?$/i.test(texto) ||
+      texto.startsWith('https://images.') ||
+      texto.startsWith('https://i.');
   }
 }

@@ -32,6 +32,7 @@ export class Login {
   };
 
   iniciarSesion() {
+    console.log('intentando iniciar sesión con:', this.usuario);
     this.api.post<UsuarioRespuesta>(this.url + '/iniciar-sesion', this.usuario).subscribe({
       next: data => {
         localStorage.setItem('usuario', JSON.stringify(data));

@@ -267,3 +267,29 @@
 .chat-enviar:hover {
   background-color: var(--mc-accent-pink);
 }
+
+.chat-ver-prenda {
+  background: transparent;
+  border: 1px solid #E0D5CF;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.chat-ver-prenda:hover {
+  border-color: var(--mc-matcha-green);
+  color: var(--mc-matcha-green);
+}
+
+.mensaje-imagen {
+  width: 200px;
+  border-radius: 12px;
+  object-fit: cover;
+}
