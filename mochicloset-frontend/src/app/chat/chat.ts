@@ -35,6 +35,7 @@ interface Usuario {
 
 @Component({
   selector: 'app-chat',
+  standalone: true,
   imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './chat.html',
   styleUrl: './chat.css',
@@ -101,12 +102,14 @@ export class Chat implements OnDestroy {
       texto: this.nuevoMensaje
     };
 
+    this.nuevoMensaje = '';
+
     this.http.post(this.url + '/mensajes', mensaje, { responseType: 'text' }).subscribe({
-      next: () => {
-        this.nuevoMensaje = '';
+      next: () => this.cargarMensajes(),
+      error: (err) => {
+        console.error('Error al enviar mensaje', err);
         this.cargarMensajes();
-      },
-      error: (err) => console.error('Error al enviar mensaje', err)
+      }
     });
   }
 
@@ -132,4 +135,20 @@ export class Chat implements OnDestroy {
       texto.startsWith('https://images.') ||
       texto.startsWith('https://i.');
   }
+
+  mostrarInputUrl = false;
+  urlImagen = '';
+
+  abrirInputUrl() {
+    this.mostrarInputUrl = !this.mostrarInputUrl;
+  }
+
+  enviarImagen() {
+    if (!this.urlImagen.trim()) return;
+    this.nuevoMensaje = this.urlImagen;
+    this.urlImagen = '';
+    this.mostrarInputUrl = false;
+    this.enviarMensaje();
+  }
+
 }
