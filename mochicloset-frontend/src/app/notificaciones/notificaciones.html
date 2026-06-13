@@ -12,44 +12,20 @@
   <!-- Lista -->
   <div class="notif-list">
 
-    <div class="notif-item">
-      <div class="notif-icon-wrapper notif-success">🎉</div>
+    <div class="notif-item" *ngFor="let n of notificaciones"
+         [class.notif-item-leida]="n.leida"
+         (click)="marcarLeida(n.id)">
+      <div class="notif-icon-wrapper notif-message">
+        {{ n.tipo === 'Mensaje' ? '💬' : '🔔' }}
+      </div>
       <div class="notif-content">
-        <p class="notif-text">¡Tu Vestido Floral Vintage fue vendido!</p>
-        <span class="notif-time">Hace 2 horas</span>
+        <p class="notif-text">{{ n.mensaje }}</p>
+        <span class="notif-time">{{ n.fechaCreacion | date:'d MMM yyyy, h:mm a' }}</span>
       </div>
     </div>
 
-    <div class="notif-item">
-      <div class="notif-icon-wrapper notif-success">🎉</div>
-      <div class="notif-content">
-        <p class="notif-text">¡Tu Blusa de Lino fue vendida!</p>
-        <span class="notif-time">Hace 5 horas</span>
-      </div>
-    </div>
-
-    <div class="notif-item">
-      <div class="notif-icon-wrapper notif-message">💬</div>
-      <div class="notif-content">
-        <p class="notif-text">Tienes un nuevo mensaje de Isabella Torres</p>
-        <span class="notif-time">Ayer</span>
-      </div>
-    </div>
-
-    <div class="notif-item notif-item-danger">
-      <div class="notif-icon-wrapper notif-danger">🚫</div>
-      <div class="notif-content">
-        <p class="notif-text notif-text-danger">Tu prenda "Cardigan Suave Beige" fue eliminada: el nombre de la prenda no coincide con las fotos publicadas.</p>
-        <span class="notif-time">Hace 2 días</span>
-      </div>
-    </div>
-
-    <div class="notif-item">
-      <div class="notif-icon-wrapper notif-message">💬</div>
-      <div class="notif-content">
-        <p class="notif-text">Ana García te envió un mensaje sobre "Falda Midi Rosa"</p>
-        <span class="notif-time">Hace 3 días</span>
-      </div>
+    <div *ngIf="notificaciones.length === 0" class="notif-item">
+      <p class="notif-text">No tenés notificaciones aún</p>
     </div>
 
   </div>
