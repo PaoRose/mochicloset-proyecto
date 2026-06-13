@@ -2,22 +2,29 @@
 
   <!-- Header -->
   <div class="chat-header">
-    <a class="chat-volver" routerLink="/explorar">←</a>
-    <img class="chat-avatar" src="assets/foto-perfil.jpg" alt="Vendedora">
+    <a class="chat-volver" routerLink="/perfil">←</a>
+    <img class="chat-avatar" [src]="otraPersona?.fotoPerfil || 'assets/foto-perfil.jpg'" alt="usuario">
     <div class="chat-header-info">
-      <p class="chat-nombre">Chat</p>
+      <p class="chat-nombre">{{ otraPersona?.nombre || 'Chat' }}</p>
+      <p class="chat-username">&#64;{{ otraPersona?.username }}</p>
     </div>
+  </div>
+
+  <!-- Prenda info -->
+  <div class="chat-detalle-compra" *ngIf="conversacion">
+    <p class="chat-prenda-nombre">{{ conversacion.publicacion?.titulo }}</p>
+    <p class="chat-prenda-precio">Bs. {{ conversacion.publicacion?.precio }}</p>
+    <button class="editar-btn" (click)="irAPrenda()" *ngIf="esCompradora">🔍 Ver prenda</button>
+    <button class="modal-guardar" (click)="confirmarVenta()" *ngIf="!esCompradora">✅ Confirmar venta</button>
   </div>
 
   <!-- Mensajes -->
   <div class="chat-mensajes">
-
     <div *ngFor="let m of mensajes"
          [class]="m.remitenteId === usuarioId ? 'mensaje mensaje-enviado' : 'mensaje mensaje-recibido'">
       <p>{{ m.texto }}</p>
       <span class="mensaje-hora">{{ m.fechaEnvio | date:'shortTime' }}</span>
     </div>
-
   </div>
 
   <!-- Input -->
