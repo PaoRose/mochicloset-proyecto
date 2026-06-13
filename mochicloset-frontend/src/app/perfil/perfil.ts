@@ -61,6 +61,7 @@ interface Conversacion {
 
 @Component({
   selector: 'app-perfil',
+  standalone: true,
   imports: [CommonModule, RouterLink, FormsModule],
   templateUrl: './perfil.html',
   styleUrl: './perfil.css'

@@ -22,6 +22,7 @@ interface Compra {
 
 @Component({
   selector: 'app-recibo',
+  standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './recibo.html',
   styleUrl: './recibo.css'

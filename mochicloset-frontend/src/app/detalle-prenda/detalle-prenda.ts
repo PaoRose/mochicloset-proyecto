@@ -29,6 +29,7 @@ interface Usuario {
 
 @Component({
   selector: 'app-detalle-prenda',
+  standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './detalle-prenda.html',
   styleUrl: './detalle-prenda.css'

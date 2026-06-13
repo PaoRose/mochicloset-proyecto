@@ -23,6 +23,7 @@ interface Publicacion {
 
 @Component({
   selector: 'app-publicar',
+  standalone: true,
   imports: [RouterLink, FormsModule, CommonModule],
   templateUrl: './publicar.html',
   styleUrl: './publicar.css'

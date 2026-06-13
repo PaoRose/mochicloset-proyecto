@@ -17,6 +17,7 @@ interface Publicacion {
 
 @Component({
   selector: 'app-explorar',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './explorar.html',
   styleUrl: './explorar.css'

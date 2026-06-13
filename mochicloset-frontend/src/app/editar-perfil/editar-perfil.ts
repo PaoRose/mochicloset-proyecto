@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-editar-perfil',
+  standalone: true,
   imports: [RouterLink, FormsModule, CommonModule],
   templateUrl: './editar-perfil.html',
   styleUrl: './editar-perfil.css'

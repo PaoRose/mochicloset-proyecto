@@ -13,6 +13,7 @@ interface UsuarioRegistro {
 
 @Component({
   selector: 'app-registro',
+  standalone: true,
   imports: [RouterLink, FormsModule],
   templateUrl: './registro.html',
   styleUrl: './registro.css',

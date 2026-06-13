@@ -17,6 +17,7 @@ interface UsuarioRespuesta {
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [RouterLink, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css'

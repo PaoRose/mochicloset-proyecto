@@ -37,13 +37,20 @@
     </div>
   </div>
 
-  <!-- Input -->
   <div class="chat-input-wrapper">
+
+    <!-- Popup URL imagen -->
+    <div class="url-popup" *ngIf="mostrarInputUrl">
+      <input type="text" placeholder="Pega la URL de la imagen..." [(ngModel)]="urlImagen" name="urlImagen" />
+      <button (click)="enviarImagen()">Enviar</button>
+    </div>
+
     <div class="chat-input">
-      <button class="chat-adjuntar">🖼</button>
-      <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="nuevoMensaje" name="mensaje" (keyup.enter)="enviarMensaje()" />
+      <button class="chat-adjuntar" (click)="abrirInputUrl()" title="Enviar imagen">🖼</button>
+      <input type="text" placeholder="Escribe un mensaje..." [(ngModel)]="nuevoMensaje" name="nuevoMensaje" (keyup.enter)="enviarMensaje()" />
       <button class="chat-enviar" (click)="enviarMensaje()">➤</button>
     </div>
+
   </div>
 
 </div>
