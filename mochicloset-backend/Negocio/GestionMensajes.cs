@@ -20,9 +20,11 @@ public class GestionMensajes
     public List<Conversacion> ListaConversacionesPorUsuaria(int usuarioId)
     {
         return _context.Conversaciones
-        .Where(c => c.CompradoraId == usuarioId || c.VendedoraId == usuarioId)
-        .Include(c => c.Publicacion)
-        .ToList();
+            .Where(c => c.CompradoraId == usuarioId || c.VendedoraId == usuarioId)
+            .Include(c => c.Publicacion)
+            .Include(c => c.Compradora)
+            .Include(c => c.Vendedora)
+            .ToList();
     }
 
     public string IniciarConversacion(Conversacion conversacion)

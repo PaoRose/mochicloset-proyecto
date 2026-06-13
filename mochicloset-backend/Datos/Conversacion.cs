@@ -8,4 +8,6 @@ public class Conversacion
     public int PublicacionId { get; set; }
     public DateTime FechaCreacion { get; set; }
     public Publicacion? Publicacion { get; set; }
+    public Usuario? Compradora { get; set; }
+    public Usuario? Vendedora { get; set; }
 }

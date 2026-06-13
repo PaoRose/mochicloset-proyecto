@@ -27,7 +27,7 @@
     <div class="metric-card">
       <p class="metric-label">Total de ventas</p>
       <div class="metric-row">
-        <span class="metric-value">Bs. {{ ventas.reduce((sum, v) => sum + v.montoTotal, 0) }}</span>
+        <span class="metric-value">Bs. {{ totalVentas }}</span>
         <span class="metric-icon">📈</span>
       </div>
     </div>
@@ -57,7 +57,8 @@
           <p class="articulo-nombre">{{ p.titulo }}</p>
           <p class="articulo-precio">Bs. {{ p.precio }}</p>
           <div class="articulo-acciones">
-            <button class="editar-btn" (click)="abrirModal(p)">✏️ Editar</button>            <button class="eliminar-btn" (click)="eliminarPublicacion(p.id)">🗑</button>
+            <button class="editar-btn" (click)="abrirModal(p)">✏️ Editar</button>
+            <button class="eliminar-btn" (click)="eliminarPublicacion(p)">🗑</button>
           </div>
         </div>
       </div>
@@ -75,7 +76,8 @@
         <div class="articulo-info">
           <p class="articulo-nombre">{{ f.publicacion?.titulo }}</p>
           <p class="articulo-precio">Bs. {{ f.publicacion?.precio }}</p>
-          <button class="eliminar-btn" (click)="eliminarFavorito(f.publicacionId, $event)">🗑 Quitar favorito</button>        </div>
+          <button class="eliminar-btn" (click)="eliminarFavorito(f.publicacionId, $event)">🗑 Quitar favorito</button>
+        </div>
       </div>
     </div>
   </div>
@@ -101,7 +103,7 @@
         <span><button class="editar-btn" [routerLink]="['/recibo', c.id]">Ver recibo</button></span>
       </div>
       <div class="historial-row" *ngFor="let v of ventas">
-        <span>{{ v.publicacion.titulo }}</span>
+        <span>{{ v.publicacion?.titulo }}</span>
         <span class="tipo-badge">Venta</span>
         <span class="monto">Bs. {{ v.montoTotal }}</span>
         <span class="fecha">{{ v.fechaCompra | date:'d MMM yyyy' }}</span>
@@ -115,12 +117,18 @@
   <div class="articulos-section" *ngIf="tabActiva === 'chats'">
     <h3 class="articulos-title">Mis conversaciones</h3>
     <div class="historial-tabla">
-      <div class="historial-header">
+      <div class="historial-header" style="grid-template-columns: 2fr 1fr 1fr 1fr;">
         <span>Prenda</span>
+        <span>Usuaria</span>
+        <span>Rol</span>
         <span>Acción</span>
       </div>
-      <div class="historial-row" *ngFor="let c of conversaciones">
+      <div class="historial-row" style="grid-template-columns: 2fr 1fr 1fr 1fr;" *ngFor="let c of conversaciones">
         <span>{{ c.publicacion?.titulo }}</span>
+        <span>{{ c.compradoraId === usuario?.id ? c.vendedora?.nombre : c.compradora?.nombre }}</span>
+        <span class="tipo-badge" [style.background-color]="c.compradoraId === usuario?.id ? '#E8F5E9' : '#FFF0F0'" [style.color]="c.compradoraId === usuario?.id ? '#4CAF50' : '#E88CA0'">
+          {{ c.compradoraId === usuario?.id ? '🛍 Comprando' : '🏪 Vendiendo' }}
+        </span>
         <span><button class="editar-btn" [routerLink]="['/chat', c.id]">Abrir chat</button></span>
       </div>
     </div>
@@ -130,7 +138,7 @@
   <div class="modal-overlay" *ngIf="modalAbierto" (click)="cerrarModal()">
     <div class="modal-card" (click)="$event.stopPropagation()">
       <div class="modal-header">
-        <span><h3 class="modal-title">Editar prenda</h3></span>
+        <h3 class="modal-title">Editar prenda</h3>
         <button class="modal-close" (click)="cerrarModal()">✕</button>
       </div>
       <div class="modal-group">

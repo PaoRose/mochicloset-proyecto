@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ApiClient } from '../core/http/api-client';
-
 interface Publicacion {
   id: number;
   titulo: string;
@@ -17,7 +16,6 @@ interface Publicacion {
   usuarioId: number;
   categoriaId: number;
 }
-
 interface Favorito {
   id: number;
   usuarioId: number;
@@ -29,7 +27,6 @@ interface Favorito {
     imagenUrl: string;
   };
 }
-
 interface Compra {
   id: number;
   usuarioId: number;
@@ -51,7 +48,16 @@ interface Conversacion {
     id: number;
     titulo: string;
   };
+  compradora: {
+    id: number;
+    nombre: string;
+  };
+  vendedora: {
+    id: number;
+    nombre: string;
+  };
 }
+
 
 @Component({
   selector: 'app-perfil',
@@ -134,8 +140,12 @@ export class Perfil {
     });
   }
 
-  eliminarPublicacion(id: number) {
-    this.api.delete(this.url + '/eliminar-propia/' + id + '?usuarioId=' + this.usuario.id).subscribe({
+  eliminarPublicacion(p: Publicacion) {
+    if (p.estado === 'Vendido') {
+      alert('Esta prenda ya fue vendida y no puede eliminarse. Seguirá contando en tu total de ventas.');
+      return;
+    }
+    this.api.delete(this.url + '/eliminar-propia/' + p.id + '?usuarioId=' + this.usuario.id).subscribe({
       next: () => this.cargarPublicaciones(),
       error: () => this.cargarPublicaciones()
     });
