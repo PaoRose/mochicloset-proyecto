@@ -46,13 +46,14 @@ public class GestionComprasController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<string> RegistrarCompra(Compra compra)
+    public ActionResult<Compra> RegistrarCompra(Compra compra)
     {
         var resultado = _gestionCompras.RegistrarCompra(compra);
 
         if (resultado != "ok")
             return BadRequest(resultado);
 
-        return Ok("Compra registrada correctamente");
+        var compraRegistrada = _gestionCompras.ObtenerCompraReciente(compra.UsuarioId, compra.PublicacionId);
+        return Ok(compraRegistrada);
     }
 }

@@ -75,4 +75,11 @@ public class GestionCompras
 
         return "ok";
     }
+    public Compra? ObtenerCompraReciente(int usuarioId, int publicacionId)
+    {
+        return _context.Compras
+            .Where(c => c.UsuarioId == usuarioId && c.PublicacionId == publicacionId)
+            .OrderByDescending(c => c.FechaCompra)
+            .FirstOrDefault();
+    }
 }

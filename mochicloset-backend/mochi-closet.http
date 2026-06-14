@@ -677,3 +677,12 @@ Content-Type: application/json
   "email": "paola@gmail.com",
   "telefono": "77712345"
 }
+
+### Registrar compra
+POST {{base}}/GestionCompras
+Content-Type: application/json
+
+{
+  "usuarioId": 2,
+  "publicacionId": 7
+}

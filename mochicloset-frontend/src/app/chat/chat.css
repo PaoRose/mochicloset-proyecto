@@ -193,7 +193,23 @@
   align-self: flex-end;
   padding-right: 4px;
 }
+.chat-venta-confirmada {
+  display: flex;
+  justify-content: center;
+  padding: 12px 16px;
+}
 
+.venta-bubble {
+  background-color: #F48FB1;
+  color: white;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 /* =====================
    INPUT
 ===================== */
@@ -327,3 +343,5 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+

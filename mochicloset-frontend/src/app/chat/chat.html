@@ -19,8 +19,8 @@
         <p class="chat-prenda-precio">Bs. {{ conversacion.publicacion?.precio }}</p>
       </div>
     </div>
-    <button class="chat-ver-prenda" (click)="irAPrenda()" *ngIf="esCompradora">🔍 Ver prenda</button>
-    <button class="chat-ver-prenda" (click)="confirmarVenta()" *ngIf="!esCompradora">✅ Confirmar venta</button>
+    <button class="chat-ver-prenda" (click)="irAPrenda()" *ngIf="esCompradora && !ventaConfirmada">🔍 Ver prenda</button>
+    <button class="modal-guardar" (click)="confirmarVenta()" *ngIf="!esCompradora && !ventaConfirmada">✅ Confirmar venta</button>
   </div>
 
   <!-- Mensajes -->
@@ -51,6 +51,15 @@
       <button class="chat-enviar" (click)="enviarMensaje()">➤</button>
     </div>
 
+  </div>
+
+  <!-- Confirmación de venta -->
+  <div class="chat-venta-confirmada" *ngIf="ventaConfirmada">
+    <div class="venta-bubble">
+      <span *ngIf="!esCompradora">✅ Venta confirmada</span>
+      <span *ngIf="esCompradora">✅ La vendedora confirmó la venta</span>
+      <button class="editar-btn" *ngIf="esCompradora && compraId" [routerLink]="['/recibo', compraId]">🧾 Ver recibo</button>
+    </div>
   </div>
 
 </div>
