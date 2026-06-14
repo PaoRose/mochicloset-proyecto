@@ -8,6 +8,7 @@
       <p class="chat-nombre">{{ otraPersona?.nombre || 'Chat' }}</p>
       <p class="chat-username">&#64;{{ otraPersona?.username }}</p>
     </div>
+    <button class="reporte-btn" (click)="abrirReporte()">⚠️ Reportar</button>
   </div>
 
   <!-- Prenda info -->
@@ -62,4 +63,25 @@
     </div>
   </div>
 
+  <!-- Modal Reporte -->
+  <div class="modal-overlay" *ngIf="modalReporte" (click)="cerrarReporte()">
+    <div class="modal-seguridad" (click)="$event.stopPropagation()" style="max-width: 400px;">
+      <div class="modal-seg-header">
+        <div class="modal-seg-titulo-row">
+          <span class="modal-seg-icono">⚠️</span>
+          <h3 class="modal-seg-titulo">Reportar usuaria</h3>
+        </div>
+        <button class="modal-seg-close" (click)="cerrarReporte()">✕</button>
+      </div>
+      <div class="modal-group" style="padding: 16px;">
+        <label style="font-weight: 600; margin-bottom: 8px; display: block;">Razón del reporte</label>
+        <textarea placeholder="Describe el problema..." [(ngModel)]="razonReporte" name="razonReporte"
+                  style="width: 100%; border-radius: 8px; padding: 10px; border: 1px solid #ddd; min-height: 100px;"></textarea>
+      </div>
+      <div class="modal-seg-acciones">
+        <button class="modal-seg-cancelar" (click)="cerrarReporte()">Cancelar</button>
+        <button class="modal-seg-chat" (click)="enviarReporte()">Enviar reporte</button>
+      </div>
+    </div>
+  </div>
 </div>

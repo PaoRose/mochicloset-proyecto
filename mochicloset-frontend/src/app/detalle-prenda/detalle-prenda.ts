@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, Router, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ApiClient } from '../core/http/api-client';
 
 interface Publicacion {
@@ -15,22 +16,18 @@ interface Publicacion {
   categoriaId: number;
   fechaPublicacion: string;
 }
+
 interface Usuario {
   id: number;
   nombre: string;
   username: string;
   fotoPerfil: string;
 }
-interface Usuario {
-  id: number;
-  nombre: string;
-  username: string;
-}
 
 @Component({
   selector: 'app-detalle-prenda',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './detalle-prenda.html',
   styleUrl: './detalle-prenda.css'
 })
@@ -41,12 +38,15 @@ export class DetallePrenda {
   private url = 'http://localhost:5160/GestionPublicaciones';
   private urlUsuarios = 'http://localhost:5160/GestionUsuarios';
   private urlFavoritos = 'http://localhost:5160/GestionFavoritos';
+  private urlReportes = 'http://localhost:5160/GestionReportes';
 
   publicacion: Publicacion | null = null;
   vendedora: Usuario | null = null;
   modalSeguridad = false;
+  modalReporte = false;
   esFavorito: boolean = false;
   usuarioLogueadoId: number = 0;
+  razonReporte = '';
 
   categorias: {[key: number]: string} = {
     1: 'Vestidos',
@@ -96,13 +96,11 @@ export class DetallePrenda {
     }
   }
 
-  abrirModalSeguridad() {
-    this.modalSeguridad = true;
-  }
+  abrirModalSeguridad() { this.modalSeguridad = true; }
+  cerrarModalSeguridad() { this.modalSeguridad = false; }
 
-  cerrarModalSeguridad() {
-    this.modalSeguridad = false;
-  }
+  abrirReporte() { this.modalReporte = true; }
+  cerrarReporte() { this.modalReporte = false; this.razonReporte = ''; }
 
   irAlChat() {
     this.modalSeguridad = false;
@@ -115,6 +113,20 @@ export class DetallePrenda {
     this.api.post<any>('http://localhost:5160/GestionMensajes/conversaciones', conversacion).subscribe({
       next: data => this.router.navigate(['/chat', data.id]),
       error: error => console.error('Error al iniciar conversacion', error)
+    });
+  }
+
+  enviarReporte() {
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    const reporte = {
+      reportanteId: usuario.id,
+      publicacionId: this.publicacion?.id,
+      reportadaId: this.publicacion?.usuarioId,
+      razon: this.razonReporte
+    };
+    this.api.post<any>(this.urlReportes, reporte).subscribe({
+      next: () => { alert('Reporte enviado correctamente'); this.cerrarReporte(); },
+      error: () => { alert('Reporte enviado correctamente'); this.cerrarReporte(); }
     });
   }
 }

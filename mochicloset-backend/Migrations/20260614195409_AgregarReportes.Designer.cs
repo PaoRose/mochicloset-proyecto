@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using mochi_closet.Data;
 
@@ -11,9 +12,11 @@ using mochi_closet.Data;
 namespace mochi_closet.Migrations
 {
     [DbContext(typeof(MochiClosetDbContext))]
-    partial class MochiClosetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260614195409_AgregarReportes")]
+    partial class AgregarReportes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

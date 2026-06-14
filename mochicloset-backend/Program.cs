@@ -13,6 +13,7 @@ builder.Services.AddScoped<GestionPublicaciones>();
 builder.Services.AddScoped<GestionFavoritos>();
 builder.Services.AddScoped<GestionMensajes>();
 builder.Services.AddScoped<GestionNotificaciones>();
+builder.Services.AddScoped<GestionReportes>();
 
 builder.Services.AddCors(options =>
 {

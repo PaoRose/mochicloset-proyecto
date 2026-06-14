@@ -39,7 +39,7 @@ namespace mochi_closet.Migrations
                 column: "CompradoraId",
                 principalTable: "Usuarios",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Conversaciones_Usuarios_VendedoraId",
@@ -47,7 +47,7 @@ namespace mochi_closet.Migrations
                 column: "VendedoraId",
                 principalTable: "Usuarios",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />

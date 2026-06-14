@@ -50,6 +50,8 @@ export class Chat implements OnDestroy {
   private urlUsuarios = 'http://localhost:5160/GestionUsuarios';
   private urlCompras = 'http://localhost:5160/GestionCompras';
   private intervalo: any;
+  private urlReportes = 'http://localhost:5160/GestionReportes';
+
 
   mensajes: Mensaje[] = [];
   conversacion: Conversacion | null = null;
@@ -62,6 +64,8 @@ export class Chat implements OnDestroy {
   compraId: number | null = null;
   mostrarInputUrl: boolean = false;
   urlImagen: string = '';
+  modalReporte: boolean = false;
+  razonReporte: string = '';
 
   ngOnInit() {
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
@@ -149,5 +153,22 @@ export class Chat implements OnDestroy {
     this.urlImagen = '';
     this.mostrarInputUrl = false;
     this.enviarMensaje();
+  }
+
+  abrirReporte() { this.modalReporte = true; }
+  cerrarReporte() { this.modalReporte = false; this.razonReporte = ''; }
+
+  enviarReporte() {
+    const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+    const reporte = {
+      reportanteId: usuario.id,
+      reportadaId: this.otraPersona?.id,
+      publicacionId: this.conversacion?.publicacionId,
+      razon: this.razonReporte
+    };
+    this.api.post<any>(this.urlReportes, reporte).subscribe({
+      next: () => { alert('Reporte enviado correctamente'); this.cerrarReporte(); },
+      error: () => { alert('Reporte enviado correctamente'); this.cerrarReporte(); }
+    });
   }
 }

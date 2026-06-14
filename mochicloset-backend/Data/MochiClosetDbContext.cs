@@ -19,6 +19,7 @@ public class MochiClosetDbContext : DbContext
     public DbSet<Conversacion> Conversaciones { get; set; }
     public DbSet<Mensaje> Mensajes { get; set; }
     public DbSet<Notificacion> Notificaciones { get; set; }
+    public DbSet<Reporte> Reportes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

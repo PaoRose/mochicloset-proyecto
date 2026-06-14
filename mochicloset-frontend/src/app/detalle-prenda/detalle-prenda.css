@@ -419,3 +419,21 @@
 .modal-seg-chat:hover {
   background-color: var(--mc-accent-pink);
 }
+
+/* =====================
+   BOTON REPORTE
+===================== */
+.reporte-btn {
+  background: none;
+  border: 1px solid #F48FB1;
+  color: #F48FB1;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.reporte-btn:hover {
+  background-color: #FFF0F5;
+}

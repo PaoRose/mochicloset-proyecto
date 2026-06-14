@@ -20,6 +20,7 @@
       <div>
         <h1 class="detalle-nombre">{{ publicacion?.titulo }}</h1>
         <p class="detalle-precio">Bs. {{ publicacion?.precio }}</p>
+        <button class="reporte-btn" (click)="abrirReporte()" *ngIf="publicacion?.usuarioId !== usuarioLogueadoId">⚠️ Reportar prenda</button>
       </div>
       <button class="detalle-fav" (click)="toggleFavorito()">
         {{ esFavorito ? '❤️' : '🤍' }}
@@ -70,6 +71,30 @@
       <span>📅 {{ publicacion?.fechaPublicacion | date:'d MMM yyyy' }}</span>
     </div>
 
+
+    <!-- Modal Reporte -->
+
+    <div class="modal-overlay" *ngIf="modalReporte" (click)="cerrarReporte()">
+      <div class="modal-seguridad" (click)="$event.stopPropagation()" style="max-width: 400px;">
+        <div class="modal-seg-header">
+          <div class="modal-seg-titulo-row">
+            <span class="modal-seg-icono">⚠️</span>
+            <h3 class="modal-seg-titulo">Reportar prenda</h3>
+          </div>
+          <button class="modal-seg-close" (click)="cerrarReporte()">✕</button>
+        </div>
+        <div class="modal-group" style="padding: 16px;">
+          <label style="font-weight: 600; margin-bottom: 8px; display: block;">Razón del reporte</label>
+          <textarea placeholder="Describe el problema..." [(ngModel)]="razonReporte" name="razonReporte"
+                    style="width: 100%; border-radius: 8px; padding: 10px; border: 1px solid #ddd; min-height: 100px;"></textarea>
+        </div>
+        <div class="modal-seg-acciones">
+          <button class="modal-seg-cancelar" (click)="cerrarReporte()">Cancelar</button>
+          <button class="modal-seg-chat" (click)="enviarReporte()">Enviar reporte</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Modal seguridad — al final del archivo -->
     <div class="modal-overlay" *ngIf="modalSeguridad" (click)="cerrarModalSeguridad()">
       <div class="modal-seguridad" (click)="$event.stopPropagation()">
@@ -104,5 +129,6 @@
     </div>
 
   </div>
+
 
 </div>
