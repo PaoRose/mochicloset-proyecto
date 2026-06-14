@@ -12,7 +12,10 @@
   </ul>
 
   <div class="nav-menu-actions">
-    <button class="action-btn" title="Notificaciones" routerLink="/notificaciones">🔔</button>
+    <button class="action-btn notif-btn" title="Notificaciones" routerLink="/notificaciones">
+      🔔
+      <span class="notif-badge" *ngIf="notificacionesNoLeidas > 0">{{ notificacionesNoLeidas }}</span>
+    </button>
     <button class="action-btn" title="Perfil" routerLink="/perfil">👤</button>
     <button class="action-btn" title="Cerrar sesión" routerLink="/login">↪</button>
   </div>
