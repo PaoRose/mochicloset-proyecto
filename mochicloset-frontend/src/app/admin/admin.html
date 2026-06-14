@@ -22,6 +22,9 @@
     <button class="tab-btn" [class.active]="tabActiva === 'usuarias'" (click)="cambiarTab('usuarias')">
       👤 Usuarias ({{ usuarias.length }})
     </button>
+    <button class="tab-btn" [class.active]="tabActiva === 'reportes'" (click)="cambiarTab('reportes')">
+      ⚠️ Reportes
+    </button>
   </div>
 
   <!-- Tab: Prendas -->
@@ -62,6 +65,29 @@
           👤 Activar
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- Tab: Reportes -->
+  <div *ngIf="tabActiva === 'reportes'">
+    <div class="admin-card">
+      <div class="reporte-row" *ngFor="let r of reportes">
+        <div class="reporte-tipo-badge" [class.prenda]="r.publicacionId" [class.usuaria]="r.reportadaId">
+          {{ r.publicacionId ? '📦 Prenda' : '👤 Usuaria' }}
+        </div>
+        <div class="reporte-info">
+          <p class="reporte-reportante">Reportado por <strong>{{ r.reportante?.nombre }}</strong></p>
+          <p class="reporte-objetivo" *ngIf="r.publicacion">Prenda: {{ r.publicacion?.titulo }}</p>
+          <p class="reporte-objetivo" *ngIf="r.reportada">Usuaria: {{ r.reportada?.nombre }}</p>
+          <p class="reporte-razon">{{ r.razon }}</p>
+          <p class="reporte-fecha">{{ r.fechaReporte | date:'d MMM yyyy' }}</p>
+        </div>
+        <span class="estado-badge" [class.suspendida]="r.estado === 'Resuelto'">{{ r.estado }}</span>
+        <button class="activar-btn" *ngIf="r.estado === 'Pendiente'" (click)="resolverReporte(r.id)">
+          ✅ Resolver
+        </button>
+      </div>
+      <p class="sin-reportes" *ngIf="reportes.length === 0">No hay reportes pendientes.</p>
     </div>
   </div>
 

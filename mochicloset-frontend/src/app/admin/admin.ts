@@ -23,6 +23,20 @@ interface Usuaria {
   fotoPerfil: string;
   fechaRegistro: string;
 }
+
+interface Reporte {
+  id: number;
+  reportanteId: number;
+  publicacionId: number | null;
+  reportadaId: number | null;
+  razon: string;
+  estado: string;
+  fechaReporte: string;
+  reportante: { nombre: string };
+  publicacion: { titulo: string } | null;
+  reportada: { nombre: string } | null;
+}
+
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -36,10 +50,12 @@ export class Admin implements OnInit {
   private router = inject(Router);
   private urlPublicaciones = 'http://localhost:5160/GestionPublicaciones';
   private urlUsuarios = 'http://localhost:5160/GestionUsuarios';
+  private urlReportes = 'http://localhost:5160/GestionReportes';
 
   tabActiva = 'prendas';
   publicaciones: Publicacion[] = [];
   usuarias: Usuaria[] = [];
+  reportes: Reporte[] = [];
   modalEliminar = false;
   prendaSeleccionada: Publicacion | null = null;
   razonEliminacion = '';
@@ -56,6 +72,7 @@ export class Admin implements OnInit {
 
     this.cargarPublicaciones();
     this.cargarUsuarias();
+    this.cargarReportes();
   }
 
   cambiarTab(tab: string) {
@@ -64,7 +81,7 @@ export class Admin implements OnInit {
 
   cargarPublicaciones() {
     this.api.get<Publicacion[]>(this.urlPublicaciones + '/lista-publicaciones').subscribe({
-      next: async data => {
+      next: data => {
         this.publicaciones = data;
         for (const p of this.publicaciones) {
           this.api.get<any>(this.urlUsuarios + '/' + p.usuarioId).subscribe({
@@ -81,6 +98,13 @@ export class Admin implements OnInit {
     this.api.get<Usuaria[]>(this.urlUsuarios + '/lista-usuarios').subscribe({
       next: data => this.usuarias = data.filter(u => u.rol !== 'Admin'),
       error: err => console.error('Error al cargar usuarias', err)
+    });
+  }
+
+  cargarReportes() {
+    this.api.get<Reporte[]>(this.urlReportes).subscribe({
+      next: data => this.reportes = data,
+      error: err => console.error('Error al cargar reportes', err)
     });
   }
 
@@ -139,6 +163,13 @@ export class Admin implements OnInit {
     ).subscribe({
       next: () => this.cargarUsuarias(),
       error: () => this.cargarUsuarias()
+    });
+  }
+
+  resolverReporte(id: number) {
+    this.http.put(`${this.urlReportes}/resolver/${id}`, {}, { responseType: 'text' }).subscribe({
+      next: () => this.cargarReportes(),
+      error: () => this.cargarReportes()
     });
   }
 }

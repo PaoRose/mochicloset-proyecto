@@ -408,3 +408,53 @@
 .modal-eliminar:hover {
   opacity: 0.85;
 }
+
+.sin-reportes {
+  text-align: center;
+  color: var(--mc-text-muted);
+  padding: 40px;
+  font-size: 14px;
+}
+
+.reporte-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #F5EEE9;
+  flex-wrap: wrap;
+}
+
+.reporte-info {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+}
+
+.reporte-reportante {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+  margin: 0;
+  grid-column: 1 / -1;
+}
+
+.reporte-objetivo {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.reporte-razon {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+  margin: 0;
+  font-style: italic;
+}
+
+.reporte-fecha {
+  font-size: 12px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}

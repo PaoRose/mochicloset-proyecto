@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ApiClient } from '../core/http/api-client';
+import { HttpClient } from '@angular/common/http';
 
 interface UsuarioLogin {
   email: string;
@@ -25,6 +26,7 @@ interface UsuarioRespuesta {
 export class Login {
   private api = inject(ApiClient);
   private router = inject(Router);
+  private http = inject(HttpClient);
   private url = 'http://localhost:5160/GestionUsuarios';
 
   usuario: UsuarioLogin = {
@@ -33,7 +35,7 @@ export class Login {
   };
 
   iniciarSesion() {
-    this.api.post<UsuarioRespuesta>(this.url + '/iniciar-sesion', this.usuario).subscribe({
+    this.http.post<UsuarioRespuesta>(this.url + '/iniciar-sesion', this.usuario).subscribe({
       next: data => {
         localStorage.setItem('usuario', JSON.stringify(data));
         if (data.rol === 'Admin') {
@@ -42,7 +44,7 @@ export class Login {
           this.router.navigate(['/home']);
         }
       },
-      error: () => alert('Correo o contraseña incorrectos.')
+      error: (err) => alert(err.error || 'Credenciales incorrectas o cuenta suspendida')
     });
   }
 }
