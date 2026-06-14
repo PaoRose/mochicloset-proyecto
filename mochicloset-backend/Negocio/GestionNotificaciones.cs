@@ -22,14 +22,19 @@ public class GestionNotificaciones
 
     public void CrearNotificacion(int usuarioId, string tipo, string mensaje)
     {
-        var notificacion = new Notificacion
+        Notificacion notificacion = tipo switch
         {
-            UsuarioId = usuarioId,
-            Tipo = tipo,
-            Mensaje = mensaje,
-            Leida = false,
-            FechaCreacion = DateTime.Now
+            "Mensaje" => new NotificacionMensaje(),
+            "Venta" => new NotificacionVenta(),
+            "Admin" => new NotificacionAdmin(),
+            _ => new Notificacion()
         };
+
+        notificacion.UsuarioId = usuarioId;
+        notificacion.Tipo = tipo;
+        notificacion.Mensaje = mensaje;
+        notificacion.Leida = false;
+        notificacion.FechaCreacion = DateTime.Now;
 
         _context.Notificaciones.Add(notificacion);
         _context.SaveChanges();
