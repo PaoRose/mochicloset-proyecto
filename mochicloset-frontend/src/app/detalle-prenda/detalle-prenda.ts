@@ -121,7 +121,7 @@ export class DetallePrenda {
     const reporte = {
       reportanteId: usuario.id,
       publicacionId: this.publicacion?.id,
-      reportadaId: this.publicacion?.usuarioId,
+      reportadaId: null,
       razon: this.razonReporte
     };
     this.api.post<any>(this.urlReportes, reporte).subscribe({
