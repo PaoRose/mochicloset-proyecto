@@ -16,8 +16,7 @@
          [class.notif-item-leida]="n.leida"
          (click)="marcarLeida(n.id)">
       <div class="notif-icon-wrapper notif-message">
-        {{ n.tipo === 'Mensaje' ? '💬' : '🔔' }}
-      </div>
+        {{ n.tipo === 'Mensaje' ? '💬' : n.tipo === 'Venta' ? '🎉' : n.tipo === 'Admin' ? '🛡' : '🔔' }}      </div>
       <div class="notif-content">
         <p class="notif-text">{{ n.mensaje }}</p>
         <span class="notif-time">{{ n.fechaCreacion | date:'d MMM yyyy, h:mm a' }}</span>
