@@ -19,10 +19,10 @@ interface Usuaria {
   nombre: string;
   email: string;
   estado: string;
+  rol: string;
   fotoPerfil: string;
   fechaRegistro: string;
 }
-
 @Component({
   selector: 'app-admin',
   standalone: true,
@@ -79,7 +79,7 @@ export class Admin implements OnInit {
 
   cargarUsuarias() {
     this.api.get<Usuaria[]>(this.urlUsuarios + '/lista-usuarios').subscribe({
-      next: data => this.usuarias = data.filter(u => u.estado !== 'Admin'),
+      next: data => this.usuarias = data.filter(u => u.rol !== 'Admin'),
       error: err => console.error('Error al cargar usuarias', err)
     });
   }

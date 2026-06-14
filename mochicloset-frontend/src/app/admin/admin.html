@@ -42,10 +42,10 @@
   <div *ngIf="tabActiva === 'usuarias'">
     <div class="admin-card">
       <div class="usuaria-row" *ngFor="let u of usuarias">
-        <img [src]="u.fotoPerfil || 'https://img.magnific.com/vector-premium/icono-perfil-avatar-predeterminado-imagen-usuario-redes-sociales-icono-avatar-gris-silueta-perfil-blanco-ilustracion-vectorial_561158-3383.jpg?semt=ais_hybrid&w=740&q=80'" alt="foto" class="usuaria-foto">
+        <img [src]="u.fotoPerfil || 'assets/foto-perfil.jpg'" alt="foto" class="usuaria-foto">
         <div class="usuaria-info">
           <p class="usuaria-nombre">{{ u.nombre }}</p>
-          <p class="usuaria-email">{{ u.email }} · Desde {{ u.fechaRegistro | date:'MMM yyyy' }}</p>
+          <p class="usuaria-email">{{ u.email }}</p>
         </div>
         <span class="estado-badge" [class.suspendida]="u.estado === 'Suspendido'">
           {{ u.estado === 'Suspendido' ? 'Suspendida' : 'Activa' }}
@@ -65,7 +65,6 @@
 <!-- Modal eliminar prenda -->
 <div class="modal-overlay" *ngIf="modalEliminar" (click)="cerrarModalEliminar()">
   <div class="modal-card" (click)="$event.stopPropagation()">
-
     <div class="modal-header">
       <div class="modal-titulo-row">
         <span>⚠️</span>
@@ -73,7 +72,6 @@
       </div>
       <button class="modal-close" (click)="cerrarModalEliminar()">✕</button>
     </div>
-
     <div class="modal-prenda-preview">
       <img [src]="prendaSeleccionada?.imagenUrl" alt="prenda">
       <div>
@@ -82,18 +80,15 @@
         <p class="modal-prenda-precio">Bs. {{ prendaSeleccionada?.precio }}</p>
       </div>
     </div>
-
     <div class="modal-group">
       <label>Razón de eliminación <span class="requerido">*</span></label>
       <textarea placeholder="Ej: Contenido inapropiado, imagen engañosa, producto prohibido..."
                 [(ngModel)]="razonEliminacion"></textarea>
       <p class="modal-hint">Esta razón será notificada a la vendedora.</p>
     </div>
-
     <div class="modal-acciones">
       <button class="modal-cancelar" (click)="cerrarModalEliminar()">Cancelar</button>
       <button class="modal-eliminar" (click)="eliminarPrenda()">🗑 Eliminar prenda</button>
     </div>
-
   </div>
 </div>
