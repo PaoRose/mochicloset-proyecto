@@ -4,7 +4,10 @@
   <div class="explorar-toolbar">
     <div class="explorar-search">
       <span class="search-icon">🔍</span>
-      <input type="text" placeholder="Buscar ropa, accesorios..." [(ngModel)]="busqueda" (keyup.enter)="aplicarFiltros()" />
+      <input type="text" placeholder="Buscar ropa, accesorios..."
+             [(ngModel)]="busqueda"
+             (keyup.enter)="aplicarFiltros()"
+             (input)="cargarPublicaciones()" />
     </div>
     <div class="explorar-toolbar-right">
       <select class="explorar-orden" [(ngModel)]="orden" (change)="cargarPublicaciones()">
@@ -46,6 +49,8 @@
       </div>
     </div>
   </div>
+
+</div>
 
 <!-- Drawer filtros — FUERA del contenedor -->
 <div class="filtros-overlay" *ngIf="filtrosAbiertos" (click)="cerrarFiltros()">

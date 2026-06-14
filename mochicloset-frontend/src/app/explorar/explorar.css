@@ -351,3 +351,21 @@
   border-color: var(--mc-matcha-green);
   color: var(--mc-matcha-green);
 }
+
+.filtros-aplicar {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 14px;
+  background-color: var(--mc-matcha-green);
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filtros-aplicar:hover {
+  background-color: var(--mc-accent-pink);
+}
