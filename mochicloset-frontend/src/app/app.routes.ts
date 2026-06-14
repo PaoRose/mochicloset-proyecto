@@ -25,5 +25,6 @@ export const routes: Routes = [
   { path: 'notificaciones', component: Notificaciones, canActivate: [authGuard] },
   { path: 'prenda/:id', component: DetallePrenda, canActivate: [authGuard] },
   { path: 'chat/:id', component: Chat, canActivate: [authGuard] },
+  { path: 'recibo/:id', component: Recibo, canActivate: [authGuard] },
   { path: 'admin', component: Admin, canActivate: [authGuard] }
 ];

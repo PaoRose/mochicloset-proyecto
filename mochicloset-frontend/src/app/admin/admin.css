@@ -1,3 +1,35 @@
+.admin-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+  background-color: var(--mc-white);
+  border-bottom: 1px solid #F0E8E3;
+}
+
+.admin-logo {
+  height: 80px;
+  width: auto;
+}
+
+.admin-picture {
+  height: 80px;
+  width: auto;
+}
+
+.admin-cerrar {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: var(--mc-text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.admin-cerrar:hover {
+  color: var(--mc-text-dark);
+}
+
 .admin-container {
   max-width: 900px;
   margin: 32px auto;

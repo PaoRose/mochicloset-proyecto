@@ -1,8 +1,13 @@
+<div class="admin-nav">
+  <img src="logo.png" alt="Mochi Closet" class="admin-logo">
+  <button class="admin-cerrar" routerLink="/login">↪</button>
+</div>
+
 <div class="admin-container">
 
   <!-- Header -->
   <div class="admin-header">
-    <div class="admin-header-icon">🛡</div>
+    <img src="admin.png" alt="Mochi Closet" class="admin-picture">
     <div>
       <h1 class="admin-title">Panel de Administración</h1>
       <p class="admin-subtitle">Mochi Closet</p>
@@ -42,7 +47,7 @@
   <div *ngIf="tabActiva === 'usuarias'">
     <div class="admin-card">
       <div class="usuaria-row" *ngFor="let u of usuarias">
-        <img [src]="u.fotoPerfil || 'assets/foto-perfil.jpg'" alt="foto" class="usuaria-foto">
+        <img [src]="u.fotoPerfil || 'https://img.magnific.com/vector-premium/icono-perfil-avatar-predeterminado-imagen-usuario-redes-sociales-icono-avatar-gris-silueta-perfil-blanco-ilustracion-vectorial_561158-3383.jpg?semt=ais_hybrid&w=740&q=80'" alt="foto" class="usuaria-foto">
         <div class="usuaria-info">
           <p class="usuaria-nombre">{{ u.nombre }}</p>
           <p class="usuaria-email">{{ u.email }}</p>
