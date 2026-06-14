@@ -1,0 +1,378 @@
+.admin-container {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 20px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-header-icon {
+  width: 52px;
+  height: 52px;
+  background-color: var(--mc-cream);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.admin-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.admin-subtitle {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tab-btn {
+  background: transparent;
+  border: 1px solid #E0D5CF;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background-color: var(--mc-matcha-green);
+  color: white;
+  border-color: var(--mc-matcha-green);
+}
+
+.admin-card {
+  background-color: var(--mc-white);
+  border: 1px solid #E0D5CF;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* Prendas */
+.prendas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px;
+}
+
+.prenda-card {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #E0D5CF;
+  position: relative;
+}
+
+.prenda-img-wrapper img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.prenda-info {
+  padding: 12px;
+}
+
+.prenda-nombre {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.prenda-vendedor {
+  font-size: 12px;
+  color: var(--mc-text-muted);
+  margin: 2px 0;
+}
+
+.prenda-precio {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mc-matcha-green);
+  margin: 0;
+}
+
+.eliminar-prenda-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Usuarias */
+.usuaria-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #F5EEE9;
+}
+
+.usuaria-row:last-child {
+  border-bottom: none;
+}
+
+.usuaria-foto {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.usuaria-info {
+  flex: 1;
+}
+
+.usuaria-nombre {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.usuaria-email {
+  font-size: 12px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}
+
+.estado-badge {
+  background-color: #E8F5E9;
+  color: #4CAF50;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.estado-badge.suspendida {
+  background-color: #F5F5F5;
+  color: #9E9E9E;
+}
+
+.suspender-btn {
+  background: transparent;
+  border: 1px solid #F5C0C0;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--mc-danger);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.suspender-btn:hover {
+  background-color: #FFF0F0;
+}
+
+.activar-btn {
+  background: transparent;
+  border: 1px solid #C8E6C9;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: #4CAF50;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.activar-btn:hover {
+  background-color: #E8F5E9;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-card {
+  background: var(--mc-white);
+  border-radius: 20px;
+  padding: 28px;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-titulo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: var(--mc-text-muted);
+  cursor: pointer;
+}
+
+.modal-prenda-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--mc-cream);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.modal-prenda-preview img {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.modal-prenda-nombre {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--mc-text-dark);
+  margin: 0;
+}
+
+.modal-prenda-vendedor {
+  font-size: 13px;
+  color: var(--mc-text-muted);
+  margin: 2px 0;
+}
+
+.modal-prenda-precio {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mc-matcha-green);
+  margin: 0;
+}
+
+.modal-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+}
+
+.requerido {
+  color: var(--mc-danger);
+}
+
+.modal-group textarea {
+  background-color: var(--mc-cream);
+  border: 1px solid var(--mc-matcha-green);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--mc-text-dark);
+  outline: none;
+  resize: none;
+  height: 100px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-hint {
+  font-size: 12px;
+  color: var(--mc-text-muted);
+  margin: 0;
+}
+
+.modal-acciones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.modal-cancelar {
+  height: 46px;
+  border: 1px solid #E0D5CF;
+  border-radius: 12px;
+  background: transparent;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--mc-text-dark);
+  cursor: pointer;
+}
+
+.modal-eliminar {
+  height: 46px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--mc-accent-pink);
+  color: white;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.modal-eliminar:hover {
+  opacity: 0.85;
+}

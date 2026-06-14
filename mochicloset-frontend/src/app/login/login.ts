@@ -33,11 +33,14 @@ export class Login {
   };
 
   iniciarSesion() {
-    console.log('intentando iniciar sesión con:', this.usuario);
     this.api.post<UsuarioRespuesta>(this.url + '/iniciar-sesion', this.usuario).subscribe({
       next: data => {
         localStorage.setItem('usuario', JSON.stringify(data));
-        this.router.navigate(['/home']);
+        if (data.rol === 'Admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/home']);
+        }
       },
       error: () => alert('Correo o contraseña incorrectos.')
     });

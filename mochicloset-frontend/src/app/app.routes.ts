@@ -11,6 +11,7 @@ import { DetallePrenda } from './detalle-prenda/detalle-prenda';
 import { Chat } from './chat/chat';
 import {Recibo} from './recibo/recibo';
 import { authGuard } from './core/guards/auth.guard';
+import { Admin } from './admin/admin';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'publicar', component: Publicar, canActivate: [authGuard] },
   { path: 'notificaciones', component: Notificaciones, canActivate: [authGuard] },
   { path: 'prenda/:id', component: DetallePrenda, canActivate: [authGuard] },
-  { path: 'chat/:id', component: Chat, canActivate: [authGuard] }
+  { path: 'chat/:id', component: Chat, canActivate: [authGuard] },
+  { path: 'admin', component: Admin, canActivate: [authGuard] }
 ];
