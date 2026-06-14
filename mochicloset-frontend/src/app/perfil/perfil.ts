@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ApiClient } from '../core/http/api-client';
+import { CommonModule } from '@angular/common';
+import { RouterLink, Router } from '@angular/router';
+
 interface Publicacion {
   id: number;
   titulo: string;
@@ -47,6 +48,7 @@ interface Conversacion {
   publicacion: {
     id: number;
     titulo: string;
+    estado: string;
   };
   compradora: {
     id: number;
@@ -72,6 +74,7 @@ export class Perfil {
   private urlFavoritos = 'http://localhost:5160/GestionFavoritos';
   private urlCompras = 'http://localhost:5160/GestionCompras';
   private urlMensajes = 'http://localhost:5160/GestionMensajes';
+  private router = inject(Router);
 
   tabActiva = 'publicaciones';
   modalAbierto = false;
@@ -82,6 +85,10 @@ export class Perfil {
   compras: Compra[] = [];
   ventas: Compra[] = [];
   conversaciones: Conversacion[] = [];
+  comprasPublicacionIds: number[] = [];
+  ventasMap: {[publicacionId: number]: number} = {};
+
+
   ngOnInit() {
     this.usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     this.cargarPublicaciones();
@@ -107,14 +114,20 @@ export class Perfil {
 
   private cargarCompras() {
     this.api.get<Compra[]>(this.urlCompras + '/mis-compras/' + this.usuario.id).subscribe({
-      next: data => this.compras = data,
+      next: data => {
+        this.compras = data;
+        this.comprasPublicacionIds = data.map(c => c.publicacionId);
+      },
       error: error => console.error('Error al cargar compras', error)
     });
   }
 
   private cargarVentas() {
     this.api.get<Compra[]>(this.urlCompras + '/mis-ventas/' + this.usuario.id).subscribe({
-      next: data => this.ventas = data,
+      next: data => {
+        this.ventas = data;
+        data.forEach(v => this.ventasMap[v.publicacionId] = v.usuarioId);
+      },
       error: error => console.error('Error al cargar ventas', error)
     });
   }
@@ -126,6 +139,27 @@ export class Perfil {
   abrirModal(p: Publicacion) {
     this.articuloEditando = {...p};
     this.modalAbierto = true;
+  }
+
+  abrirChat(conversacionId: number, publicacionId: number, vendedoraId: number, compradoraId: number) {
+    const esVendedora = vendedoraId === this.usuario.id;
+    const esCompradora = this.comprasPublicacionIds.includes(publicacionId);
+    const publicacionVendida = this.conversaciones.find(c => c.publicacionId === publicacionId)?.publicacion?.estado === 'Vendido';
+
+    if (!publicacionVendida) {
+      this.router.navigate(['/chat', conversacionId]);
+      return;
+    }
+
+    if (esVendedora && this.ventasMap[publicacionId] === compradoraId) {
+      this.router.navigate(['/chat', conversacionId]);
+      return;
+    }
+
+    if (!esVendedora && esCompradora) {
+      this.router.navigate(['/chat', conversacionId]);
+      return;
+    }
   }
 
   cerrarModal() {

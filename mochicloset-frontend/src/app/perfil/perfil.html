@@ -123,16 +123,37 @@
       <div class="historial-header" style="grid-template-columns: 2fr 1fr 1fr 1fr;">
         <span>Prenda</span>
         <span>Usuaria</span>
-        <span>Rol</span>
+        <span>Estado</span>
         <span>Acción</span>
       </div>
       <div class="historial-row" style="grid-template-columns: 2fr 1fr 1fr 1fr;" *ngFor="let c of conversaciones">
         <span>{{ c.publicacion?.titulo }}</span>
         <span>{{ c.compradoraId === usuario?.id ? c.vendedora?.nombre : c.compradora?.nombre }}</span>
-        <span class="tipo-badge" [style.background-color]="c.compradoraId === usuario?.id ? '#E8F5E9' : '#FFF0F0'" [style.color]="c.compradoraId === usuario?.id ? '#4CAF50' : '#E88CA0'">
-          {{ c.compradoraId === usuario?.id ? '🛍 Comprando' : '🏪 Vendiendo' }}
-        </span>
-        <span><button class="editar-btn" [routerLink]="['/chat', c.id]">Abrir chat</button></span>
+        <span class="tipo-badge"
+              [style.background-color]="c.publicacion?.estado === 'Vendido' ?
+          (c.vendedoraId === usuario?.id ?
+            (ventasMap[c.publicacionId] === c.compradoraId ? '#FFCDD2' : '#FFCDD2') :
+            (comprasPublicacionIds.includes(c.publicacionId) ? '#C8E6C9' : '#FFCDD2')) :
+          (c.compradoraId === usuario?.id ? '#FFF9C4' : '#E3F2FD')"
+              [style.color]="c.publicacion?.estado === 'Vendido' ?
+          (c.vendedoraId === usuario?.id ? '#C62828' :
+          (comprasPublicacionIds.includes(c.publicacionId) ? '#2E7D32' : '#C62828')) :
+          (c.compradoraId === usuario?.id ? '#F57F17' : '#1565C0')">
+        {{ c.publicacion?.estado === 'Vendido' ?
+          (c.vendedoraId === usuario?.id ?
+            (ventasMap[c.publicacionId] === c.compradoraId ? '✅ Vendido' : '❌ No disponible') :
+            (comprasPublicacionIds.includes(c.publicacionId) ? '✅ Comprado' : '❌ No disponible')) :
+          (c.compradoraId === usuario?.id ? '🛍 Comprando' : '🏪 Vendiendo') }}
+      </span>
+        <span>
+        <button class="editar-btn"
+                (click)="abrirChat(c.id, c.publicacionId, c.vendedoraId, c.compradoraId)"
+                [style.opacity]="c.publicacion?.estado === 'Vendido' &&
+            ((c.vendedoraId === usuario?.id && ventasMap[c.publicacionId] !== c.compradoraId) ||
+            (c.vendedoraId !== usuario?.id && !comprasPublicacionIds.includes(c.publicacionId))) ? '0.4' : '1'">
+          Abrir chat
+        </button>
+      </span>
       </div>
     </div>
   </div>

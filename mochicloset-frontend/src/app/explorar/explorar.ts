@@ -13,6 +13,7 @@ interface Publicacion {
   imagenUrl: string;
   usuarioId: number;
   categoriaId: number;
+  fechaPublicacion: string;
 }
 
 @Component({
@@ -57,7 +58,9 @@ export class Explorar {
         } else if (this.orden === 'precio-desc') {
           this.publicaciones = data.sort((a, b) => b.precio - a.precio);
         } else {
-          this.publicaciones = data;
+          this.publicaciones = data.sort((a, b) =>
+            new Date(b.fechaPublicacion).getTime() - new Date(a.fechaPublicacion).getTime()
+          );
         }
       },
       error: error => console.error('Error al cargar publicaciones', error)
