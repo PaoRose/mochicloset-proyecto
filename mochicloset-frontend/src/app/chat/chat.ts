@@ -163,7 +163,7 @@ export class Chat implements OnDestroy {
     const reporte = {
       reportanteId: usuario.id,
       reportadaId: this.otraPersona?.id,
-      publicacionId: this.conversacion?.publicacionId,
+      publicacionId: null,
       razon: this.razonReporte
     };
     this.api.post<any>(this.urlReportes, reporte).subscribe({

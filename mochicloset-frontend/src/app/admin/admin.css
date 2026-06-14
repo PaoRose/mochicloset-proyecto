@@ -458,3 +458,25 @@
   color: var(--mc-text-muted);
   margin: 0;
 }
+
+.reporte-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eliminar-prenda-accion {
+  background: transparent;
+  border: 1px solid #F5C0C0;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--mc-danger);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.eliminar-prenda-accion:hover {
+  background-color: #FFF0F0;
+}

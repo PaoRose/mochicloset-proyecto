@@ -32,6 +32,7 @@ interface Reporte {
   razon: string;
   estado: string;
   fechaReporte: string;
+  discriminator: string;
   reportante: { nombre: string };
   publicacion: { titulo: string } | null;
   reportada: { nombre: string } | null;
@@ -171,5 +172,23 @@ export class Admin implements OnInit {
       next: () => this.cargarReportes(),
       error: () => this.cargarReportes()
     });
+  }
+
+  abrirModalEliminarDesdeReporte(r: Reporte) {
+    const prenda = this.publicaciones.find(p => p.id === r.publicacionId);
+    if (prenda) {
+      this.abrirModalEliminar(prenda);
+    } else {
+      this.api.get<Publicacion>(this.urlPublicaciones + '/' + r.publicacionId).subscribe({
+        next: p => this.abrirModalEliminar(p),
+        error: () => alert('No se encontró la prenda.')
+      });
+    }
+  }
+
+  suspenderDesdeReporte(r: Reporte) {
+    if (!r.reportadaId) return;
+    this.suspenderUsuaria(r.reportadaId);
+    this.resolverReporte(r.id);
   }
 }

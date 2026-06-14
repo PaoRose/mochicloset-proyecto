@@ -72,8 +72,8 @@
   <div *ngIf="tabActiva === 'reportes'">
     <div class="admin-card">
       <div class="reporte-row" *ngFor="let r of reportes">
-        <div class="reporte-tipo-badge" [class.prenda]="r.publicacionId" [class.usuaria]="r.reportadaId">
-          {{ r.publicacionId ? '📦 Prenda' : '👤 Usuaria' }}
+        <div class="reporte-tipo-badge" [class.prenda]="r.publicacionId && !r.reportadaId" [class.usuaria]="r.reportadaId">
+          {{ r.publicacionId && !r.reportadaId ? '📦 Prenda' : '👤 Usuaria' }}
         </div>
         <div class="reporte-info">
           <p class="reporte-reportante">Reportado por <strong>{{ r.reportante?.nombre }}</strong></p>
@@ -83,13 +83,14 @@
           <p class="reporte-fecha">{{ r.fechaReporte | date:'d MMM yyyy' }}</p>
         </div>
         <span class="estado-badge" [class.suspendida]="r.estado === 'Resuelto'">{{ r.estado }}</span>
-        <button class="activar-btn" *ngIf="r.estado === 'Pendiente'" (click)="resolverReporte(r.id)">
-          ✅ Resolver
-        </button>
+        <div class="reporte-acciones" *ngIf="r.estado === 'Pendiente'">
+          <button class="eliminar-prenda-accion" *ngIf="r.publicacionId && !r.reportadaId"
+                  (click)="abrirModalEliminarDesdeReporte(r)">🗑 Eliminar prenda</button>
+          <button class="suspender-btn" *ngIf="r.reportadaId"
+                  (click)="suspenderDesdeReporte(r)">🚫 Suspender usuaria</button>
+          <button class="activar-btn" (click)="resolverReporte(r.id)">✅ Resolver</button>
+        </div>
       </div>
-      <p class="sin-reportes" *ngIf="reportes.length === 0">No hay reportes pendientes.</p>
-    </div>
-  </div>
 
 </div>
 
