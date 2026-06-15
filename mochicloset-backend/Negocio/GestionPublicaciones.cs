@@ -148,6 +148,17 @@ public class GestionPublicaciones
         if (publicacion == null)
             return "Publicacion no encontrada";
 
+        // Resolver reportes ANTES de eliminar la publicación
+        var reportesAsociados = _context.Reportes
+            .Where(r => r.PublicacionId == id)
+            .ToList();
+
+        foreach (var reporte in reportesAsociados)
+        {
+            reporte.Estado = "Resuelto";
+        }
+        _context.SaveChanges();
+
         _gestionNotificaciones.CrearNotificacion(
             publicacion.UsuarioId,
             "PrendaEliminada",
