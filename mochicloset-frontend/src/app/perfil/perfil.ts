@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiClient } from '../core/http/api-client';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
+
 
 interface Publicacion {
   id: number;
@@ -68,13 +69,14 @@ interface Conversacion {
   templateUrl: './perfil.html',
   styleUrl: './perfil.css'
 })
-export class Perfil {
+export class Perfil implements OnDestroy{
   private api = inject(ApiClient);
   private url = 'http://localhost:5160/GestionPublicaciones';
   private urlFavoritos = 'http://localhost:5160/GestionFavoritos';
   private urlCompras = 'http://localhost:5160/GestionCompras';
   private urlMensajes = 'http://localhost:5160/GestionMensajes';
   private router = inject(Router);
+  private intervalo: any;
 
   tabActiva = 'publicaciones';
   modalAbierto = false;
@@ -96,6 +98,11 @@ export class Perfil {
     this.cargarCompras();
     this.cargarVentas();
     this.cargarConversaciones();
+
+    this.intervalo = setInterval(() => this.cargarPublicaciones(), 3000);
+    this.intervalo = setInterval(() => this.cargarCompras(), 3000);
+    this.intervalo = setInterval(() => this.cargarVentas(), 3000);
+    this.intervalo = setInterval(() => this.cargarConversaciones(), 3000);
   }
 
   private cargarPublicaciones() {
@@ -212,4 +219,7 @@ export class Perfil {
     });
   }
 
+  ngOnDestroy() {
+    if (this.intervalo) clearInterval(this.intervalo);
+  }
 }

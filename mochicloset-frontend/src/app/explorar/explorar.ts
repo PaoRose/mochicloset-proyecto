@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiClient } from '../core/http/api-client';
 import { Router } from '@angular/router';
+import { Component, inject, OnDestroy } from '@angular/core';
+
 
 interface Publicacion {
   id: number;
@@ -23,10 +24,11 @@ interface Publicacion {
   templateUrl: './explorar.html',
   styleUrl: './explorar.css'
 })
-export class Explorar {
+export class Explorar implements OnDestroy {
   private api = inject(ApiClient);
   private url = 'http://localhost:5160/GestionPublicaciones';
   private router = inject(Router);
+  private intervalo: any;
 
   publicaciones: Publicacion[] = [];
   filtrosAbiertos = false;
@@ -41,6 +43,7 @@ export class Explorar {
   ngOnInit() {
     this.cargarPublicaciones();
     this.cargarFavoritos();
+    this.intervalo = setInterval(() => this.cargarPublicaciones(), 3000);
   }
 
   cargarPublicaciones() {
@@ -124,5 +127,9 @@ export class Explorar {
 
   cerrarFiltros() {
     this.filtrosAbiertos = false;
+  }
+
+  ngOnDestroy() {
+    if (this.intervalo) clearInterval(this.intervalo);
   }
 }

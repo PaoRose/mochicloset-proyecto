@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiClient } from '../core/http/api-client';
 
@@ -17,9 +17,10 @@ interface Notificacion {
   templateUrl: './notificaciones.html',
   styleUrl: './notificaciones.css',
 })
-export class Notificaciones {
+export class Notificaciones implements OnDestroy{
   private api = inject(ApiClient);
   private url = 'http://localhost:5160/GestionNotificaciones';
+  private intervalo: any;
 
   notificaciones: Notificacion[] = [];
   usuario: any = null;
@@ -27,6 +28,7 @@ export class Notificaciones {
   ngOnInit() {
     this.usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     this.cargarNotificaciones();
+    this.intervalo = setInterval(() => this.cargarNotificaciones(), 3000);
   }
 
   private cargarNotificaciones() {
@@ -41,5 +43,8 @@ export class Notificaciones {
       next: () => this.cargarNotificaciones(),
       error: () => this.cargarNotificaciones()
     });
+  }
+  ngOnDestroy() {
+    if (this.intervalo) clearInterval(this.intervalo);
   }
 }
