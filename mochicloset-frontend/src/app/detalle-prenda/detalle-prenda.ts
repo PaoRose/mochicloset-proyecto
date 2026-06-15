@@ -117,12 +117,18 @@ export class DetallePrenda {
   }
 
   enviarReporte() {
+    if (!this.publicacion) {
+      alert('Esta prenda ya no existe.');
+      return;
+    }
+
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
     const reporte = {
       reportanteId: usuario.id,
-      publicacionId: this.publicacion?.id,
+      publicacionId: this.publicacion.id,
       reportadaId: null,
-      razon: this.razonReporte
+      razon: this.razonReporte,
+      tituloPublicacion: this.publicacion.titulo
     };
     this.api.post<any>(this.urlReportes, reporte).subscribe({
       next: () => { alert('Reporte enviado correctamente'); this.cerrarReporte(); },

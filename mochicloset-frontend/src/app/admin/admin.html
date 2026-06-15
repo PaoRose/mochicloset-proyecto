@@ -34,12 +34,12 @@
         <div class="prenda-card" *ngFor="let p of publicaciones">
           <div class="prenda-img-wrapper">
             <img [src]="p.imagenUrl" [alt]="p.titulo">
+            <button class="eliminar-prenda-btn" (click)="abrirModalEliminar(p)">🗑</button>
           </div>
           <div class="prenda-info">
             <p class="prenda-nombre">{{ p.titulo }}</p>
             <p class="prenda-vendedor">{{ p.vendedoraNombre }}</p>
             <p class="prenda-precio">Bs. {{ p.precio }}</p>
-            <button class="eliminar-prenda-btn" (click)="abrirModalEliminar(p)">🗑</button>
           </div>
         </div>
       </div>
@@ -72,12 +72,16 @@
   <div *ngIf="tabActiva === 'reportes'">
     <div class="admin-card">
       <div class="reporte-row" *ngFor="let r of reportes">
-        <div class="reporte-tipo-badge" [class.prenda]="r.publicacionId && !r.reportadaId" [class.usuaria]="r.reportadaId">
-          {{ r.publicacionId && !r.reportadaId ? '📦 Prenda' : '👤 Usuaria' }}
+        <div class="reporte-tipo-badge"
+             [class.prenda]="(r.publicacionId || r.tituloPublicacion) && !r.reportadaId"
+             [class.usuaria]="r.reportadaId && !r.publicacionId && !r.tituloPublicacion">
+          {{ (r.publicacionId || r.tituloPublicacion) && !r.reportadaId ? '📦 Prenda' : '👤 Usuaria' }}
         </div>
         <div class="reporte-info">
           <p class="reporte-reportante">Reportado por <strong>{{ r.reportante?.nombre }}</strong></p>
-          <p class="reporte-objetivo" *ngIf="r.publicacion">Prenda: {{ r.publicacion?.titulo }}</p>
+          <p class="reporte-objetivo" *ngIf="r.publicacion || r.tituloPublicacion">
+            Prenda: {{ r.publicacion?.titulo || r.tituloPublicacion }}
+          </p>
           <p class="reporte-objetivo" *ngIf="r.reportada">Usuaria: {{ r.reportada?.nombre }}</p>
           <p class="reporte-razon">{{ r.razon }}</p>
           <p class="reporte-fecha">{{ r.fechaReporte | date:'d MMM yyyy' }}</p>
@@ -91,10 +95,13 @@
           <button class="activar-btn" (click)="resolverReporte(r.id)">✅ Resolver</button>
         </div>
       </div>
+      <p class="sin-reportes" *ngIf="reportes.length === 0">No hay reportes pendientes.</p>
+    </div>
+  </div>
 
 </div>
 
-<!-- Modal eliminar prenda -->
+<!-- Modal eliminar prenda — FUERA del admin-container -->
 <div class="modal-overlay" *ngIf="modalEliminar" (click)="cerrarModalEliminar()">
   <div class="modal-card" (click)="$event.stopPropagation()">
     <div class="modal-header">

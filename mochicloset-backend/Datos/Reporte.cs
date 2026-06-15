@@ -13,6 +13,7 @@ public class Reporte
     public Usuario? Reportante { get; set; }
     public Publicacion? Publicacion { get; set; }
     public Usuario? Reportada { get; set; }
+    public string? TituloPublicacion { get; set; }
 
     public virtual string ObtenerTipo()
     {

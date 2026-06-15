@@ -36,6 +36,7 @@ interface Reporte {
   reportante: { nombre: string };
   publicacion: { titulo: string } | null;
   reportada: { nombre: string } | null;
+  tituloPublicacion: string | null;
 }
 
 @Component({

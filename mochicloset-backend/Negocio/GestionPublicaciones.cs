@@ -108,6 +108,8 @@ public class GestionPublicaciones
     {
         var query = _context.Publicaciones
             .Where(p => p.Estado == "Disponible")
+            .Where(p => _context.Usuarios
+                .Any(u => u.Id == p.UsuarioId && u.Estado == "Activo"))
             .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(busqueda))
