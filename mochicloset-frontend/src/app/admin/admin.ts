@@ -53,6 +53,7 @@ export class Admin implements OnInit {
   private urlPublicaciones = 'http://localhost:5160/GestionPublicaciones';
   private urlUsuarios = 'http://localhost:5160/GestionUsuarios';
   private urlReportes = 'http://localhost:5160/GestionReportes';
+  private intervalo: any;
 
   tabActiva = 'prendas';
   publicaciones: Publicacion[] = [];
@@ -75,6 +76,10 @@ export class Admin implements OnInit {
     this.cargarPublicaciones();
     this.cargarUsuarias();
     this.cargarReportes();
+
+    this.intervalo = setInterval(() => this.cargarReportes(), 3000);
+    this.intervalo = setInterval(() => { this.cargarReportes(); this.cargarPublicaciones();}, 3000);
+    this.intervalo = setInterval(() => this.cargarUsuarias(), 3000);
   }
 
   cambiarTab(tab: string) {
@@ -82,6 +87,7 @@ export class Admin implements OnInit {
   }
 
   cargarPublicaciones() {
+
     this.api.get<Publicacion[]>(this.urlPublicaciones + '/lista-publicaciones').subscribe({
       next: data => {
         this.publicaciones = data;
@@ -191,5 +197,9 @@ export class Admin implements OnInit {
     if (!r.reportadaId) return;
     this.suspenderUsuaria(r.reportadaId);
     this.resolverReporte(r.id);
+  }
+
+  ngOnDestroy() {
+    if (this.intervalo) clearInterval(this.intervalo);
   }
 }

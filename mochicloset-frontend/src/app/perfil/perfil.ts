@@ -177,7 +177,7 @@ export class Perfil {
 
   eliminarPublicacion(p: Publicacion) {
     if (p.estado === 'Vendido') {
-      alert('Esta prenda ya fue vendida y no puede eliminarse. Seguirá contando en tu total de ventas.');
+      alert('Esta prenda ya fue vendida y no puede eliminarse.');
       return;
     }
     this.api.delete(this.url + '/eliminar-propia/' + p.id + '?usuarioId=' + this.usuario.id).subscribe({
