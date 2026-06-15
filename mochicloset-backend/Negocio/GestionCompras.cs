@@ -7,10 +7,12 @@ namespace mochi_closet.Negocio;
 public class GestionCompras
 {
     private readonly MochiClosetDbContext _context;
+    private readonly GestionNotificaciones _gestionNotificaciones;
 
-    public GestionCompras(MochiClosetDbContext context)
+    public GestionCompras(MochiClosetDbContext context, GestionNotificaciones gestionNotificaciones)
     {
         _context = context;
+        _gestionNotificaciones = gestionNotificaciones;
     }
 
     public List<Compra> ListaCompras()
@@ -72,6 +74,11 @@ public class GestionCompras
         _context.Compras.Add(compra);
         publicacion.Estado = "Vendido";
         _context.SaveChanges();
+        
+        _gestionNotificaciones.CrearNotificacion(
+            compra.UsuarioId,
+            "Venta",
+            "¡Tu compra fue confirmada! La vendedora confirmó la venta.");
 
         return "ok";
     }

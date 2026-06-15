@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiClient } from '../core/http/api-client';
 
@@ -13,6 +13,7 @@ import { ApiClient } from '../core/http/api-client';
 export class NavMenu implements OnDestroy {
   private api = inject(ApiClient);
   private url = 'http://localhost:5160/GestionNotificaciones';
+  private router = inject(Router);
   private intervalo: any;
 
   notificacionesNoLeidas: number = 0;
@@ -33,5 +34,10 @@ export class NavMenu implements OnDestroy {
       next: data => this.notificacionesNoLeidas = data.filter(n => !n.leida).length,
       error: () => {}
     });
+  }
+
+  cerrarSesion() {
+    localStorage.removeItem('usuario');
+    this.router.navigate(['/login']);
   }
 }
