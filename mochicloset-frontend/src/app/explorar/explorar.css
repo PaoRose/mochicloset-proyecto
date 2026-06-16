@@ -1,7 +1,3 @@
-/* =====================
-   CONTENEDOR
-===================== */
-
 .explorar-container {
   max-width: 1200px;
   margin: 24px auto;
@@ -10,10 +6,6 @@
   flex-direction: column;
   gap: 20px;
 }
-
-/* =====================
-   TOOLBAR
-===================== */
 
 .explorar-toolbar {
   display: flex;
@@ -89,10 +81,6 @@
   color: var(--mc-matcha-green);
 }
 
-/* =====================
-   CATEGORÍAS
-===================== */
-
 .explorar-categorias {
   display: flex;
   gap: 8px;
@@ -123,19 +111,11 @@
   color: var(--mc-matcha-green);
 }
 
-/* =====================
-   GRID
-===================== */
-
 .explorar-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
-
-/* =====================
-   CARD
-===================== */
 
 .prenda-card {
   background-color: var(--mc-white);
@@ -183,10 +163,6 @@
   transform: scale(1.1);
 }
 
-/* =====================
-   INFO
-===================== */
-
 .prenda-info {
   padding: 14px 16px 16px;
   display: flex;
@@ -231,10 +207,6 @@
   font-weight: 500;
   color: var(--mc-text-muted);
 }
-
-/* =====================
-   DRAWER FILTROS
-===================== */
 
 .filtros-overlay {
   position: fixed;

@@ -1,7 +1,3 @@
-/* =====================
-   CONTENEDOR
-===================== */
-
 .editar-container {
   max-width: 700px;
   margin: 32px auto;
@@ -10,10 +6,6 @@
   flex-direction: column;
   gap: 16px;
 }
-
-/* =====================
-   VOLVER
-===================== */
 
 .editar-volver {
   font-size: 14px;
@@ -30,10 +22,6 @@
   color: var(--mc-text-dark);
 }
 
-/* =====================
-   HEADER
-===================== */
-
 .editar-title {
   font-family: 'Nunito', sans-serif;
   font-size: 28px;
@@ -48,10 +36,6 @@
   margin: 0;
 }
 
-/* =====================
-   CARD
-===================== */
-
 .editar-card {
   background-color: var(--mc-white);
   border: 1px solid #E0D5CF;
@@ -62,10 +46,6 @@
   gap: 24px;
   margin-top: 8px;
 }
-
-/* =====================
-   FOTO
-===================== */
 
 .editar-foto-section {
   display: flex;
@@ -105,19 +85,11 @@
   margin: 0;
 }
 
-/* =====================
-   DIVIDER
-===================== */
-
 .editar-divider {
   border: none;
   border-top: 1px solid #F0E8E3;
   margin: 0;
 }
-
-/* =====================
-   FORMULARIO
-===================== */
 
 .editar-form {
   display: flex;
@@ -182,10 +154,6 @@
   font-size: 12px;
   color: var(--mc-text-muted);
 }
-
-/* =====================
-   BOTONES
-===================== */
 
 .editar-acciones {
   display: grid;
