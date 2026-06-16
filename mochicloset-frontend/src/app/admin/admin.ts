@@ -77,13 +77,7 @@ export class Admin implements OnInit {
     this.cargarUsuarias();
     this.cargarReportes();
 
-    this.intervalo = setInterval(() => this.cargarReportes(), 3000);
-    this.intervalo = setInterval(() => { this.cargarReportes(); this.cargarPublicaciones();}, 3000);
-    this.intervalo = setInterval(() => this.cargarUsuarias(), 3000);
-  }
-
-  cambiarTab(tab: string) {
-    this.tabActiva = tab;
+    this.intervalo = setInterval(() => { this.cargarReportes(); this.cargarPublicaciones(); }, 3000);
   }
 
   cargarPublicaciones() {
