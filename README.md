@@ -20,32 +20,24 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
 ## Configuración de la base de datos
 
-Existen dos formas de preparar la base de datos. Ambas producen exactamente el mismo resultado (mismas tablas, mismas relaciones, mismos datos de prueba), la diferencia es solo el método. **Se recomienda la Opción 1** porque no requiere abrir SQL Server Management Studio.
+**Importante:** la única forma de crear la base de datos desde cero (tablas, relaciones y datos de prueba) es ejecutando el script SQL. El backend NO crea las tablas automáticamente.
 
-### Opción 1 — Automática, sin scripts manuales (recomendada)
-
-El backend trae un componente (`DbSeeder.cs`, dentro de la carpeta `Seed/`) que arma la base de datos por su cuenta la primera vez que corre.
-
-1. En SQL Server Management Studio, crea una base de datos vacía con el nombre `MochiClosetDB`:
-   ```sql
-   CREATE DATABASE MochiClosetDB;
-   ```
-2. Configura la cadena de conexión (ver sección "Configurar la cadena de conexión" más abajo)
-3. Ejecuta el backend con `dotnet run`
-
-Al iniciar, el backend detecta que la base de datos está vacía y automáticamente: crea todas las tablas y relaciones, y agrega los datos de prueba (usuarias, prendas, categorías, etc.). No hace falta tocar SSMS para nada más.
-
-### Opción 2 — Manual, ejecutando el script SQL
-
-Si preferís ver y controlar el SQL directamente, en lugar de la Opción 1:
+### Paso 1 — Crear la base de datos con el script SQL
 
 1. Abre SQL Server Management Studio
 2. Abre el archivo `/database/mochicloset.sql` de este repositorio
 3. Ejecútalo completo (Execute / F5)
 
-Este script crea la base de datos `MochiClosetDB` desde cero, con las mismas tablas, relaciones y datos de prueba que la Opción 1 generaría automáticamente.
+Este script crea la base de datos `MochiClosetDB`, todas las tablas, relaciones (foreign keys) y los datos de prueba (usuarias, prendas, categorías, compras, etc.).
 
-**Importante:** elegí solo una de las dos opciones, no las dos. Si ya usaste la Opción 1 y el backend ya pobló la base de datos, no necesitás correr el script de la Opción 2.
+### Paso 2 — Verificación automática al iniciar el backend (opcional, ya incluido)
+
+El backend tiene un componente (`DbSeeder.cs`, en la carpeta `Seed/`) que se ejecuta automáticamente cada vez que corres `dotnet run`. Este componente:
+
+- Verifica y corrige las foreign keys especiales del sistema (las que usan `ON DELETE SET NULL` o `ON DELETE CASCADE`), por si la base de datos no las tuviera configuradas exactamente así
+- Verifica si la tabla `Usuarios` tiene datos. Si está vacía, agrega datos de prueba. Si ya tiene datos (como después de correr el script del Paso 1), no hace nada
+
+**Este componente no crea tablas.** Si la base de datos no existe o no tiene la estructura creada, el backend no va a poder conectarse y dará error al iniciar. Por eso el Paso 1 (script SQL) es obligatorio, no opcional.
 
 ### Configurar la cadena de conexión
 
@@ -79,19 +71,21 @@ Es el nombre que aparece en el campo "Server name" cuando abres SQL Server Manag
 
 ## Ejecutar el Backend
 
-1. Abre una terminal y navega a la carpeta del backend:
+1. Asegúrate de haber completado el Paso 1 de "Configuración de la base de datos" (ejecutar el script SQL) antes de seguir.
+
+2. Abre una terminal y navega a la carpeta del backend:
 
 ```bash
 cd mochicloset-backend
 ```
 
-2. Restaura las dependencias:
+3. Restaura las dependencias:
 
 ```bash
 dotnet restore
 ```
 
-3. Ejecuta el proyecto:
+4. Ejecuta el proyecto:
 
 ```bash
 dotnet run
@@ -99,14 +93,13 @@ dotnet run
 
 El backend estará disponible en `http://localhost:5160`
 
-Si configuraste la Opción 1 de la base de datos, al iniciar deberías ver en la consola mensajes como:
+Al iniciar, deberías ver en la consola un mensaje como:
 
 ```
 Correcciones de Foreign Keys verificadas/aplicadas.
-Base de datos poblada con datos de prueba: ...
 ```
 
-(El segundo mensaje solo aparece la primera vez, cuando la base de datos está vacía.)
+(Este mensaje confirma que el backend pudo conectarse a la base de datos y verificó las relaciones. Si la base de datos no existe o el script SQL no se ejecutó, el backend mostrará un error de conexión en su lugar.)
 
 ---
 
@@ -163,7 +156,7 @@ mochicloset-proyecto/
 │   ├── Negocio/                # Lógica de negocio
 │   ├── Datos/                  # Entidades
 │   ├── Data/                   # DbContext
-│   ├── Seed/                   # Población automática de datos de prueba (Opción 1)
+│   ├── Seed/                   # Verificación de FKs y datos de prueba (no crea tablas)
 │   └── appsettings.json        # Configuración (cadena de conexión)
 │
 ├── mochicloset-frontend/       # Aplicación Angular
@@ -182,7 +175,7 @@ mochicloset-proyecto/
 │       └── recibo/
 │
 └── database/
-    └── mochicloset.sql         # Script SQL manual (Opción 2, ver arriba)
+    └── mochicloset.sql         # Script SQL obligatorio: crea la BD, tablas y datos de prueba
 ```
 
 ---
@@ -206,7 +199,7 @@ mochicloset-proyecto/
 - El chat se actualiza automáticamente cada 3 segundos
 - Las publicaciones de usuarias suspendidas no aparecen en el explorar
 - El backend debe estar corriendo antes de iniciar el frontend
-- La base de datos puede prepararse de dos formas (automática con el backend, o manual con el script SQL), ver sección "Configuración de la base de datos"
+- El script `/database/mochicloset.sql` es obligatorio para crear la base de datos desde cero; el backend no crea tablas automáticamente
 
 ---
 
