@@ -1,0 +1,127 @@
+﻿POST http://localhost:5160/GestionCompras
+Content-Type: application/json
+Content-Length: 42
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "usuarioId": 2,
+  "publicacionId": 7
+}
+
+<> 2026-06-13T192746.400.txt
+
+###
+
+POST http://localhost:5160/GestionCompras
+Content-Type: application/json
+Content-Length: 42
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "usuarioId": 2,
+  "publicacionId": 7
+}
+
+<> 2026-06-13T192713.400.txt
+
+###
+
+POST http://localhost:5160/GestionCompras
+Content-Type: application/json
+Content-Length: 42
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "usuarioId": 2,
+  "publicacionId": 7
+}
+
+<> 2026-06-13T192710.200.txt
+
+###
+
+PUT http://localhost:5160/GestionUsuarios/actualizar-perfil
+Content-Type: application/json
+Content-Length: 120
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id": 2,
+  "nombre": "Paola Test",
+  "username": "paorose",
+  "email": "paola@gmail.com",
+  "telefono": "77712345"
+}
+
+###
+
+PUT http://localhost:5160/GestionUsuarios/actualizar-perfil
+Content-Type: application/json
+Content-Length: 120
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "id": 2,
+  "nombre": "Paola Test",
+  "username": "paorose",
+  "email": "paola@gmail.com",
+  "telefono": "77712345"
+}
+
+###
+
+GET http://localhost:5160/GestionUsuarios/lista-usuarios
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-06-10T225125.200.json
+
+###
+
+GET http://localhost:5160/GestionUsuarios/lista-usuarias
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-06-10T225040.400.json
+
+###
+
+GET http://localhost:5160/GestionUsuarios/lista-usuarias
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-06-10T224944.400.json
+
+###
+
+GET http://localhost:5160/GestionUsuarios/listar-usuarios
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-06-10T224919.400.json
+
+###
+
+GET http://localhost:5160/GestionUsuarios/listar-usuarios
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2025.3.4
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2026-06-10T224915.400.json
+
+###
+

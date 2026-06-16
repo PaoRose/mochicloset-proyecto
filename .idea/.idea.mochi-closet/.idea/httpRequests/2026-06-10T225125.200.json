@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "nombre": "Administradora Mochi",
+    "username": "admin",
+    "email": "admin@mochicloset.com",
+    "telefono": "00000000",
+    "password": "admin1234",
+    "rol": "Admin",
+    "estado": "Activo"
+  },
+  {
+    "id": 2,
+    "nombre": "Paola Quinteros",
+    "username": "paorose",
+    "email": "paola@gmail.com",
+    "telefono": "77712345",
+    "password": "12345678",
+    "rol": "Usuaria",
+    "estado": "Activo"
+  },
+  {
+    "id": 3,
+    "nombre": "Alicia Belaunde",
+    "username": "aliciab",
+    "email": "alicia@gmail.com",
+    "telefono": "76654321",
+    "password": "12345678",
+    "rol": "Usuaria",
+    "estado": "Activo"
+  },
+  {
+    "id": 4,
+    "nombre": "Sofia Mendez",
+    "username": "sofiamendez",
+    "email": "sofia@gmail.com",
+    "telefono": "75598765",
+    "password": "12345678",
+    "rol": "Usuaria",
+    "estado": "Activo"
+  },
+  {
+    "id": 5,
+    "nombre": "Valentina Cruz",
+    "username": "valecruz",
+    "email": "valentina@gmail.com",
+    "telefono": "71234567",
+    "password": "12345678",
+    "rol": "Usuaria",
+    "estado": "Activo"
+  },
+  {
+    "id": 6,
+    "nombre": "Camila Rojas",
+    "username": "camilarojas",
+    "email": "camila@gmail.com",
+    "telefono": "78887766",
+    "password": "12345678",
+    "rol": "Usuaria",
+    "estado": "Activo"
+  },
+  {
+    "id": 7,
+    "nombre": "Gabriela Torres",
+    "username": "gabitorres",
+    "email": "gabriela@gmail.com",
+    "telefono": "79991234",
+    "password": "12345678",
+    "rol": "Usuaria",
+    "estado": "Activo"
+  },
+  {
+    "id": 8,
+    "nombre": "Daniela Vaca",
+    "username": "danyvaca",
+    "email": "daniela@gmail.com",
+    "telefono": "72223344",
+    "password": "12345678",
+    "rol": "Usuaria",
+    "estado": "Activo"
+  },
+  {
+    "id": 9,
+    "nombre": "Fernanda Suarez",
+    "username": "fersuarez",
+    "email": "fernanda@gmail.com",
+    "telefono": "73334455",
+    "password": "12345678",
+    "rol": "Usuaria",
+    "estado": "Activo"
+  }
+]

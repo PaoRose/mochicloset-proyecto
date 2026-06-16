@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using mochi_closet.Data;
 using mochi_closet.Negocio;
+using mochi_closet.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<MochiClosetDbContext>();
+    DbSeeder.Seed(context);
 }
 
 app.UseCors("AllowAngular");

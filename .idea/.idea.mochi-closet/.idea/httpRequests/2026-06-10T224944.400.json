@@ -1,0 +1,11 @@
+{
+  "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+  "title": "One or more validation errors occurred.",
+  "status": 400,
+  "errors": {
+    "id": [
+      "The value 'lista-usuarias' is not valid."
+    ]
+  },
+  "traceId": "00-738f97e19034e232265b86562b6eea37-9b955f5765b9bde1-00"
+}
