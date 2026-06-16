@@ -1,7 +1,3 @@
-/* =====================
-   FONDO GENERAL
-===================== */
-
 .login-container {
   min-height: 100vh;
   display: flex;
@@ -11,19 +7,11 @@
   background-color: var(--mc-warm-white);
 }
 
-/* =====================
-   LOGO
-===================== */
-
 .login-logo {
   width: 200px;
   height: auto;
   margin-bottom: 5px;
 }
-
-/* =====================
-   CONTENEDOR
-===================== */
 
 .login-wrapper {
   width: 100%;
@@ -36,10 +24,6 @@
   text-align: center;
   margin-bottom: 40px;
 }
-
-/* =====================
-   TÍTULO
-===================== */
 
 .title {
   font-family: 'Nunito', sans-serif;
@@ -55,10 +39,6 @@
   color: var(--mc-text-muted);
   margin: 0 0 28px;
 }
-
-/* =====================
-   INPUTS
-===================== */
 
 .input-group {
   display: flex;
@@ -106,10 +86,6 @@
   color: #C4B8B0;
 }
 
-/* =====================
-   BOTÓN
-===================== */
-
 .login-btn {
   width: 100%;
   height: 50px;
@@ -129,10 +105,6 @@
 .login-btn:hover {
   background-color: var(--mc-accent-pink);
 }
-
-/* =====================
-   REGISTRO
-===================== */
 
 .register {
   margin-top: 20px;

@@ -1,6 +1,4 @@
-/* =====================
-   CONTENEDOR
-===================== */
+
 .chat-container {
   max-width: 680px;
   margin: 0 auto;
@@ -11,9 +9,7 @@
   min-height: 100vh;
 }
 
-/* =====================
-   HEADER
-===================== */
+
 .chat-header {
   display: flex;
   align-items: center;
@@ -74,9 +70,6 @@
 
 .reporte-btn:hover { background-color: #FFF0F5; }
 
-/* =====================
-   PRENDA INFO
-===================== */
 .chat-detalle-compra {
   background-color: var(--mc-white);
   border: 1px solid #E0D5CF;
@@ -155,9 +148,6 @@
 
 .chat-confirmar-venta:hover { background-color: var(--mc-accent-pink); }
 
-/* =====================
-   MENSAJES
-===================== */
 .chat-mensajes {
   display: flex;
   flex-direction: column;
@@ -208,9 +198,6 @@
   object-fit: cover;
 }
 
-/* =====================
-   VENTA CONFIRMADA
-===================== */
 .chat-venta-confirmada {
   display: flex;
   justify-content: center;
@@ -229,9 +216,6 @@
   gap: 12px;
 }
 
-/* =====================
-   INPUT
-===================== */
 .chat-input-wrapper {
   position: fixed;
   bottom: 0;
@@ -330,9 +314,6 @@
   cursor: pointer;
 }
 
-/* =====================
-   MODAL
-===================== */
 .modal-overlay {
   position: fixed;
   top: 0;

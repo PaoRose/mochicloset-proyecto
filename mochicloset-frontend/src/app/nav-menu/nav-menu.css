@@ -1,7 +1,3 @@
-/* =====================
-   NAV MENU
-===================== */
-
 .nav-menu {
   display: flex;
   align-items: center;
@@ -11,18 +7,10 @@
   border-bottom: 1px solid #F0E8E3;
 }
 
-/* =====================
-   LOGO
-===================== */
-
 .nav-menu-logo img {
   height: 80px;
   width: auto;
 }
-
-/* =====================
-   LINKS
-===================== */
 
 .nav-menu-links {
   display: flex;
@@ -49,10 +37,6 @@
   color: var(--mc-matcha-green);
   font-weight: 600;
 }
-
-/* =====================
-   ICONOS
-===================== */
 
 .nav-menu-actions {
   display: flex;

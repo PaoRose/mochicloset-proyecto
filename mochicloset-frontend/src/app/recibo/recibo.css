@@ -1,8 +1,4 @@
-﻿/* =====================
-   CONTENEDOR
-===================== */
-
-.recibo-container {
+﻿.recibo-container {
   max-width: 600px;
   margin: 32px auto;
   padding: 0 20px;
@@ -10,10 +6,6 @@
   flex-direction: column;
   gap: 20px;
 }
-
-/* =====================
-   VOLVER
-===================== */
 
 .recibo-volver {
   font-size: 14px;
@@ -26,10 +18,6 @@
   color: var(--mc-matcha-green);
 }
 
-/* =====================
-   CARD
-===================== */
-
 .recibo-card {
   background-color: var(--mc-white);
   border: 1px solid #E0D5CF;
@@ -40,10 +28,6 @@
   flex-direction: column;
   gap: 20px;
 }
-
-/* =====================
-   HEADER
-===================== */
 
 .recibo-header {
   display: flex;
@@ -84,19 +68,11 @@
   border-radius: 999px;
 }
 
-/* =====================
-   DIVIDER
-===================== */
-
 .recibo-divider {
   border: none;
   border-top: 1px solid #E0D5CF;
   margin: 0;
 }
-
-/* =====================
-   PRENDA
-===================== */
 
 .recibo-prenda {
   display: flex;
@@ -125,10 +101,6 @@
   color: var(--mc-text-muted);
   margin: 0;
 }
-
-/* =====================
-   DETALLES
-===================== */
 
 .recibo-detalles {
   display: flex;
@@ -162,20 +134,12 @@
   color: var(--mc-matcha-green);
 }
 
-/* =====================
-   NOTA
-===================== */
-
 .recibo-nota {
   font-size: 13px;
   color: var(--mc-text-muted);
   text-align: center;
   margin: 0;
 }
-
-/* =====================
-   BOTÓN IMPRIMIR
-===================== */
 
 .recibo-imprimir-btn {
   background-color: var(--mc-matcha-green);
@@ -194,10 +158,6 @@
 .recibo-imprimir-btn:hover {
   background-color: var(--mc-accent-pink);
 }
-
-/* =====================
-   PRINT
-===================== */
 
 @media print {
   .recibo-volver,
