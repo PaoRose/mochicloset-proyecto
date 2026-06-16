@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
@@ -46,7 +46,7 @@ interface Reporte {
   templateUrl: './admin.html',
   styleUrl: './admin.css'
 })
-export class Admin implements OnInit {
+export class Admin implements OnInit, OnDestroy {
   private api = inject(ApiClient);
   private http = inject(HttpClient);
   private router = inject(Router);
@@ -77,11 +77,21 @@ export class Admin implements OnInit {
     this.cargarUsuarias();
     this.cargarReportes();
 
-    this.intervalo = setInterval(() => { this.cargarReportes(); this.cargarPublicaciones(); }, 3000);
+    this.intervalo = setInterval(() => {
+      this.cargarReportes();
+      this.cargarPublicaciones();
+    }, 3000);
+  }
+
+  ngOnDestroy() {
+    if (this.intervalo) clearInterval(this.intervalo);
+  }
+
+  cambiarTab(tab: string) {
+    this.tabActiva = tab;
   }
 
   cargarPublicaciones() {
-
     this.api.get<Publicacion[]>(this.urlPublicaciones + '/lista-publicaciones').subscribe({
       next: data => {
         this.publicaciones = data;
@@ -191,9 +201,5 @@ export class Admin implements OnInit {
     if (!r.reportadaId) return;
     this.suspenderUsuaria(r.reportadaId);
     this.resolverReporte(r.id);
-  }
-
-  ngOnDestroy() {
-    if (this.intervalo) clearInterval(this.intervalo);
   }
 }
