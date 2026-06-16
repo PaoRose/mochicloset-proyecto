@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="UserContentModel">
-    <attachedFolders>
-      <Path>database</Path>
-      <Path>mochicloset-frontend</Path>
-    </attachedFolders>
+    <attachedFolders />
     <explicitIncludes />
     <explicitExcludes />
   </component>
