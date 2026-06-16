@@ -1,10 +1,10 @@
-# 🌸 Mochi Closet
+# Mochi Closet
 
 Plataforma web para la compra y venta de ropa de segunda mano entre mujeres en Santa Cruz de la Sierra, Bolivia.
 
 ---
 
-## 📋 Requisitos previos
+## Requisitos previos
 
 Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
@@ -18,7 +18,7 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
 ---
 
-## 🗄️ Configuración de la base de datos
+## Configuración de la base de datos
 
 ### 1. Crear la base de datos
 
@@ -60,7 +60,7 @@ Es el nombre que aparece en el campo "Server name" cuando abres SQL Server Manag
 
 ---
 
-## 🚀 Ejecutar el Backend
+## Ejecutar el Backend
 
 1. Abre una terminal y navega a la carpeta del backend:
 
@@ -84,7 +84,7 @@ El backend estará disponible en `http://localhost:5160`
 
 ---
 
-## 🌐 Ejecutar el Frontend
+## Ejecutar el Frontend
 
 1. Abre una nueva terminal y navega a la carpeta del frontend:
 
@@ -112,7 +112,7 @@ http://localhost:4200
 
 ---
 
-## 👤 Credenciales de prueba
+## Credenciales de prueba
 
 ### Administradora
 | Campo | Valor |
@@ -128,7 +128,7 @@ http://localhost:4200
 
 ---
 
-## 📁 Estructura del proyecto
+## Estructura del proyecto
 
 ```
 mochicloset-proyecto/
@@ -160,20 +160,20 @@ mochicloset-proyecto/
 
 ---
 
-## ✨ Funcionalidades principales
+## Funcionalidades principales
 
-- 🔐 Registro e inicio de sesión con validaciones
-- 👗 Publicar prendas con imagen, precio, talla y condición
-- 🔍 Explorar catálogo con filtros por categoría, talla, condición y precio
-- ❤️ Guardar prendas en favoritos
-- 💬 Chat entre compradora y vendedora
-- 🧾 Recibo de compra
-- 🔔 Notificaciones del sistema
-- 🛡️ Panel de administración para gestionar prendas, usuarias y reportes
+- Registro e inicio de sesión con validaciones
+- Publicar prendas con imagen, precio, talla y condición
+- Explorar catálogo con filtros por categoría, talla, condición y precio
+- Guardar prendas en favoritos
+- Chat entre compradora y vendedora
+- Recibo de compra
+- Notificaciones del sistema
+- Panel de administración para gestionar prendas, usuarias y reportes
 
 ---
 
-## ⚠️ Notas importantes
+## Notas importantes
 
 - Las imágenes de prendas se manejan por URL externa — no se suben archivos al servidor
 - El chat se actualiza automáticamente cada 3 segundos
@@ -182,6 +182,6 @@ mochicloset-proyecto/
 
 ---
 
-## 👩‍💻 Desarrolladoras
+## Desarrolladoras
 - Paola Rosenda Quinteros Pérez
 - María Alicia Belaunde Villagomez
