@@ -12,7 +12,7 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 |-------------|---------------------|----------|
 | .NET SDK | 10.0 o superior | https://dotnet.microsoft.com/download |
 | Node.js | 18.0 o superior | https://nodejs.org |
-| Angular CLI | 17.0 o superior | `npm install -g @angular/cli` |
+| Angular CLI | 21.0 o superior | `npm install -g @angular/cli` |
 | SQL Server | 2019 o superior | https://www.microsoft.com/sql-server |
 | SQL Server Management Studio | Cualquier versión | https://aka.ms/ssmsfullsetup |
 
@@ -20,17 +20,34 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
 ## Configuración de la base de datos
 
-### 1. Crear la base de datos
+Existen dos formas de preparar la base de datos. Ambas producen exactamente el mismo resultado (mismas tablas, mismas relaciones, mismos datos de prueba), la diferencia es solo el método. **Se recomienda la Opción 1** porque no requiere abrir SQL Server Management Studio.
 
-Abre SQL Server Management Studio, conéctate a tu servidor y ejecuta el archivo:
+### Opción 1 — Automática, sin scripts manuales (recomendada)
 
-```
-/database/mochicloset.sql
-```
+El backend trae un componente (`DbSeeder.cs`, dentro de la carpeta `Seed/`) que arma la base de datos por su cuenta la primera vez que corre.
 
-Este script crea automáticamente la base de datos `MochiClosetDB`, todas las tablas, relaciones y datos de prueba.
+1. En SQL Server Management Studio, crea una base de datos vacía con el nombre `MochiClosetDB`:
+   ```sql
+   CREATE DATABASE MochiClosetDB;
+   ```
+2. Configura la cadena de conexión (ver sección "Configurar la cadena de conexión" más abajo)
+3. Ejecuta el backend con `dotnet run`
 
-### 2. Configurar la cadena de conexión
+Al iniciar, el backend detecta que la base de datos está vacía y automáticamente: crea todas las tablas y relaciones, y agrega los datos de prueba (usuarias, prendas, categorías, etc.). No hace falta tocar SSMS para nada más.
+
+### Opción 2 — Manual, ejecutando el script SQL
+
+Si preferís ver y controlar el SQL directamente, en lugar de la Opción 1:
+
+1. Abre SQL Server Management Studio
+2. Abre el archivo `/database/mochicloset.sql` de este repositorio
+3. Ejecútalo completo (Execute / F5)
+
+Este script crea la base de datos `MochiClosetDB` desde cero, con las mismas tablas, relaciones y datos de prueba que la Opción 1 generaría automáticamente.
+
+**Importante:** elegí solo una de las dos opciones, no las dos. Si ya usaste la Opción 1 y el backend ya pobló la base de datos, no necesitás correr el script de la Opción 2.
+
+### Configurar la cadena de conexión
 
 Abre el archivo:
 
@@ -81,6 +98,15 @@ dotnet run
 ```
 
 El backend estará disponible en `http://localhost:5160`
+
+Si configuraste la Opción 1 de la base de datos, al iniciar deberías ver en la consola mensajes como:
+
+```
+Correcciones de Foreign Keys verificadas/aplicadas.
+Base de datos poblada con datos de prueba: ...
+```
+
+(El segundo mensaje solo aparece la primera vez, cuando la base de datos está vacía.)
 
 ---
 
@@ -137,6 +163,7 @@ mochicloset-proyecto/
 │   ├── Negocio/                # Lógica de negocio
 │   ├── Datos/                  # Entidades
 │   ├── Data/                   # DbContext
+│   ├── Seed/                   # Población automática de datos de prueba (Opción 1)
 │   └── appsettings.json        # Configuración (cadena de conexión)
 │
 ├── mochicloset-frontend/       # Aplicación Angular
@@ -155,7 +182,7 @@ mochicloset-proyecto/
 │       └── recibo/
 │
 └── database/
-    └── mochicloset.sql         # Script completo de base de datos
+    └── mochicloset.sql         # Script SQL manual (Opción 2, ver arriba)
 ```
 
 ---
@@ -175,10 +202,11 @@ mochicloset-proyecto/
 
 ## Notas importantes
 
-- Las imágenes de prendas se manejan por URL externa — no se suben archivos al servidor
+- Las imágenes de prendas se manejan por URL externa, no se suben archivos al servidor
 - El chat se actualiza automáticamente cada 3 segundos
 - Las publicaciones de usuarias suspendidas no aparecen en el explorar
 - El backend debe estar corriendo antes de iniciar el frontend
+- La base de datos puede prepararse de dos formas (automática con el backend, o manual con el script SQL), ver sección "Configuración de la base de datos"
 
 ---
 
